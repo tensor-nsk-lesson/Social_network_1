@@ -1,4 +1,4 @@
-ï»¿drop table "Autorization" CASCADE;
+drop table "Autorization" CASCADE;
 drop table "Profile" CASCADE;
 drop table "Private" CASCADE;
 drop table "FakeProfile" CASCADE;
@@ -45,16 +45,16 @@ insert into "Autorization" ("Login", "Password", "Id") VALUES ('Person1', 1, 101
 							      ('Person4', 4, 104);
 select * from "Autorization";
 select * from "Autorization" where "Login" = 'Person1';
-delete * from "Autorization";
+delete from "Autorization";
 
-insert into "Profile" ("Id", "SecondName", "FirstName", "FatherName", "Age", "AboutYorself") VALUES (101, 'Ð’Ð¾Ð»Ð°Ð½Ð´ÐµÐ¼Ð¾Ñ€Ñ‚', 'ÐžÐ»ÐµÐ³', 'Ð’Ð¸Ñ‚Ð°Ð»ÑŒÐµÐ²Ð¸Ñ‡', 18, 'ÐšÐ½ÑÐ·ÑŒ Ñ‚ÐµÐ¼Ð½Ð¾Ð³Ð¾ ÑƒÐ³Ð»Ð°'),
-												     (102, null, 'Ð›Ð°ÐºÐ¸ÑÑ‚Ñ€Ð°Ð¹Ðº', 'ÐÐ½Ð°Ñ‚Ð¾Ð»ÑŒÐµÐ²Ð¸Ñ‡', 118, 'Ð¥Ð¾Ð»Ð¾Ð¿ ÑÐ²ÐµÑ‚Ð»Ð¾Ð¹ ÑÑ‚ÐµÐ½Ñ‹'),
-												     (103, null, 'ÐšÐ°Ð±Ð»ÑƒÐº', null, 50, 'ÐœÐ½Ðµ Ð¶ÐµÐ½Ð° Ð½Ðµ Ñ€Ð°Ð·Ñ€ÐµÑˆÐ¸Ð»Ð° Ð¿Ð¸ÑÐ°Ñ‚ÑŒ Ð·Ð´ÐµÑÑŒ Ñ‡Ñ‚Ð¾-Ñ‚Ð¾'),
-												     (104, null, 'ÐšÐ¾Ñ€Ð¾Ð»ÑŒ', 'Ð¢Ñ€ÐµÑ„', 88, null);
+insert into "Profile" ("Id", "SecondName", "FirstName", "FatherName", "Age", "AboutYorself") VALUES (101, 'Âîëàíäåìîðò', 'Îëåã', 'Âèòàëüåâè÷', 18, 'Êíÿçü òåìíîãî óãëà'),
+												     (102, null, 'Ëàêèñòðàéê', 'Àíàòîëüåâè÷', 118, 'Õîëîï ñâåòëîé ñòåíû'),
+												     (103, null, 'Êàáëóê', null, 50, 'Ìíå æåíà íå ðàçðåøèëà ïèñàòü çäåñü ÷òî-òî'),
+												     (104, null, 'Êîðîëü', 'Òðåô', 88, null);
 select * from "Profile";
-select * from "Profile" where "SecondName" = 'Ð’Ð¾Ð»Ð°Ð½Ð´ÐµÐ¼Ð¾Ñ€Ñ‚' or "FirstName" = 'Ð›Ð°ÐºÐ¸ÑÑ‚Ñ€Ð°Ð¹Ðº';
+select * from "Profile" where "SecondName" = 'Âîëàíäåìîðò' or "FirstName" = 'Ëàêèñòðàéê';
 select * from "Profile" where "Age" > 18;
-delete * from "Profile";
+delete from "Profile";
 
 insert into "Private" ("Id", "Invisibility", "Fake", "ViewFriends", "ViewGroups") VALUES (101, false, null,'{102,103}', '{102}'),
 											 (102, true, null, '{102,103,104}', '{102,104}'),
@@ -63,12 +63,12 @@ insert into "Private" ("Id", "Invisibility", "Fake", "ViewFriends", "ViewGroups"
 select * from "Private";
 select * from "Private" where "Invisibility" = 'true';
 select * from "Private" where "ViewFriends"[1] = 102;
-delete * from "Private";
+delete from "Private";
 
-insert into "FakeProfile" ("Id", "SecondName", "FirstName", "FatherName", "Age", "AboutYorself") VALUES (201, 'Secret1', 'Noname', 'Ð’Ð¸Ñ‚Ð°Ð»ÑŒÐµÐ²Ð¸Ñ‡', 18, 'Ð¥Ð¾Ð»Ð¾Ð¿ ÑÐ²ÐµÑ‚Ð»Ð¾Ð¹ ÑÑ‚ÐµÐ½Ñ‹'),
-												     (202, null, 'Secret3', null, 50, 'Ð¯ ÑÐ°Ð¼ ÑÐµÐ±Ðµ Ñ…Ð¾Ð·ÑÐ¸Ð½');
+insert into "FakeProfile" ("Id", "SecondName", "FirstName", "FatherName", "Age", "AboutYorself") VALUES (201, 'Secret1', 'Noname', 'Âèòàëüåâè÷', 18, 'Õîëîï ñâåòëîé ñòåíû'),
+												     (202, null, 'Secret3', null, 50, 'ß ñàì ñåáå õîçÿèí');
 select * from "FakeProfile";
 select * from "FakeProfile" where "SecondName" = 'Secret1';
 select * from "FakeProfile" where "Age" > 18;
-delete * from "FakeProfile";
+delete from "FakeProfile";
 
