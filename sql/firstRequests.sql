@@ -1,6 +1,6 @@
 drop table "Autorization" CASCADE;
 drop table "Profile" CASCADE;
-drop table "Private" CASCADE;
+drop table "Privace" CASCADE;
 drop table "FakeProfile" CASCADE;
 
 create table if not exists "Autorization"(
@@ -15,7 +15,7 @@ create table if not exists "Profile"(
 	"FirstName" Text NOT NULL,
 	"FatherName" Text,
 	"Age" INTEGER,
-	"AboutYorself" Text,
+	"AboutMe" Text,
 	CONSTRAINT "pk_id" PRIMARY KEY ("Id"),
 	FOREIGN KEY ("Id") REFERENCES "Autorization"("Id") ON DELETE CASCADE
 );
@@ -34,7 +34,7 @@ create table if not exists"FakeProfile"(
 	"FirstName" Text,
 	"FatherName" Text,
 	"Age" INTEGER,
-	"AboutYorself" Text,
+	"AboutMe" Text,
 	CONSTRAINT "pk_id_faik" PRIMARY KEY ("Id"),
 	FOREIGN KEY ("Id") REFERENCES "Privace"("FakeId") ON DELETE CASCADE
 );
@@ -47,7 +47,7 @@ select * from "Autorization";
 select * from "Autorization" where "Login" = 'Person1';
 delete from "Autorization";
 
-insert into "Profile" ("Id", "SecondName", "FirstName", "FatherName", "Age", "AboutYorself") VALUES (101, 'Воландеморт', 'Олег', 'Витальевич', 18, 'Князь темного угла'),
+insert into "Profile" ("Id", "SecondName", "FirstName", "FatherName", "Age", "AboutMe") VALUES (101, 'Воландеморт', 'Олег', 'Витальевич', 18, 'Князь темного угла'),
 												     (102, null, 'Лакистрайк', 'Анатольевич', 118, 'Холоп светлой стены'),
 												     (103, null, 'Каблук', null, 50, 'Мне жена не разрешила писать здесь что-то'),
 												     (104, null, 'Король', 'Треф', 88, null);
@@ -65,7 +65,7 @@ select * from "Privace" where "Invisibility" = 'true';
 select * from "Privace" where "ViewFriends"[1] = 102;
 delete from "Privace";
 
-insert into "FakeProfile" ("Id", "SecondName", "FirstName", "FatherName", "Age", "AboutYorself") VALUES (201, 'Secret1', 'Noname', 'Витальевич', 18, 'Холоп светлой стены'),
+insert into "FakeProfile" ("Id", "SecondName", "FirstName", "FatherName", "Age", "AboutMe") VALUES (201, 'Secret1', 'Noname', 'Витальевич', 18, 'Холоп светлой стены'),
 												     (202, null, 'Secret3', null, 50, 'Я сам себе хозяин');
 select * from "FakeProfile";
 select * from "FakeProfile" where "SecondName" = 'Secret1';
