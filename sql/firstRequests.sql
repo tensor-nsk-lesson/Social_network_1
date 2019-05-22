@@ -19,10 +19,10 @@ create table if not exists "Profile"(
 	CONSTRAINT "pk_id" PRIMARY KEY ("Id"),
 	FOREIGN KEY ("Id") REFERENCES "Autorization"("Id") ON DELETE CASCADE
 );
-create table if not exists "Private"(
+create table if not exists "Privace"(
 	"Id" INTEGER,
 	"Invisibility" boolean,
-	"Fake" INTEGER UNIQUE,
+	"FakeId" INTEGER UNIQUE,
 	"ViewFriends" INTEGER[],
 	"ViewGroups" INTEGER[],
 	CONSTRAINT "pk_id_private" PRIMARY KEY ("Id"),
@@ -36,7 +36,7 @@ create table if not exists"FakeProfile"(
 	"Age" INTEGER,
 	"AboutYorself" Text,
 	CONSTRAINT "pk_id_faik" PRIMARY KEY ("Id"),
-	FOREIGN KEY ("Id") REFERENCES "Private"("Fake") ON DELETE CASCADE
+	FOREIGN KEY ("Id") REFERENCES "Privace"("FakeId") ON DELETE CASCADE
 );
 
 insert into "Autorization" ("Login", "Password", "Id") VALUES ('Person1', 1, 101),
@@ -56,14 +56,14 @@ select * from "Profile" where "SecondName" = 'Воландеморт' or "FirstName" = 'Лак
 select * from "Profile" where "Age" > 18;
 delete from "Profile";
 
-insert into "Private" ("Id", "Invisibility", "Fake", "ViewFriends", "ViewGroups") VALUES (101, false, null,'{102,103}', '{102}'),
+insert into "Privace" ("Id", "Invisibility", "FakeId", "ViewFriends", "ViewGroups") VALUES (101, false, null,'{102,103}', '{102}'),
 											 (102, true, null, '{102,103,104}', '{102,104}'),
 											 (103, false, 201, '{102,103}', '{102}'),
 											 (104, false, 202, null, null);
-select * from "Private";
-select * from "Private" where "Invisibility" = 'true';
-select * from "Private" where "ViewFriends"[1] = 102;
-delete from "Private";
+select * from "Privace";
+select * from "Privace" where "Invisibility" = 'true';
+select * from "Privace" where "ViewFriends"[1] = 102;
+delete from "Privace";
 
 insert into "FakeProfile" ("Id", "SecondName", "FirstName", "FatherName", "Age", "AboutYorself") VALUES (201, 'Secret1', 'Noname', 'Витальевич', 18, 'Холоп светлой стены'),
 												     (202, null, 'Secret3', null, 50, 'Я сам себе хозяин');
@@ -71,4 +71,3 @@ select * from "FakeProfile";
 select * from "FakeProfile" where "SecondName" = 'Secret1';
 select * from "FakeProfile" where "Age" > 18;
 delete from "FakeProfile";
-
