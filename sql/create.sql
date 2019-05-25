@@ -1,4 +1,4 @@
-﻿drop table "GlobalContent";
+drop table "GlobalContent";
 drop table "LocalContent";
 drop table "Walls";
 drop table "UsersGroup";
@@ -87,6 +87,8 @@ create table if not exists "Dialogs"(
 );
 create table if not exists "Message"(
 	"IdDialog" INTEGER NOT NULL,
+	"IdUser" INTEGER NOT NULL,
+	"IdMessage" INTEGER NOT NULL,
 	"Message" Text,
 	"Time" timestamp without time zone,
 	"Status" INTEGER NOT NULL
