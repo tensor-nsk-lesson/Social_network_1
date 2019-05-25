@@ -61,7 +61,7 @@ create table if not exists"FakeProfile"(
 	"Gender" boolean,
 	"IdContent" integer NOT NULL,
 	CONSTRAINT "pk_id_faik" PRIMARY KEY ("Id"),
-	CONSTRAINT "FakeProfile_Id_fkey" FOREIGN KEY ("Id")
+	FOREIGN KEY ("Id") REFERENCES "Privacy"("FakeId") ON DELETE CASCADE
 );
 create table if not exists "Token"(
 	"IdUser" INTEGER NOT NULL,
@@ -123,7 +123,7 @@ create table if not exists "LocalContent"(
 );
 create table if not exists "GlobalContent"(
 	"IdFile" INTEGER NOT NULL,
-	"File" Text
+	"File" Text,
 	"Status" integer NOT NULL
 ); 
 CREATE TABLE if not exists "LikesAndDislikes"
