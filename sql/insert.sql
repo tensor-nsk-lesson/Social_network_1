@@ -3,20 +3,20 @@ insert into "Authorization" ("Login", "Password", "Id") VALUES ('Person1', 1, 10
 							      ('Person3', 3, 103),
 							      ('Person4', 4, 104);
 
-insert into "Profile" ("Id", "SecondName", "FirstName", "FatherName", "Age", "AboutMe", "Status", "Date", "LastActivity","StatusProfile", "Gender", "IdContent")
-VALUES (101, 'Воландеморт', 'Олег', 'Витальевич', 18, 'Князь темного угла', 'в активном поиске', to_timestamp('19.05.97', 'dd-mm-yy'), to_timestamp('20:21', 'hh24:mi'), 1, false, 801),
-(102, null, 'Лакистрайк', 'Анатольевич', 118, 'Холоп светлой стены','в активном поиске', to_timestamp('17.05.97', 'dd-mm-yy'), to_timestamp('20:31', 'hh24:mi'), 1, true, 801),
-(103, null, 'Каблук', null, 50, 'Мне жена не разрешила писать здесь что-то', 'в активном поиске', to_timestamp('12.05.97', 'dd-mm-yy'), to_timestamp('21:21', 'hh24:mi'), 0, false, 801),
-(104, null, 'Король', 'Треф', 88, null, 'в активном поиске', to_timestamp('11.05.97', 'dd-mm-yy'), to_timestamp('22:21', 'hh24:mi'), 0, true, 801);
+insert into "Profile" ("Id", "SecondName", "FirstName", "FatherName", "Age", "AboutMe", "Status", "Date", "LastActivity","StatusProfile", "Gender", "City")
+VALUES (101, 'Воландеморт', 'Олег', 'Витальевич', 18, 'Князь темного угла', 'в активном поиске', to_timestamp('19.05.97', 'dd-mm-yy'), to_timestamp('20:21', 'hh24:mi'), 1, false, 'Татуин'),
+(102, null, 'Лакистрайк', 'Анатольевич', 118, 'Холоп светлой стены','в активном поиске', to_timestamp('17.05.97', 'dd-mm-yy'), to_timestamp('20:31', 'hh24:mi'), 1, true, 'Татуин'),
+(103, null, 'Каблук', null, 50, 'Мне жена не разрешила писать здесь что-то', 'в активном поиске', to_timestamp('12.05.97', 'dd-mm-yy'), to_timestamp('21:21', 'hh24:mi'), 0, false, 'Татуин'),
+(104, null, 'Король', 'Треф', 88, null, 'в активном поиске', to_timestamp('11.05.97', 'dd-mm-yy'), to_timestamp('22:21', 'hh24:mi'), 0, true, 'Татуин');
 
 insert into "Privacy" ("Id", "Invisibility", "FakeId", "ViewFriends", "ViewGroups") VALUES (101, false, null, 0, 0),
 											 (102, true, null, 1, 1),
 											 (103, false, 201, 2, 1),
 											 (104, false, 202, 1, 0);
 
-insert into "FakeProfile" ("Id", "SecondName", "FirstName", "FatherName", "Age", "AboutMe", "Status", "Date", "LastActivity","StatusProfile", "Gender", "IdContent")
-VALUES (201, 'Secret1', 'Noname', 'Витальевич', 18, 'Холоп светлой стены', 'в активном поиске', to_timestamp('19.05.97', 'dd-mm-yy'), to_timestamp('20:21', 'hh24:mi'), 1, false, 807),
-(202, null, 'Secret3', null, 50, 'Я сам себе хозяин', 'в активном поиске', to_timestamp('19.05.97', 'dd-mm-yy'), to_timestamp('20:21', 'hh24:mi'), 1, false, 808);
+insert into "FakeProfile" ("Id", "SecondName", "FirstName", "FatherName", "Age", "AboutMe", "Status", "Date", "LastActivity","StatusProfile", "Gender", "City")
+VALUES (201, 'Secret1', 'Noname', 'Витальевич', 18, 'Холоп светлой стены', 'в активном поиске', to_timestamp('19.05.97', 'dd-mm-yy'), to_timestamp('20:21', 'hh24:mi'), 1, false, 'Татуин'),
+(202, null, 'Secret3', null, 50, 'Я сам себе хозяин', 'в активном поиске', to_timestamp('19.05.97', 'dd-mm-yy'), to_timestamp('20:21', 'hh24:mi'), 1, false, 'Татуин');
 
 insert into "Friends" ("IdUser", "IdFriend", "Status", "WideStatus")
 VALUES (101, 102, 0, null),

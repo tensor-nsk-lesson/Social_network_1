@@ -33,7 +33,7 @@ create table if not exists "Profile"(
 	"LastActivity" timestamp without time zone,
 	"StatusProfile" integer NOT NULL,
 	"Gender" boolean,
-	"IdContent" integer NOT NULL,
+	"City" text,
 	CONSTRAINT "pk_id" PRIMARY KEY ("Id"),
 	FOREIGN KEY ("Id") REFERENCES "Authorization"("Id") ON DELETE CASCADE
 );
@@ -59,7 +59,7 @@ create table if not exists"FakeProfile"(
 	"LastActivity" timestamp without time zone,
 	"StatusProfile" integer NOT NULL,
 	"Gender" boolean,
-	"IdContent" integer NOT NULL,
+	"City" text,
 	CONSTRAINT "pk_id_faik" PRIMARY KEY ("Id"),
 	FOREIGN KEY ("Id") REFERENCES "Privacy"("FakeId") ON DELETE CASCADE
 );
@@ -83,9 +83,10 @@ create table if not exists "Dialogs"(
 	"IdUser" INTEGER NOT NULL,
 	"Status" INTEGER NOT NULL,
 	"NameDialog" Text,
-	"Name" Text
+	"Name" Text,
+	"Photo" text
 );
-create table if not exists "Message"(
+create table if not exists "Messages"(
 	"IdDialog" INTEGER NOT NULL,
 	"IdUser" INTEGER NOT NULL,
 	"IdMessage" INTEGER NOT NULL,
@@ -99,7 +100,7 @@ create table if not exists "Friends"(
 	"Status" INTEGER NOT NULL,
 	"WideStatus" Text
 );
-create table if not exists "Group"(
+create table if not exists "Groups"(
 	"IdGroup" INTEGER,
 	"Name" Text,
 	"Description" Text,
@@ -108,18 +109,16 @@ create table if not exists "Group"(
 create table if not exists "UsersGroup"(
 	"IdGroup" INTEGER NOT NULL,
 	"IdUser" INTEGER NOT NULL,
-	FOREIGN KEY ("IdGroup") REFERENCES "Group"("IdGroup") ON DELETE CASCADE
+	FOREIGN KEY ("IdGroup") REFERENCES "Groups"("IdGroup") ON DELETE CASCADE
 );
 create table if not exists "Walls"(
 	"IdWall" INTEGER NOT NULL,
 	"IdPost" INTEGER NOT NULL UNIQUE,
-	"Time" timestamp without time zone
+	"Status" boolean
 );
 create table if not exists "LocalContent"(
 	"IdContent" INTEGER NOT NULL,
-	"IdFile" INTEGER NOT NULL,
-	"File" Text,
-	"Status" integer NOT NULL
+	"IdFile" INTEGER NOT NULL
 );
 create table if not exists "GlobalContent"(
 	"IdFile" INTEGER NOT NULL,
@@ -134,9 +133,17 @@ CREATE TABLE if not exists "LikesAndDislikes"
 );
 CREATE TABLE if not exists "Posts"
 (
-	"IdPost" integer NOT NULL,
+	"IdPost" integer NOT NULL UNIQUE,
 	"IdUser" integer NOT NULL,
-	"Comment" text,
+	"Content" text,
 	"Time" timestamp without time zone,
 	FOREIGN KEY ("IdPost") REFERENCES "Walls"("IdPost") ON DELETE CASCADE
-)
+);
+CREATE TABLE if not exists "Comments"
+(
+	"IdPost" integer NOT NULL,
+	"IdComment" integer NOT NULL,
+	"Content" text,
+	"Time" timestamp without time zone,
+	FOREIGN KEY ("IdPost") REFERENCES "Posts"("IdPost") ON DELETE CASCADE
+)	
