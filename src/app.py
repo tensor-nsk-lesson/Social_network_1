@@ -133,5 +133,10 @@ def like_dislike(id_post, id_status):
     put_like_dislike(id_post, id_status, id_user)
     return
 
+@app.route("/profile/<int:id>", methods=['GET'])
+def get_profile(id):
+    json = get_profile_info(id)
+    return jsonify(json)
+
 
 app.run(port=80)
