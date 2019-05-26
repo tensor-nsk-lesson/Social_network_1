@@ -117,7 +117,7 @@ def register():
 
 
 @app.route('/token/<int:id_user>', methods=['GET'])
-def get_friends(id_user):
+def token(id_user):
     return jsonify(get_token(id_user))
 
 
