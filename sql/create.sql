@@ -46,23 +46,6 @@ create table if not exists "Privacy"(
 	CONSTRAINT "pk_id_private" PRIMARY KEY ("Id"),
 	FOREIGN KEY ("Id") REFERENCES "Profile"("Id") ON DELETE CASCADE
 );
-create table if not exists"FakeProfile"(
-	"Id" integer NOT NULL,
-	"Photo" text,
-	"SecondName" text,
-	"FirstName" text,
-	"FatherName" text,
-	"Age" integer,
-	"AboutMe" text,
-	"Status" text,
-	"Date" timestamp without time zone,
-	"LastActivity" timestamp without time zone,
-	"StatusProfile" integer NOT NULL,
-	"Gender" boolean,
-	"City" text,
-	CONSTRAINT "pk_id_faik" PRIMARY KEY ("Id"),
-	FOREIGN KEY ("Id") REFERENCES "Privacy"("FakeId") ON DELETE CASCADE
-);
 create table if not exists "Token"(
 	"IdUser" INTEGER NOT NULL,
 	"Password" INTEGER NOT NULL,
@@ -129,7 +112,7 @@ CREATE TABLE if not exists "LikesAndDislikes"
 (
 	"IdPost" integer NOT NULL,
 	"IdUser" integer NOT NULL,
-	"Status" integer NOT NULL
+	"Status" boolean NOT NULL
 );
 CREATE TABLE if not exists "Posts"
 (
