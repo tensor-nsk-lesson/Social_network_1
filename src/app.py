@@ -1,4 +1,6 @@
-from flask import Flask, jsonify, request
+import os
+import sys
+from flask import Flask, render_template, jsonify, request
 from dialog import *
 from content import *
 from group import *
@@ -7,7 +9,13 @@ from auth_and_register import *
 from wall import *
 from like_or_dislike import *
 
-app = Flask(__name__)
+project_root = os.path.dirname(__file__)
+template_path = os.path.join(project_root, '../client')
+app = Flask(__name__, template_folder=template_path)
+
+@app.route('/')
+def index():
+	return render_template('index.html')
 
 
 @app.route('/dialogs/<int:id_user>', methods=["GET"])
