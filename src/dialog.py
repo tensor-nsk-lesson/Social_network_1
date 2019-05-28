@@ -1,5 +1,5 @@
 from connect import connect
-
+import random
 
 def get_dialogs_for_user(id_user):
     conn = connect()
@@ -20,17 +20,15 @@ def get_dialogs_for_user(id_user):
 def create_dialog(id_user):
     conn = connect()
     cur = conn.cursor()
-    cur.execute('select max("IdDialog") from "Dialogs"')
-    max = cur.fetchone()
-    max = max[0] + 1
-    cur.execute('insert into "Dialogs" ("IdDialog", "IdUser", "Status", "NameDialog") '
-                'values('+max.__str__()+','
-                +id_user.__str__()
-                +', 0 , \'Dialog'+max.__str__()+'\')')
+    cur.execute('insert into "Dialogs" ("IdUser", "Status", "NameDialog") '
+                'values('+id_user.__str__()
+                +', 0 , \'Dialog'+random.randint(1, 100000).__str__()+'\')'
+                'returning "IdDialog"')
+    id_dialog = cur.fetchone()
     conn.commit()
     conn.close()
     result = {
-        "IdDialog": max
+        "IdDialog": id_dialog[0]
     }
     return result
 
@@ -89,3 +87,16 @@ def get_messages_for_user(id_dialog):
     conn.commit()
     conn.close()
     return result
+
+
+def add_in_dialog(id_user, id_dialog):
+    conn = connect()
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM "Dialogs" WHERE "IdDialog" = '+id_dialog.__str__())
+    row = cursor.fetchone()
+    cursor.execute('INSERT INTO "Dialogs" ("IdDialog", "IdUser", "Status", "NameDialog", "Photo") VALUES '
+                   + ' (' + id_dialog.__str__()+', ' + id_user.__str__() + ', ' + row[2].__str__()
+                   + ', \'' + row[3].__str__() + '\', \'' + row[5].__str__() + '\')')
+    conn.commit()
+    conn.close()
+    return

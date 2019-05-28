@@ -8,6 +8,7 @@ from friend import *
 from auth_and_register import *
 from wall import *
 from like_or_dislike import *
+from user import *
 
 project_root = os.path.dirname(__file__)
 template_path = os.path.join(project_root, '../client')
@@ -30,30 +31,23 @@ def create(id_user):
     return jsonify(idDialog)
 
 
-#@app.route('/add_in_dialog', methods=["POST"])
-#def addInDialog():
-
-
 @app.route('/rename_dialog/<int:id_dialog>', methods=["PUT"])
 def rename(id_dialog):
     new_name = request.json.get('new_name')
-    rename_dialog(id_dialog, new_name)
-    return
+    return jsonify(rename_dialog(id_dialog, new_name))
 
 
 @app.route('/dialog/<int:id_dialog>/message/<int:id_message>', methods=['PUT'])
 def change_status_for_message(id_dialog, id_message):
     new_status = request.json.get('new_status')
     id_user = request.json.get('id_user')
-    update_status_message_for_user(id_dialog, id_message, new_status, id_user)
-    return
+    return jsonify(update_status_message_for_user(id_dialog, id_message, new_status, id_user))
 
 
 @app.route('/dialog/<int:id_dialog>/message/<int:id_message>', methods=['DELETE'])
 def delete_message(id_dialog, id_message):
     id_user = request.json.get('id_user')
-    delete_message_for_all(id_dialog, id_message, id_user)
-    return
+    return jsonify(delete_message_for_all(id_dialog, id_message, id_user))
 
 
 @app.route('/dialog/<int:id_dialog>/get_messages', methods=['GET'])
@@ -70,8 +64,7 @@ def get_contents(status):
 def add_content():
     id_user = request.json.get('id_user')
     id_file = request.json.get('id_file')
-    add_content_for_user(id_user, id_file)
-    return
+    return jsonify(add_content_for_user(id_user, id_file))
 
 
 @app.route('/get_groups/<int:id_user>', methods=['GET'])
@@ -84,8 +77,7 @@ def create_group():
     name = request.json.get('name')
     description = request.json.get('description')
     id_user = request.json.get('id_user')
-    create_group_by_user(name, description, id_user)
-    return
+    return jsonify(create_group_by_user(name, description, id_user))
 
 
 @app.route('/get_group/<int:id_group>', methods=['GET'])
@@ -121,12 +113,9 @@ def auth():
 def register():
     first_name = request.json.get('first_name')
     date = request.json.get('date')
-    return jsonify(register(first_name, date))
-
-
-@app.route('/token/<int:id_user>', methods=['GET'])
-def token(id_user):
-    return jsonify(get_token(id_user))
+    login = request.json.get('login')
+    password = request.json.get('password')
+    return jsonify(register_user(first_name, date, login, password))
 
 
 @app.route('/walls/<int:id_wall>', methods=['GET'])
@@ -135,16 +124,44 @@ def get_wall(id_wall):
     return jsonify(wall)
 
 
-@app.route('/post/<int:id_post>/status/<int:id_status>', methods=['PUT'])
+@app.route('/posts/<int:id_post>/status/<int:id_status>', methods=['PUT'])
 def like_dislike(id_post, id_status):
     id_user = request.json.get('id_user')
-    put_like_dislike(id_post, id_status, id_user)
-    return
+    return put_like_dislike(id_post, id_status, id_user)
 
-@app.route("/profile/<int:id>", methods=['GET'])
-def get_profile(id):
-    json = get_profile_info(id)
-    return jsonify(json)
+
+@app.route('/privacy/invisibility/<string:status>', methods=['PUT'])
+def privacy_invisibility(status):
+    id_user = request.json.get('id_user')
+    return change_privacy_invisibility(status, id_user)
+
+
+@app.route('/friends/<int:id_friend>', methods=['PUT'])
+def add_friend(id_friend):
+    id_user = request.json.get('id_user')
+    wide_status = request.json.get('wide_status')
+    return add_friends(id_friend, id_user, wide_status)
+
+
+@app.route('/privacy/view_friends/<int:status>', methods=['PUT'])
+def privacy_view_friends(status):
+    id_user = request.json.get('id_user')
+    id_friends = request.json.get('mass_id')
+    return put_privacy_view_friends(status, id_user, id_friends)
+
+
+@app.route('/privacy/view_groups/<int:status>', methods=['PUT'])
+def privacy_view_groups(status):
+    id_user = request.json.get('id_user')
+    id_friends = request.json.get('mass_id')
+    return put_privacy_view_groups(status, id_user, id_friends)
+
+
+@app.route('/add_in_dialog', methods = ['POST'])
+def add_in_dialog():
+    id_user = request.json.get('id_user')
+    id_dialog = request.json.get('id_dialog')
+    return add_in_dialog(id_user, id_dialog)
 
 
 app.run(port=80)
