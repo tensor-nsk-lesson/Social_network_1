@@ -10,13 +10,20 @@ from wall import *
 from like_or_dislike import *
 from user import *
 
+
 project_root = os.path.dirname(__file__)
-template_path = os.path.join(project_root, '../client')
-app = Flask(__name__, template_folder=template_path)
+template_path = os.path.join(project_root, '../client/templates')
+static_path = os.path.join(project_root, '../client/static')
+
+app = Flask(__name__, template_folder=template_path, static_folder=static_path)
 
 @app.route('/')
 def index():
 	return render_template('index.html')
+
+@app.route('/reg')
+def reg():
+	return render_template('registration.html')
 
 
 @app.route('/dialogs/<int:id_user>', methods=["GET"])
