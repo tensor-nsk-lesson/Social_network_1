@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+  <script src="{{url_for('static', filename='js/script.js')}}"></script>
+  <title>FoxNET</title>
+  <style>
+  .log-input{
+    width: 220px;
+    height: 40px;
+    border: 0 solid #fff;
+    background-color: #503484;
+    color: #fff;
+    border: 1px solid #503484;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    }
+    .reg-input{
+      margin-top: 30px;
+    }
+</style>
+</head>
+<body>
+  <form class='autorisation-wrap registr' action="">
+      <h1>Registration</h1>
+      <input type="text" class="login-data" placeholder="Firstname">
+      <input type="text" class="login-data" placeholder="Email">
+      <input type="text" class="login-data" placeholder="DD/MM/YYYY">
+      <input type="text" class="login-data" placeholder="Password">
+      <input type="text" class="login-data" placeholder="Password again">
+      <input type="submit" class='log-input reg-input' value='REGISTRATE'>
+  </form>
+</body>
+</html>
