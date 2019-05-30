@@ -1,4 +1,5 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
+from flask_socketio import SocketIO, send, emit
 from dialog import *
 from content import *
 from group import *
@@ -7,8 +8,17 @@ from auth_and_register import *
 from wall import *
 from like_or_dislike import *
 from user import *
+import redis
+import secrets
+
+r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'my_secret'
+
+id_Message = 0
+
+socketio = SocketIO(app, async_mod=None)
 
 
 @app.route('/dialogs/<int:id_user>', methods=["GET"])
@@ -98,7 +108,13 @@ def get_friends(id_user):
 def auth():
     login = request.json.get('login')
     password = request.json.get('password')
-    return jsonify(authorization(login, password))
+    result = authorization(login, password)
+    if result.get('Error'):
+        return jsonify(result)
+    else:
+        key = secrets.token_hex(10)
+        r.set(key.__str__(), result.get('Id'), 3600)
+    return jsonify({'session':key})
 
 
 @app.route('/register', methods=['POST'])
@@ -156,4 +172,28 @@ def add_in_dialog():
     return add_in_dialog(id_user, id_dialog)
 
 
-app.run(port=80)
+@app.route('/')
+def index():
+    # conn = connect()
+    # cur = conn.cursor()
+    # cur.execute('SELECT "Message" FROM "Messages"')
+    # conn.close()
+    # messages = cur.fechall()
+    return render_template('index.html', title='My Chat')
+
+
+@socketio.on('message')
+def handle_message(message):
+    # print('message ' + message)
+    # conn = connect()
+    # cur = conn.cursor()
+    # cur.execute('INSERT INTO "Messages" ("IdDialog", "IdUser", "IdMessage", "Message", "Time", "Status") VALUES (201, '
+    #             + '101, ' + id_Message.__str__() + ', ' + message.__str__() + ', CURRENT_TIMESTAMP, 0 )')
+    # cur.commit()
+    # conn.close()
+    # id_Message + 1
+    send(message, broadcast=True)
+
+socketio.run(app)
+
+##app.run(port=80)

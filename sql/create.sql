@@ -1,6 +1,6 @@
 drop table "GlobalContent";
 drop table "LocalContent";
-drop table "Walls";
+drop table "Walls" Cascade;
 drop table "UsersGroup";
 drop table "Group";
 drop table "Friends";
@@ -13,11 +13,16 @@ drop table "FakeProfile" CASCADE;
 drop table "Privacy" CASCADE;
 drop table "Profile" CASCADE;
 drop table "Authorization" CASCADE;
+drop table "Posts" cascade;
+drop table "Groups" cascade;
+drop table "Comments" cascade;
+drop table "LikesAndDislikes" cascade;
+drop table "Messages" cascade;
 
 create table if not exists "Authorization"(
 	"Login" VARCHAR(20),
 	"Password" INTEGER NOT NULL,
-	"Id" INTEGER NOT NULL UNIQUE,
+	"Id" serial UNIQUE,
 	CONSTRAINT "pk_login" PRIMARY KEY ("Login")
 );
 create table if not exists "Profile"(
@@ -46,20 +51,13 @@ create table if not exists "Privacy"(
 	CONSTRAINT "pk_id_private" PRIMARY KEY ("Id"),
 	FOREIGN KEY ("Id") REFERENCES "Profile"("Id") ON DELETE CASCADE
 );
-create table if not exists "Token"(
-	"IdUser" INTEGER NOT NULL,
-	"Password" INTEGER NOT NULL,
-	"Time" timestamp without time zone,
-	CONSTRAINT "pk_id_user" PRIMARY KEY ("IdUser"),
-	FOREIGN KEY ("IdUser") REFERENCES "Authorization"("Id") ON DELETE CASCADE
-);
 create table if not exists "SeeingGroup"(
-	"IdStatus" INTEGER NOT NULL,
-	"IdUser" INTEGER NOT NULL
+	"IdUser" INTEGER NOT NULL,
+	"IdFriend" INTEGER NOT NULL
 );
 create table if not exists "SeeingFriends"(
-	"IdStatus" INTEGER NOT NULL,
-	"IdUser" INTEGER NOT NULL
+	"IdUser" INTEGER NOT NULL,
+	"IdFriend" INTEGER NOT NULL
 );
 create table if not exists "Dialogs"(
 	"IdDialog" INTEGER NOT NULL,
@@ -129,4 +127,4 @@ CREATE TABLE if not exists "Comments"
 	"Content" text,
 	"Time" timestamp without time zone,
 	FOREIGN KEY ("IdPost") REFERENCES "Posts"("IdPost") ON DELETE CASCADE
-)	
+);	

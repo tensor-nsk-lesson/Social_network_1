@@ -99,8 +99,8 @@ class TestApi(unittest.TestCase):
 
     def test_auth(self):
         data = {
-            'login': 'Person1',
-            'password': 1
+            'login': 'Login',
+            'password': 4
         }
         resp = requests.post('http://127.0.0.1:80/auth', json=data)
         self.assertEqual(resp.status_code, 200)
