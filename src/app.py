@@ -1,6 +1,6 @@
 from flask_socketio import SocketIO, send, emit
-import os
-import sys
+#import os
+#import sys
 from flask import Flask, render_template, jsonify, request
 from dialog import *
 from content import *
@@ -22,31 +22,33 @@ id_Message = 0
 
 socketio = SocketIO(app, async_mod=None)
 
-project_root = os.path.dirname(__file__)
-template_path = os.path.join(project_root, '../client/templates')
-static_path = os.path.join(project_root, '../client/static')
+#project_root = os.path.dirname(__file__)
+#template_path = os.path.join(project_root, '../client/templates')
+#static_path = os.path.join(project_root, '../client/static')
 
-app = Flask(__name__, template_folder=template_path, static_folder=static_path)
+#app = Flask(__name__, template_folder=template_path, static_folder=static_path)
 
-@app.route('/')
-def index():
-	return render_template('index.html')
+#@app.route('/')
+#def index():
+#	return render_template('index.html')
 
-@app.route('/reg')
-def reg():
-	return render_template('registration.html')
+#@app.route('/reg')
+#def reg():
+#	return render_template('registration.html')
 
 
-@app.route('/dialogs/<int:id_user>', methods=["GET"])
-def get_dialogs(id_user):
+@app.route('/dialogs/<string:id_session>', methods=["GET"])
+def get_dialogs(id_session):
+    id_user = r.get(id_session)
     json = get_dialogs_for_user(id_user)
     return jsonify(json)
 
 
-@app.route('/dialog/<int:id_user>', methods=["GET"])
-def create(id_user):
-    idDialog = create_dialog(id_user)
-    return jsonify(idDialog)
+@app.route('/dialog/<string:id_session>', methods=["GET"])
+def create(id_session):
+    id_user = r.get(id_session)
+    id_dialog = create_dialog(id_user)
+    return jsonify(id_dialog)
 
 
 @app.route('/rename_dialog/<int:id_dialog>', methods=["PUT"])
@@ -58,13 +60,13 @@ def rename(id_dialog):
 @app.route('/dialog/<int:id_dialog>/message/<int:id_message>', methods=['PUT'])
 def change_status_for_message(id_dialog, id_message):
     new_status = request.json.get('new_status')
-    id_user = request.json.get('id_user')
+    id_user = r.get(request.json.get('id_session'))
     return jsonify(update_status_message_for_user(id_dialog, id_message, new_status, id_user))
 
 
 @app.route('/dialog/<int:id_dialog>/message/<int:id_message>', methods=['DELETE'])
 def delete_message(id_dialog, id_message):
-    id_user = request.json.get('id_user')
+    id_user = r.get(request.json.get('id_session'))
     return jsonify(delete_message_for_all(id_dialog, id_message, id_user))
 
 
@@ -80,13 +82,14 @@ def get_contents(status):
 
 @app.route('/add_local_content', methods=['POST'])
 def add_content():
-    id_user = request.json.get('id_user')
+    id_user = r.get(request.json.get('id_session'))
     id_file = request.json.get('id_file')
     return jsonify(add_content_for_user(id_user, id_file))
 
 
-@app.route('/get_groups/<int:id_user>', methods=['GET'])
-def get_groups(id_user):
+@app.route('/get_groups/<string:id_session>', methods=['GET'])
+def get_groups(id_session):
+    id_user = r.get(id_session)
     return jsonify(get_groups_for_user(id_user))
 
 
@@ -94,7 +97,7 @@ def get_groups(id_user):
 def create_group():
     name = request.json.get('name')
     description = request.json.get('description')
-    id_user = request.json.get('id_user')
+    id_user = r.get(request.json.get('id_session'))
     return jsonify(create_group_by_user(name, description, id_user))
 
 
@@ -115,8 +118,9 @@ def add_user():
     return jsonify(add_user_in_group(id_user, id_group))
 
 
-@app.route('/friend/<int:id_user>', methods=['GET'])
-def get_friends(id_user):
+@app.route('/friend/<string:id_session>', methods=['GET'])
+def get_friends(id_session):
+    id_user = r.get(id_session)
     return jsonify(get_friends_for_user(id_user))
 
 
@@ -150,33 +154,33 @@ def get_wall(id_wall):
 
 @app.route('/posts/<int:id_post>/status/<int:id_status>', methods=['PUT'])
 def like_dislike(id_post, id_status):
-    id_user = request.json.get('id_user')
+    id_user = r.get(request.json.get('id_session'))
     return put_like_dislike(id_post, id_status, id_user)
 
 
 @app.route('/privacy/invisibility/<string:status>', methods=['PUT'])
 def privacy_invisibility(status):
-    id_user = request.json.get('id_user')
+    id_user = r.get(request.json.get('id_session'))
     return change_privacy_invisibility(status, id_user)
 
 
 @app.route('/friends/<int:id_friend>', methods=['PUT'])
 def add_friend(id_friend):
-    id_user = request.json.get('id_user')
+    id_user = r.get(request.json.get('id_session'))
     wide_status = request.json.get('wide_status')
     return add_friends(id_friend, id_user, wide_status)
 
 
 @app.route('/privacy/view_friends/<int:status>', methods=['PUT'])
 def privacy_view_friends(status):
-    id_user = request.json.get('id_user')
+    id_user = r.get(request.json.get('id_session'))
     id_friends = request.json.get('mass_id')
     return put_privacy_view_friends(status, id_user, id_friends)
 
 
 @app.route('/privacy/view_groups/<int:status>', methods=['PUT'])
 def privacy_view_groups(status):
-    id_user = request.json.get('id_user')
+    id_user = r.get(request.json.get('id_session'))
     id_friends = request.json.get('mass_id')
     return put_privacy_view_groups(status, id_user, id_friends)
 
@@ -209,6 +213,7 @@ def handle_message(message):
     # conn.close()
     # id_Message + 1
     send(message, broadcast=True)
+
 
 socketio.run(app)
 
