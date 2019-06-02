@@ -20,7 +20,7 @@ def put_privacy_view_friends(status, id_user, id_friends):
     else:
         cursor.execute('UPDATE "Privacy" SET "ViewFriends" = ' + status.__str__() + ' WHERE "Id" = '
                        + id_user.__str__())
-        cursor.execute('delete "Privacy" WHERE "Id" = ' + id_user.__str__())
+        cursor.execute('delete from "Privacy" WHERE "Id" = ' + id_user.__str__())
     conn.commit()
     conn.close()
     return
@@ -36,7 +36,7 @@ def put_privacy_view_groups(status, id_user, id_friends):
     else:
         cursor.execute('UPDATE "Privacy" SET "ViewGroups" = ' + status.__str__() + ' WHERE "Id" = '
                        + id_user.__str__())
-        cursor.execute('delete "Privacy" WHERE "Id" = '+ id_user.__str__())
+        cursor.execute('delete from "Privacy" WHERE "Id" = '+ id_user.__str__())
     conn.commit()
     conn.close()
     return

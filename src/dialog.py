@@ -1,6 +1,7 @@
 from connect import connect
 import random
 
+
 def get_dialogs_for_user(id_user):
     conn = connect()
     cur = conn.cursor()
@@ -20,9 +21,10 @@ def get_dialogs_for_user(id_user):
 def create_dialog(id_user):
     conn = connect()
     cur = conn.cursor()
-    cur.execute('insert into "Dialogs" ("IdUser", "Status", "NameDialog") '
-                'values('+id_user.__str__()
-                +', 0 , \'Dialog'+random.randint(1, 100000).__str__()+'\')'
+    number = random.randint(1, 100000).__str__()
+    cur.execute('insert into "Dialogs" ("IdDialog", "IdUser", "Status", "NameDialog") '
+                'values('+number+','+id_user.__str__()
+                +', 0 , \'Dialog'+number+'\')'
                 'returning "IdDialog"')
     id_dialog = cur.fetchone()
     conn.commit()

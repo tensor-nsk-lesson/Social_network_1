@@ -1,5 +1,6 @@
 from connect import connect
 
+
 def get_profile_info(id):
     conn = connect()
     cur = conn.cursor()

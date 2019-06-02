@@ -13,7 +13,7 @@ from user import *
 import redis
 import secrets
 
-r = redis.StrictRedis(host='localhost', port=6379, db=0)
+r = redis.StrictRedis(host='localhost', port=6379, db=0, decode_responses=True)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'my_secret'
@@ -40,7 +40,12 @@ socketio = SocketIO(app, async_mod=None)
 @app.route('/dialogs/<string:id_session>', methods=["GET"])
 def get_dialogs(id_session):
     id_user = r.get(id_session)
-    json = get_dialogs_for_user(id_user)
+    if not id_user:
+        json = {
+            'Error':'пшел нах злоумышленник'
+        }
+    else:
+        json = get_dialogs_for_user(id_user)
     return jsonify(json)
 
 
@@ -133,7 +138,8 @@ def auth():
         return jsonify(result)
     else:
         key = secrets.token_hex(10)
-        r.set(key.__str__(), result.get('Id'), 3600)
+        print(key.__str__())
+        r.set(key.__str__(), result.get('Id').__str__(), 3600)
     return jsonify({'session':key})
 
 
@@ -148,48 +154,47 @@ def register():
 
 @app.route('/walls/<int:id_wall>', methods=['GET'])
 def get_wall(id_wall):
-    wall = get_user_wall(id_wall)
-    return jsonify(wall)
+    return jsonify(get_user_wall(id_wall))
 
 
-@app.route('/posts/<int:id_post>/status/<int:id_status>', methods=['PUT'])
+@app.route('/posts/<int:id_post>/status/<string:id_status>', methods=['PUT'])
 def like_dislike(id_post, id_status):
     id_user = r.get(request.json.get('id_session'))
-    return put_like_dislike(id_post, id_status, id_user)
+    return jsonify(put_like_dislike(id_post, id_status, id_user))
 
 
 @app.route('/privacy/invisibility/<string:status>', methods=['PUT'])
 def privacy_invisibility(status):
     id_user = r.get(request.json.get('id_session'))
-    return change_privacy_invisibility(status, id_user)
+    return jsonify(change_privacy_invisibility(status, id_user))
 
 
 @app.route('/friends/<int:id_friend>', methods=['PUT'])
 def add_friend(id_friend):
     id_user = r.get(request.json.get('id_session'))
     wide_status = request.json.get('wide_status')
-    return add_friends(id_friend, id_user, wide_status)
+    return jsonify(add_friends(id_friend, id_user, wide_status))
 
 
 @app.route('/privacy/view_friends/<int:status>', methods=['PUT'])
 def privacy_view_friends(status):
     id_user = r.get(request.json.get('id_session'))
     id_friends = request.json.get('mass_id')
-    return put_privacy_view_friends(status, id_user, id_friends)
+    return jsonify(put_privacy_view_friends(status, id_user, id_friends))
 
 
 @app.route('/privacy/view_groups/<int:status>', methods=['PUT'])
 def privacy_view_groups(status):
     id_user = r.get(request.json.get('id_session'))
     id_friends = request.json.get('mass_id')
-    return put_privacy_view_groups(status, id_user, id_friends)
+    return jsonify(put_privacy_view_groups(status, id_user, id_friends))
 
 
 @app.route('/add_in_dialog', methods = ['POST'])
 def add_in_dialog():
     id_user = request.json.get('id_user')
     id_dialog = request.json.get('id_dialog')
-    return add_in_dialog(id_user, id_dialog)
+    return jsonify(add_in_dialog(id_user, id_dialog))
 
 
 @app.route('/')
