@@ -13,9 +13,15 @@ from user import *
 import redis
 import secrets
 
+
 r = redis.StrictRedis(host='localhost', port=6379, db=0, decode_responses=True)
 
-app = Flask(__name__)
+project_root = os.path.dirname(__file__)
+template_path = os.path.join(project_root, '../client/templates')
+static_path = os.path.join(project_root, '../client/static')
+
+app = Flask(__name__, template_folder=template_path, static_folder=static_path)
+
 app.config['SECRET_KEY'] = 'my_secret'
 
 id_Message = 0
@@ -31,7 +37,6 @@ socketio = SocketIO(app, async_mod=None)
 #@app.route('/')
 #def index():
 #	return render_template('index.html')
-
 #@app.route('/reg')
 #def reg():
 #	return render_template('registration.html')
@@ -222,3 +227,9 @@ def handle_message(message):
 
 socketio.run(app)
 
+<<<<<<< HEAD
+||||||| merged common ancestors
+app.run(port=80)
+=======
+app.run(port=80)
+>>>>>>> front-end
