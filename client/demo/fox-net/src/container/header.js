@@ -1,6 +1,6 @@
 import React from 'react';
 import {Component} from 'react';
-import logo from '../pics/foxnet.png'
+import logo from '../pics/foxnetWhite.png'
 import peoplePic from '../pics/people.png'
 import notificationPic from '../pics/nontification.png'
 import profilePhoto from'../pics/profilePhoto.jpg'
@@ -17,8 +17,14 @@ class Header extends Component{
           <img src={peoplePic} alt="PEOPLE"/>
           <img src={notificationPic}alt="NONTIFICATION"/>
         </div>
-        <div className="searchWrap">
-          <input type="text" className='search' placeholder="Search"/>
+        <div className="pagesList">
+          <ul>
+            <li>My profile</li>
+            <li>Friends</li>
+            <li>News</li>
+            <li>Groups</li>
+            <li>Music</li>
+          </ul>
         </div>
         <div className="profileLogo">
           <i>&equiv;</i>

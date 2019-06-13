@@ -20,7 +20,7 @@ class Chat extends Component{
         <div className="dialogBlock">
           {messages}
         </div>
-        <input type="text" placeholder="Enter your message" className='messageInput'/>
+        <textarea placeholder='Enter your message' className='messageInput'></textarea>
         <button className='sendMessage'><img src={sendMessage}/></button>
       </div>
     )

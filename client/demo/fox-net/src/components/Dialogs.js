@@ -12,9 +12,7 @@ class Dialogs extends Component{
       <React.Fragment>
       <Header user='Венимин Аноним'/>
       <section className='dialogWrap'>
-        <div className="dialogList">
-          <DialogList />
-        </div>
+        <DialogList />
         <Chat/>
       </section>
       </React.Fragment>

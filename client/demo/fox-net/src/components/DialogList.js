@@ -9,9 +9,9 @@ class DialogList extends Component{
       return <Dialogs key={index} dialogs={item} lastMessage={this.props.lastMessage[index]} lastMessageTime={this.props.lastMessageTime[index]}/>
     })
     return(
-      <React.Fragment>
+      <div className="dialogList">
         {dialogList}
-      </React.Fragment>
+      </div>
     )
   }
 }

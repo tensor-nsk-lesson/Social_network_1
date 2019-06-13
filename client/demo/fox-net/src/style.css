@@ -124,8 +124,8 @@ header{
 }
 header img{
   margin-right: 20px;
-  width: 50px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   padding-left: 20px;
 }
 .logo{
@@ -150,30 +150,25 @@ header img{
   width: 40px;
   height: 30px;
 }
-.searchWrap{
+.pagesList{
   display: flex;
-  align-items: center;
-  height: 50px;
-  width:500px;
-  border-right: 1px solid #342255;
+  justify-content: center;
+  width: 450px;
 }
-.search{
-  color: #6d48b0;
-  font-weight: 400;
-  border: 0px solid #fff;
-  padding-left: 10px;
-  margin-left: 20px;
+.pagesList ul{
+  width: 450px;
+  justify-content: space-around;
+  margin-top: 15px;
   display: flex;
-  background-color: #342255;
-  border-radius: 30px;
-  width: 300px;
-  height: 30px;
-  align-items: center;
-  transition: background .2s;
+  list-style: none;
 }
-.search:focus{
-  background: #fff;
-  outline: none;
+.pagesList li{
+  cursor: pointer;
+  margin-left: 10px;
+  transition: 1s;
+}
+.pagesList li:hover{
+  text-decoration: underline;
 }
 .profileLogo{
   display: flex;
@@ -203,7 +198,7 @@ header img{
   border-radius: 10px;
   background: #232323;
   width: 270px;
-  height: 510px;
+  height: 82vh;
   overflow: scroll;
   overflow-x: hidden;
 }
@@ -216,6 +211,7 @@ header img{
   border-radius: 10px;
   background: #232323;
   width: 900px;
+  height: 82vh;
 }
 .dialog{
   cursor: pointer;
@@ -275,7 +271,7 @@ header img{
   overflow-x: hidden;
   background: #202020;
   width: 650px;
-  height: 370px;
+  height: 60vh;
   margin-top: 30px;
   margin-left: 130px;
   border: 2px solid #353535;
@@ -326,19 +322,27 @@ header img{
   font-size: 10px;
 }
 .messageInput{
+  position: relative;
+  margin-top: 2vh;
+  padding-top: 0px;
+  resize: none;
+  color: #fff;
   padding-left: 10px;
   border-radius: 20px;
   border: 1px solid #353535;
   background: #202020;
   width: 605px;
-  height: 25px;
-  margin-top: 10px;
+  min-height: 25px;
   margin-left: 130px;
-  transition: background .2s;
+  transition: background .2s;;
+}
+.messageInput::placeholder{
+  color: #fff;
 }
 .messageInput:focus{
   background: #fff;
   outline: none;
+  color: #000;
 }
 .sendMessage{
   margin-left: 10px;
@@ -347,8 +351,8 @@ header img{
   border: none;
 }
 .sendMessage img{
-  position: relative;
-  top:5px;
+  margin-top: 2vh;
+  margin-bottom: 5px;
   width: 25px;
   height: 25px;
 }
@@ -449,6 +453,14 @@ header img{
 .popupMessage button:hover{
   color: #000;
   background: #fff;
+}
+.profile{
+  width: 1250px;
+}
+.profileInfo{
+  width: 200px;
+  height: 600px;
+  border: 1px solid #fff;
 }
 ::-webkit-scrollbar-button {
 width:5px;

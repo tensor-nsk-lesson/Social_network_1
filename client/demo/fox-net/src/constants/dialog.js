@@ -1,7 +1,7 @@
 const dialogList = {
   user: 'Виниамин Аноним',
   dialogs:[
-    'Кот Евгений',
+    'Кот ЕвГЕНИЙ',
     'Пётр Игрь',
     'Такса Сережа',
     'Лось Альберт',
@@ -29,7 +29,7 @@ const dialogList = {
     '7:07',
     '7:00'
   ],
-  interlocutor:'Кот Евгений'
+  interlocutor:'Кот ЕвГЕНИЙ'
 }
 
 export default dialogList;

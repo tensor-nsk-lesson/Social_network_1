@@ -1,6 +1,7 @@
 import React from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
 import '../style.css'
 import months from '../constants/months.js'
 import days from '../constants/days.js'
@@ -58,7 +59,9 @@ class Registration extends Component{
             </div>
             <input type="password" className="loginData" placeholder="Password" ref={(input) => {this.passwordInput = input}}/>
             <input type="password" className="loginData" placeholder="Password again" ref={(input) => {this.checkPasswordInput = input}}/>
-            <input type="submit" className='logInput regInput' value='REGISTRATE'/>
+            <Link to='/'>
+              <input type="submit" className='logInput regInput' value='REGISTRATE'/>
+            </Link>
         </form>
       </div>
     )

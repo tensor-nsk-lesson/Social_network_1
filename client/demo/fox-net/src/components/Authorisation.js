@@ -1,8 +1,9 @@
 import React from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
 import '../style.css';
-import logo from '../pics/foxnet.png';
+import logo from '../pics/foxnetBlack.png';
 
 class Authorisation extends Component{
   constructor(props){
@@ -28,7 +29,9 @@ class Authorisation extends Component{
             <input type="password" className='loginData' placeholder="Password" ref={(input) => {this.passwordInput = input}}/>
             <div className="serviceButtons"><label id='remember'><input type="checkbox" id='checkbox' ref={(input) => {this.rememberInput = input}}/>
             <p>Remember me</p></label> <a href="#" className='loginFuncs'>Forgot?</a></div>
-            <input className='logInput' type="submit" value='LOGIN'/>
+            <Link to='/dialogs'>
+              <input className='logInput' type="submit" value='LOGIN'/>
+            </Link>
             <a href="#" className='loginFuncs'>I don't have an accaunt</a>
         </form>
       </div>
