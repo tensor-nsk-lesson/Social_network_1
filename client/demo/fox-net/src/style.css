@@ -132,7 +132,6 @@ header img{
   text-transform: uppercase;
   display: flex;
   align-items: center;
-  border-right: 1px solid #342255;
   width:300px;
   height: 50px;
   cursor: pointer;
@@ -141,7 +140,6 @@ header img{
   display: flex;
   align-items: center;
   justify-content: center;
-  border-right: 1px solid #342255;
   width: 200px;
   height: 50px;
 }
@@ -159,6 +157,7 @@ header img{
   width: 450px;
   justify-content: space-around;
   margin-top: 15px;
+  margin-left: 20px;
   display: flex;
   list-style: none;
 }
@@ -167,12 +166,16 @@ header img{
   margin-left: 10px;
   transition: 1s;
 }
+.pagesList a{
+  color: #fff;
+  text-decoration: none;
+}
 .pagesList li:hover{
   text-decoration: underline;
 }
 .profileLogo{
   display: flex;
-  width:350px;
+  width:300px;
   height: 50px;
   justify-content: flex-end;
   align-items: center;
@@ -293,7 +296,6 @@ header img{
   text-align: left;
   height: auto;
   color: #fff;
-  resize: none;
   padding-top: 5px;
   background: #4f3382;
   border-radius: 15px;
@@ -455,12 +457,101 @@ header img{
   background: #fff;
 }
 .profile{
+  margin: 0 auto;
+  justify-content: space-around;
   width: 1250px;
+  display: flex;
+  margin-top: 30px;
+}
+.profileInfoWrap{
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #232323;
+  width: 300px;
+  height: 83vh;
 }
 .profileInfo{
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  height: 500px;
+}
+.profileInfo img{
   width: 200px;
-  height: 600px;
-  border: 1px solid #fff;
+  height: 200px;
+  border-radius: 100px;
+}
+.profileInfoButtons{
+  display: flex;
+  flex-direction: column;
+}
+.profileInfoButtons button{
+  color: #fff;
+  width: 200px;
+  height: 30px;
+  margin-top: 20px;
+  border: none;
+  background: #4f3382;
+  border: 1px solid #353535;
+  border-radius: 10px;
+  transition: .5s;
+}
+.profileInfoButtons button:hover{
+  background: #fff;
+  color: #4f3382;
+}
+.profileWallWrap{
+  overflow: scroll;
+  overflow-x: hidden;
+  width:700px;
+  height: 83vh;
+}
+.profilePhotos{
+  display: flex;
+  overflow: hidden;
+  background: #232323;
+  width: 700px;
+  height: 100px;
+}
+.profilePhotos img{
+  padding: 10px;
+  width: 80px;
+  height: 80px;
+}
+.profileWall{
+  background: #232323;
+  width: 700px;
+  padding-bottom: 30px;
+  min-height: 100px;
+  margin-top: 15px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.profileWall > img{
+  margin: 10px;
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+}
+.profileWallText{
+  margin: 0 auto;
+  width: 600px;
+  align-items: center;
+  flex-direction: column;
+}
+.profileWallText img{
+  margin-top: 20px;
+  max-width: 600px;
+}
+.profileWallText p{
+  word-break: break-all;
+  height: auto;
+  max-width: 650px;
+  font-size: 14px;
 }
 ::-webkit-scrollbar-button {
 width:5px;
@@ -477,6 +568,7 @@ background-color:#4f3382;
 
 ::-webkit-scrollbar{
 width: 2px;
+height: 5px;
 }
 @media screen and (min-height: 1000px){
   .autorisationWrap{

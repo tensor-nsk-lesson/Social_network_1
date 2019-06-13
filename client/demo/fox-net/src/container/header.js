@@ -1,5 +1,6 @@
 import React from 'react';
 import {Component} from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../pics/foxnetWhite.png'
 import peoplePic from '../pics/people.png'
 import notificationPic from '../pics/nontification.png'
@@ -19,8 +20,13 @@ class Header extends Component{
         </div>
         <div className="pagesList">
           <ul>
-            <li>My profile</li>
+            <Link to='/profile'>
+              <li>My profile</li>
+            </Link>
             <li>Friends</li>
+            <Link to='/dialogs'>
+              <li>Dialogs</li>
+            </Link>
             <li>News</li>
             <li>Groups</li>
             <li>Music</li>
