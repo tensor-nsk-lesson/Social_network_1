@@ -1,7 +1,7 @@
 from flask_socketio import SocketIO, send, emit
 #import os
 #import sys
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, make_response
 from dialog import *
 from content import *
 from group import *
@@ -37,9 +37,9 @@ socketio = SocketIO(app, async_mod=None)
 #	return render_template('registration.html')
 
 
-@app.route('/dialogs/<string:id_session>', methods=["GET"])
-def get_dialogs(id_session):
-    id_user = r.get(id_session)
+@app.route('/dialogs', methods=["GET"])
+def get_dialogs():
+    id_user = r.get(request.coookies.get('session'))
     if not id_user:
         json = {
             'Error':'пшел нах злоумышленник'
@@ -49,9 +49,9 @@ def get_dialogs(id_session):
     return jsonify(json)
 
 
-@app.route('/dialog/<string:id_session>', methods=["GET"])
-def create(id_session):
-    id_user = r.get(id_session)
+@app.route('/dialog/', methods=["GET"])
+def create():
+    id_user = r.get(request.coookies.get('session'))
     id_dialog = create_dialog(id_user)
     return jsonify(id_dialog)
 
@@ -65,13 +65,13 @@ def rename(id_dialog):
 @app.route('/dialog/<int:id_dialog>/message/<int:id_message>', methods=['PUT'])
 def change_status_for_message(id_dialog, id_message):
     new_status = request.json.get('new_status')
-    id_user = r.get(request.json.get('id_session'))
+    id_user = r.get(request.coookies.get('session'))
     return jsonify(update_status_message_for_user(id_dialog, id_message, new_status, id_user))
 
 
 @app.route('/dialog/<int:id_dialog>/message/<int:id_message>', methods=['DELETE'])
 def delete_message(id_dialog, id_message):
-    id_user = r.get(request.json.get('id_session'))
+    id_user = r.get(request.coookies.get('session'))
     return jsonify(delete_message_for_all(id_dialog, id_message, id_user))
 
 
@@ -87,14 +87,14 @@ def get_contents(status):
 
 @app.route('/add_local_content', methods=['POST'])
 def add_content():
-    id_user = r.get(request.json.get('id_session'))
+    id_user = r.get(request.coookies.get('session'))
     id_file = request.json.get('id_file')
     return jsonify(add_content_for_user(id_user, id_file))
 
 
-@app.route('/get_groups/<string:id_session>', methods=['GET'])
-def get_groups(id_session):
-    id_user = r.get(id_session)
+@app.route('/get_groups/', methods=['GET'])
+def get_groups():
+    id_user = r.get(request.coookies.get('session'))
     return jsonify(get_groups_for_user(id_user))
 
 
@@ -102,7 +102,7 @@ def get_groups(id_session):
 def create_group():
     name = request.json.get('name')
     description = request.json.get('description')
-    id_user = r.get(request.json.get('id_session'))
+    id_user = r.get(request.coookies.get('session'))
     return jsonify(create_group_by_user(name, description, id_user))
 
 
@@ -138,9 +138,10 @@ def auth():
         return jsonify(result)
     else:
         key = secrets.token_hex(10)
-        print(key.__str__())
         r.set(key.__str__(), result.get('Id').__str__(), 3600)
-    return jsonify({'session':key})
+        cookie = make_response(jsonify({'success':'success'}))
+        cookie.set_cookie('session', key.__str__(), max_age=None);
+    return cookie
 
 
 @app.route('/register', methods=['POST'])
@@ -159,33 +160,33 @@ def get_wall(id_wall):
 
 @app.route('/posts/<int:id_post>/status/<string:id_status>', methods=['PUT'])
 def like_dislike(id_post, id_status):
-    id_user = r.get(request.json.get('id_session'))
+    id_user = r.get(request.coookies.get('session'))
     return jsonify(put_like_dislike(id_post, id_status, id_user))
 
 
 @app.route('/privacy/invisibility/<string:status>', methods=['PUT'])
 def privacy_invisibility(status):
-    id_user = r.get(request.json.get('id_session'))
+    id_user = r.get(request.coookies.get('session'))
     return jsonify(change_privacy_invisibility(status, id_user))
 
 
 @app.route('/friends/<int:id_friend>', methods=['PUT'])
 def add_friend(id_friend):
-    id_user = r.get(request.json.get('id_session'))
+    id_user = r.get(request.coookies.get('session'))
     wide_status = request.json.get('wide_status')
     return jsonify(add_friends(id_friend, id_user, wide_status))
 
 
 @app.route('/privacy/view_friends/<int:status>', methods=['PUT'])
 def privacy_view_friends(status):
-    id_user = r.get(request.json.get('id_session'))
+    id_user = r.get(request.coookies.get('session'))
     id_friends = request.json.get('mass_id')
     return jsonify(put_privacy_view_friends(status, id_user, id_friends))
 
 
 @app.route('/privacy/view_groups/<int:status>', methods=['PUT'])
 def privacy_view_groups(status):
-    id_user = r.get(request.json.get('id_session'))
+    id_user = r.get(request.coookies.get('session'))
     id_friends = request.json.get('mass_id')
     return jsonify(put_privacy_view_groups(status, id_user, id_friends))
 

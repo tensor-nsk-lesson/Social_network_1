@@ -6,12 +6,12 @@ class TestApi(unittest.TestCase):
 
     def test_auth(self):
         data = {
-            'login': 'Login',
-            'password': 4
+            'login': 'Person1',
+            'password': 'aaa'
         }
         resp = requests.post('http://127.0.0.1:5000/auth', json=data)
-        global id_session
-        id_session = resp.json().get('session')
+        success = resp.json().get('success')
+        session = resp.cookies.get('session')
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
@@ -113,10 +113,11 @@ class TestApi(unittest.TestCase):
         data = {
             'first_name': 'DIEMATH',
             'date': '20.05.2005',
-            'login':'Person2',
-            'password':'2'
+            'login':'Person49',
+            'password': '2'
         }
         resp = requests.post('http://127.0.0.1:5000/register', json=data)
+        error = resp.json().get('error')
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
