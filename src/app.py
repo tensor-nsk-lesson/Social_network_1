@@ -10,6 +10,7 @@ from auth_and_register import *
 from wall import *
 from like_or_dislike import *
 from user import *
+from profile import *
 import redis
 import secrets
 
@@ -196,6 +197,12 @@ def add_in_dialog():
     id_user = request.json.get('id_user')
     id_dialog = request.json.get('id_dialog')
     return jsonify(add_in_dialog(id_user, id_dialog))
+
+
+@app.route('/get_profile/', methods = ['GET'])
+def get_profile_user():
+    id_user = r.get(request.coookies.get('session'))
+    return jsonify(get_profile_info(id_user))
 
 
 @app.route('/')

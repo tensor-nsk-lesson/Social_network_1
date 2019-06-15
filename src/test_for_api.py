@@ -175,3 +175,7 @@ class TestApi(unittest.TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
+    def test_get_profile_user(self):
+        resp = requests.get('http://127.0.0.1:5000/get_profile/')
+        self.assertEqual(resp.status_code, 200)
+        self.assertIsNotNone(resp.text)
