@@ -7,6 +7,7 @@ import months from '../constants/months.js'
 import days from '../constants/days.js'
 import years from '../constants/years.js'
 import {registration} from '../actions/registration.js'
+import { Redirect } from 'react-router'
 
 class Registration extends Component{
   constructor(props){
@@ -41,6 +42,9 @@ class Registration extends Component{
     let listYears = this.state.years.map((item,key) =>{
       return <option value={item} key={key}>{item}</option>
     })
+    if (this.props.success == 'success'){
+      return <Redirect to='/'/>
+    }
     return (
       <div className="singWrap" onSubmit={this.submitRegData.bind(this)}>
         <form className='autorisationWrap registr' action="">
@@ -70,7 +74,7 @@ class Registration extends Component{
 
 export default connect(
   state => ({
-    regData: state.regData
+    success: state.registration.success
   }),
   dispatch => ({
     onReg: (url, data) =>{

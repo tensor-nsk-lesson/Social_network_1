@@ -4,14 +4,9 @@ import {connect} from 'react-redux';
 import Header from '../container/header.js'
 import ProfileInfo from '../container/profileInfo.js'
 import Wall from '../container/profileWall.js'
+import {getProfile} from '../actions/profile.js'
 
 class Profile extends Component{
-  componentDidMount(){
-    fetch("/dialogs/eb7209b8faf067427a47",{
-       method: 'GET',
-       credentials: 'include'
-    })
-  }
   render(){
     return(
       <React.Fragment>

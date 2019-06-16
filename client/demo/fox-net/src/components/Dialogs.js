@@ -6,10 +6,15 @@ import Header from '../container/header.js'
 import DialogList from './DialogList.js'
 import Chat from './DialogChat.js';
 import {test} from '../actions/test.js';
+import { Redirect } from 'react-router'
 
 class Dialogs extends Component{
+  constructor(props){
+    super(props);
+    this.state ={redirect : false}
+  }
   componentDidMount(){
-    this.props.onGet("/dialogs/846cfbaa315df72273f4")
+    this.props.onGetDialogs("/dialogs/")
   }
   render(){
     return(
@@ -29,7 +34,7 @@ export default connect(
 
   }),
   dispatch =>({
-    onGet: (url) =>{
+    onGetDialogs: (url) =>{
       dispatch(test(url))
     }
   })

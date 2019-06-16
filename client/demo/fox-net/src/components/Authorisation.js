@@ -5,12 +5,10 @@ import { Link } from 'react-router-dom';
 import '../style.css';
 import logo from '../pics/foxnetBlack.png';
 import {authorisation} from '../actions/authorisation.js';
+import {success} from '../actions/success.js'
+import { Redirect } from 'react-router'
 
 class Authorisation extends Component{
-  constructor(props){
-    super(props);
-    this.state = {};
-  }
   loginUser(e){
     e.preventDefault();
     const data = {
@@ -20,6 +18,9 @@ class Authorisation extends Component{
     this.props.onAuth('/auth', data);
   }
   render(){
+      if (this.props.success == 'success'){
+        return <Redirect to='/profile'/>
+      }
     return(
       <div className="singWrap">
         <form className="autorisationWrap">
@@ -40,13 +41,14 @@ class Authorisation extends Component{
 }
 export default connect(
   state =>({
+    success: state.authorisation.success
   }),
   dispatch =>({
-    onLoginUser: (data) =>{
-      dispatch({type: 'LOGIN_USER', data: data})
-    },
     onAuth: (url, data) =>{
       dispatch(authorisation(url, data))
-    }
+    },
+    // getSuccess: () => {
+    //   dispatch(getSuccess());
+    // }
   })
 )(Authorisation)

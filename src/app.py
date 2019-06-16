@@ -212,20 +212,6 @@ def add_in_dialog():
     id_dialog = request.json.get('id_dialog')
     return jsonify(add_in_dialog(id_user, id_dialog))
 
-
-<<<<<<< HEAD
-||||||| merged common ancestors
-@app.route('/')
-def index():
-    # conn = connect()
-    # cur = conn.cursor()
-    # cur.execute('SELECT "Message" FROM "Messages"')
-    # conn.close()
-    # messages = cur.fechall()
-    return render_template('index.html', title='My Chat')
-
-
-=======
 @app.route('/get_profile/', methods = ['GET'])
 def get_profile_user():
     id_user = r.get(request.cookies.get('session'))
@@ -241,8 +227,6 @@ def index():
     # messages = cur.fechall()
     return render_template('index.html', title='My Chat')
 
-
->>>>>>> 8ab495e8cde836d9011c3c98cb5b853fba8a07d0
 @socketio.on('message')
 def handle_message(message):
     # print('message ' + message)

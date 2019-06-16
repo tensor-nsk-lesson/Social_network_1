@@ -1,9 +1,9 @@
 export default function authorisation(state = [], action){
   switch (action.type) {
     case 'LOGIN_USER_SUCCESS':
-      return action
+      return action.key
       break;
-    case 'LOGIN_USER_SUCCESS':
+    case 'PERSONS_FETCH_DATA_SUCCESS':
       return action
       break;
     default:
