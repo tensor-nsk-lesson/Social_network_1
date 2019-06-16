@@ -10,6 +10,7 @@ from auth_and_register import *
 from wall import *
 from like_or_dislike import *
 from user import *
+from profile import *
 import redis
 import secrets
 
@@ -43,9 +44,9 @@ socketio = SocketIO(app, async_mod=None)
 #	return render_template('registration.html')
 
 
-@app.route('/dialogs/<string:id_session>', methods=["GET"])
-def get_dialogs(id_session):
-    id_user = r.get(id_session)
+@app.route('/dialogs/', methods=["GET"])
+def get_dialogs():
+    id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
             'Error':'пшел нах злоумышленник'
@@ -55,9 +56,9 @@ def get_dialogs(id_session):
     return jsonify(json)
 
 
-@app.route('/dialog/<string:id_session>', methods=["GET"])
-def create(id_session):
-    id_user = r.get(id_session)
+@app.route('/dialog/', methods=["GET"])
+def create():
+    id_user = r.get(request.cookies.get('session'))
     id_dialog = create_dialog(id_user)
     return jsonify(id_dialog)
 
@@ -71,13 +72,13 @@ def rename(id_dialog):
 @app.route('/dialog/<int:id_dialog>/message/<int:id_message>', methods=['PUT'])
 def change_status_for_message(id_dialog, id_message):
     new_status = request.json.get('new_status')
-    id_user = r.get(request.json.get('id_session'))
+    id_user = r.get(request.cookies.get('session'))
     return jsonify(update_status_message_for_user(id_dialog, id_message, new_status, id_user))
 
 
 @app.route('/dialog/<int:id_dialog>/message/<int:id_message>', methods=['DELETE'])
 def delete_message(id_dialog, id_message):
-    id_user = r.get(request.json.get('id_session'))
+    id_user = r.get(request.cookies.get('session'))
     return jsonify(delete_message_for_all(id_dialog, id_message, id_user))
 
 @app.route('/test', methods=['GET'])
@@ -101,14 +102,14 @@ def get_contents(status):
 
 @app.route('/add_local_content', methods=['POST'])
 def add_content():
-    id_user = r.get(request.json.get('id_session'))
+    id_user = r.get(request.cookies.get('session'))
     id_file = request.json.get('id_file')
     return jsonify(add_content_for_user(id_user, id_file))
 
 
-@app.route('/get_groups/<string:id_session>', methods=['GET'])
-def get_groups(id_session):
-    id_user = r.get(id_session)
+@app.route('/get_groups/', methods=['GET'])
+def get_groups():
+    id_user = r.get(request.cookies.get('session'))
     return jsonify(get_groups_for_user(id_user))
 
 
@@ -116,7 +117,7 @@ def get_groups(id_session):
 def create_group():
     name = request.json.get('name')
     description = request.json.get('description')
-    id_user = r.get(request.json.get('id_session'))
+    id_user = r.get(request.cookies.get('session'))
     return jsonify(create_group_by_user(name, description, id_user))
 
 
@@ -137,9 +138,9 @@ def add_user():
     return jsonify(add_user_in_group(id_user, id_group))
 
 
-@app.route('/friend/<string:id_session>', methods=['GET'])
-def get_friends(id_session):
-    id_user = r.get(id_session)
+@app.route('/friend', methods=['GET'])
+def get_friends():
+    id_user = r.get(request.cookies.get('session'))
     return jsonify(get_friends_for_user(id_user))
 
 
@@ -152,7 +153,6 @@ def auth():
         return jsonify(result)
     else:
         key = secrets.token_hex(10)
-        print(key.__str__())
         r.set(key.__str__(), result.get('Id').__str__(), 3600)
         cookie = make_response(jsonify({'success':'success'}))
         cookie.set_cookie('session', key.__str__(), max_age=None);
@@ -175,33 +175,33 @@ def get_wall(id_wall):
 
 @app.route('/posts/<int:id_post>/status/<string:id_status>', methods=['PUT'])
 def like_dislike(id_post, id_status):
-    id_user = r.get(request.json.get('id_session'))
+    id_user = r.get(request.cookies.get('session'))
     return jsonify(put_like_dislike(id_post, id_status, id_user))
 
 
 @app.route('/privacy/invisibility/<string:status>', methods=['PUT'])
 def privacy_invisibility(status):
-    id_user = r.get(request.json.get('id_session'))
+    id_user = r.get(request.cookies.get('session'))
     return jsonify(change_privacy_invisibility(status, id_user))
 
 
 @app.route('/friends/<int:id_friend>', methods=['PUT'])
 def add_friend(id_friend):
-    id_user = r.get(request.json.get('id_session'))
+    id_user = r.get(request.cookies.get('session'))
     wide_status = request.json.get('wide_status')
     return jsonify(add_friends(id_friend, id_user, wide_status))
 
 
 @app.route('/privacy/view_friends/<int:status>', methods=['PUT'])
 def privacy_view_friends(status):
-    id_user = r.get(request.json.get('id_session'))
+    id_user = r.get(request.cookies.get('session'))
     id_friends = request.json.get('mass_id')
     return jsonify(put_privacy_view_friends(status, id_user, id_friends))
 
 
 @app.route('/privacy/view_groups/<int:status>', methods=['PUT'])
 def privacy_view_groups(status):
-    id_user = r.get(request.json.get('id_session'))
+    id_user = r.get(request.cookies.get('session'))
     id_friends = request.json.get('mass_id')
     return jsonify(put_privacy_view_groups(status, id_user, id_friends))
 
@@ -213,6 +213,36 @@ def add_in_dialog():
     return jsonify(add_in_dialog(id_user, id_dialog))
 
 
+<<<<<<< HEAD
+||||||| merged common ancestors
+@app.route('/')
+def index():
+    # conn = connect()
+    # cur = conn.cursor()
+    # cur.execute('SELECT "Message" FROM "Messages"')
+    # conn.close()
+    # messages = cur.fechall()
+    return render_template('index.html', title='My Chat')
+
+
+=======
+@app.route('/get_profile/', methods = ['GET'])
+def get_profile_user():
+    id_user = r.get(request.cookies.get('session'))
+    return jsonify(get_profile_info(id_user))
+
+
+@app.route('/')
+def index():
+    # conn = connect()
+    # cur = conn.cursor()
+    # cur.execute('SELECT "Message" FROM "Messages"')
+    # conn.close()
+    # messages = cur.fechall()
+    return render_template('index.html', title='My Chat')
+
+
+>>>>>>> 8ab495e8cde836d9011c3c98cb5b853fba8a07d0
 @socketio.on('message')
 def handle_message(message):
     # print('message ' + message)

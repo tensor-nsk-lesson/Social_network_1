@@ -23,6 +23,7 @@ def authorization(login, password):
 def register_user(first_name, date, login, password):
     conn = connect()
     cur = conn.cursor()
+<<<<<<< HEAD
     cur.execute('select "Login" from "Authorization" where "Login" = \''+login.__str__()+'\'')
     all_login = cur.fetchall();
     if not all_login:
@@ -37,3 +38,29 @@ def register_user(first_name, date, login, password):
         return {'success':'success'}
     else:
         return {'error':'Accaunt with this login already exist'}
+||||||| merged common ancestors
+    cur.execute('insert into "Authorization" ("Login","Password")'
+                ' values(\''+login.__str__()+'\', '+password.__str__()+') returning "Id"');
+    id = cur.fetchone();
+    conn.commit()
+    cur.execute('insert into "Profile" ("Id", "FirstName","Date", "StatusProfile")'
+                ' values('+id[0].__str__()+',\''+first_name.__str__()+'\',to_timestamp(\''+date.__str__()+'\', \'dd-mm-yy\'), 1)')
+    conn.commit()
+    conn.close()
+    return
+=======
+    cur.execute('select "Login" from "Authorization" where "Login" = \''+login.__str__()+'\'')
+    all_login = cur.fetchall();
+    if not all_login:
+        cur.execute('insert into "Authorization" ("Login","Password")'
+                    ' values(\''+login.__str__()+'\', '+password.__str__()+') returning "Id"');
+        id = cur.fetchone();
+        conn.commit()
+        cur.execute('insert into "Profile" ("Id", "FirstName","Date", "StatusProfile")'
+                    ' values('+id[0].__str__()+',\''+first_name.__str__()+'\',to_timestamp(\''+date.__str__()+'\', \'dd-mm-yy\'), 1)')
+        conn.commit()
+        conn.close()
+        return {'success':'success'}
+    else:
+        return {'error':'Account with it login already exsist'}
+>>>>>>> 8ab495e8cde836d9011c3c98cb5b853fba8a07d0
