@@ -2,7 +2,7 @@ import React from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
 import userPhoto from '../pics/profilePhoto.jpg'
-import logo from '../pics/foxnetBlack.png'
+import logo from '../pics/foxnetWhite.png'
 class Wall extends Component{
   constructor(props){
     super(props);
@@ -20,12 +20,9 @@ class Wall extends Component{
         <div className='profilePhotos'>
           {example}
         </div>
-        <div className='profileWall'>
-            <img src={userPhoto}/>
-            <div className='profileWallText'>
-              <p>Это Кот ЕвГЕНИЙ</p>
-              <img src={userPhoto}/>
-            </div>
+        <div className='addPost'>
+          <textarea placeholder="What's up?"></textarea>
+          <button>Add</button>
         </div>
         <div className='profileWall'>
             <img src={userPhoto}/>

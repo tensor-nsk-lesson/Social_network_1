@@ -1,7 +1,7 @@
 from flask_socketio import SocketIO, send, emit
-#import os
+import os
 #import sys
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, make_response
 from dialog import *
 from content import *
 from group import *
@@ -17,8 +17,8 @@ import secrets
 r = redis.StrictRedis(host='localhost', port=6379, db=0, decode_responses=True)
 
 project_root = os.path.dirname(__file__)
-template_path = os.path.join(project_root, '../client/templates')
-static_path = os.path.join(project_root, '../client/static')
+template_path = os.path.join(project_root, '../client/demo/fox-net/public')
+static_path = os.path.join(project_root, '../client/demo/fox-net/src')
 
 app = Flask(__name__, template_folder=template_path, static_folder=static_path)
 
@@ -27,6 +27,7 @@ app.config['SECRET_KEY'] = 'my_secret'
 id_Message = 0
 
 socketio = SocketIO(app, async_mod=None)
+
 
 #project_root = os.path.dirname(__file__)
 #template_path = os.path.join(project_root, '../client/templates')
@@ -79,6 +80,14 @@ def delete_message(id_dialog, id_message):
     id_user = r.get(request.json.get('id_session'))
     return jsonify(delete_message_for_all(id_dialog, id_message, id_user))
 
+@app.route('/test', methods=['GET'])
+def testing():
+    test = ['hi']
+    return jsonify(test)
+
+@app.route("/hello")
+def hello():
+    return "Hello World!"
 
 @app.route('/dialog/<int:id_dialog>/get_messages', methods=['GET'])
 def get_messages(id_dialog):
@@ -145,7 +154,9 @@ def auth():
         key = secrets.token_hex(10)
         print(key.__str__())
         r.set(key.__str__(), result.get('Id').__str__(), 3600)
-    return jsonify({'session':key})
+        cookie = make_response(jsonify({'success':'success'}))
+        cookie.set_cookie('session', key.__str__(), max_age=None);
+    return cookie
 
 
 @app.route('/register', methods=['POST'])
@@ -202,16 +213,6 @@ def add_in_dialog():
     return jsonify(add_in_dialog(id_user, id_dialog))
 
 
-@app.route('/')
-def index():
-    # conn = connect()
-    # cur = conn.cursor()
-    # cur.execute('SELECT "Message" FROM "Messages"')
-    # conn.close()
-    # messages = cur.fechall()
-    return render_template('index.html', title='My Chat')
-
-
 @socketio.on('message')
 def handle_message(message):
     # print('message ' + message)
@@ -225,11 +226,8 @@ def handle_message(message):
     send(message, broadcast=True)
 
 
-socketio.run(app)
+socketio.run(app, host='localhost', port=80)
 
-<<<<<<< HEAD
-||||||| merged common ancestors
+
+
 app.run(port=80)
-=======
-app.run(port=80)
->>>>>>> front-end

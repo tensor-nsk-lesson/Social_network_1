@@ -5,7 +5,8 @@ import userLogin from './userLogin';
 import dialog from './dialog';
 import messagesList from './messages';
 import popup from './popup'
-import persons from './test'
+import authorisation from './authorisation'
+import registration from './registration'
 
 export default combineReducers({
   routing: routerReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
   dialog,
   messagesList,
   popup,
-  persons
+  authorisation,
+  registration
 })

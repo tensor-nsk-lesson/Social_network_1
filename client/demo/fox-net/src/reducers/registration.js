@@ -1,6 +1,6 @@
-export default function persons(state = [], action){
+export default function registration(state = [], action){
   switch (action.type) {
-    case 'PERSONS_FETCH_DATA_SUCCESS':
+    case 'REGISTRATION_USER_SUCCESS':
       return action
       break;
     default:

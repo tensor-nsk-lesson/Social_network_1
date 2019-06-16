@@ -4,12 +4,12 @@ import {connect} from 'react-redux';
 import '../style.css'
 import Header from '../container/header.js'
 import DialogList from './DialogList.js'
-import Chat from './DialogChat.js'
-import {test} from '../actions/test.js'
+import Chat from './DialogChat.js';
+import {test} from '../actions/test.js';
 
 class Dialogs extends Component{
   componentDidMount(){
-    this.props.fetchData("/testing")
+    this.props.onGet("/dialogs/846cfbaa315df72273f4")
   }
   render(){
     return(
@@ -26,13 +26,10 @@ class Dialogs extends Component{
 
 export default connect(
   state => ({
-    user: state.user
+
   }),
   dispatch =>({
-    onChooseDialog: (dialog) =>{
-      dispatch({type: 'CHANGE_DIALOG', dialog: dialog})
-    },
-    fetchData: (url) =>{
+    onGet: (url) =>{
       dispatch(test(url))
     }
   })

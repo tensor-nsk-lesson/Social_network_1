@@ -6,6 +6,7 @@ import '../style.css'
 import months from '../constants/months.js'
 import days from '../constants/days.js'
 import years from '../constants/years.js'
+import {registration} from '../actions/registration.js'
 
 class Registration extends Component{
   constructor(props){
@@ -20,12 +21,12 @@ class Registration extends Component{
     e.preventDefault();
     if (this.passwordInput.value === this.checkPasswordInput.value){
       const userData ={
-        name: this.nameInput.value,
-        email: this.secondnameInput.value,
+        first_name: this.nameInput.value,
+        login: this.secondnameInput.value,
         date: this.dayInput.value + '.' + this.monthInput.value + '.' + this.yearInput.value,
         password: this.passwordInput.value
       }
-    this.props.onSubmitRegData(userData);
+      this.props.onReg('/register', userData);
   }else{
     console.log("Passwords aren't the same")
   }
@@ -59,9 +60,8 @@ class Registration extends Component{
             </div>
             <input type="password" className="loginData" placeholder="Password" ref={(input) => {this.passwordInput = input}}/>
             <input type="password" className="loginData" placeholder="Password again" ref={(input) => {this.checkPasswordInput = input}}/>
-            <Link to='/'>
               <input type="submit" className='logInput regInput' value='REGISTRATE'/>
-            </Link>
+
         </form>
       </div>
     )
@@ -73,8 +73,8 @@ export default connect(
     regData: state.regData
   }),
   dispatch => ({
-    onSubmitRegData: (data)=>{
-      dispatch({type: 'ADD_USER', data: data})
+    onReg: (url, data) =>{
+      dispatch(registration(url, data))
     }
   })
 )(Registration);
