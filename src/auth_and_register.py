@@ -27,7 +27,7 @@ def register_user(first_name, date, login, password):
     all_login = cur.fetchall();
     if not all_login:
         cur.execute('insert into "Authorization" ("Login","Password")'
-                    ' values(\''+login.__str__()+'\', '+password.__str__()+') returning "Id"');
+                    ' values(\''+login.__str__()+'\', \''+password.__str__()+'\') returning "Id"');
         id = cur.fetchone();
         conn.commit()
         cur.execute('insert into "Profile" ("Id", "FirstName","Date", "StatusProfile")'
