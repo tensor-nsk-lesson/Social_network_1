@@ -7,9 +7,9 @@ import sendMessage from '../pics/sendMessage.png'
 
 class Chat extends Component{
   render(){
-    let messages = this.props.messages.map((item,key) =>{
-      return <div className={this.props.sender[key]} key={key}><p>{item}</p> <span className='messageTime'>{this.props.time[key]}</span></div>
-    });
+    // let messages = this.props.messages.map((item,key) =>{
+    //   return <div className={this.props.sender[key]} key={key}><p>{item}</p> <span className='messageTime'>{this.props.time[key]}</span></div>
+    // });
     return(
       <div className="dialogMessages">
         <div className="messageProfileInfo">
@@ -18,7 +18,7 @@ class Chat extends Component{
         </div>
         <p className='isOnline'>online</p>
         <div className="dialogBlock">
-          {messages}
+          
         </div>
         <textarea placeholder='Enter your message' className='messageInput'></textarea>
         <button className='sendMessage'><img src={sendMessage}/></button>
@@ -29,10 +29,10 @@ class Chat extends Component{
 
 export default connect(
   state =>({
-    interlocutor: state.dialog.interlocutor,
-    messages: state.messagesList.messages,
-    time: state.messagesList.time,
-    sender: state.messagesList.sender
+    // interlocutor: state.dialog.interlocutor,
+    // messages: state.messagesList.messages,
+    // time: state.messagesList.time,
+    // sender: state.messagesList.sender
   }),
   dispatch =>({})
 )(Chat)

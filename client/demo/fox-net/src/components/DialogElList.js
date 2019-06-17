@@ -8,7 +8,7 @@ class DialogElement extends Component{
       <div className="dialog">
         <div className="dialogProfileInfo">
           <img src={userPhoto} alt="userPhoto"/>
-          <h4>{this.props.dialogs}</h4>
+          <h4>{this.props.dialog}</h4>
         </div>
         <p className="message">{this.props.lastMessage}<span className='messageTime'>{this.props.lastMessageTime}</span></p>
       </div>

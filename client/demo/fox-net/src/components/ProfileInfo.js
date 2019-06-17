@@ -3,6 +3,7 @@ import {Component} from 'react';
 import {connect} from 'react-redux';
 import userPhoto from '../pics/profilePhoto.jpg'
 import {getProfile} from '../actions/profile.js'
+import ProfilePopup from '../components/ProfilePopup.js'
 
 class ProfileInfo extends Component{
   componentDidMount(){
@@ -10,17 +11,20 @@ class ProfileInfo extends Component{
   }
   render(){
     return(
+      <React.Fragment>
+      <ProfilePopup/>
       <div className='profileInfoWrap'>
         <div className='profileInfo'>
           <img src={userPhoto} />
           <h3>{this.props.FirstName} {this.props.SecondName}</h3>
           <div className='profileInfoButtons'>
-            <button>User information</button>
+            <button onClick={this.props.onTogglePopup}>User information</button>
             <button>Add friend</button>
             <button>Send message</button>
           </div>
         </div>
       </div>
+      </React.Fragment>
     )
   }
 }
@@ -33,6 +37,9 @@ export default connect(
   dispatch =>({
     onGetProfile: (url) =>{
       dispatch(getProfile(url))
+    },
+    onTogglePopup: () =>{
+      dispatch({type: 'TOGGLE_POPUP', status: 'flex'})
     }
   })
 )(ProfileInfo)

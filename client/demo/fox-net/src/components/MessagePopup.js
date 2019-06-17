@@ -9,9 +9,9 @@ class Popup extends Component{
       <div className="popupWrap">
         <div className="backgroundPopup"></div>
           <div className="popup">
-            <div className="popupProfileInfo">
-              <img src="../static/src/profilePhoto.jpg" alt=""/>
-              <div><h4>{this.props.name}</h4><span>{this.props.isOnline}</span></div>
+            <div className="popupUserName">
+              <img src={profilePhoto} alt=""/>
+              <div><h4>{this.props.FirstName} {this.props.SecondName}</h4><span>online</span></div>
             </div>
             <div className="popupMessage">
               <textarea type="text" placeholder="Enter your message"></textarea>
@@ -25,8 +25,8 @@ class Popup extends Component{
 
 export default connect(
   state => ({
-    name: state.popup.name,
-    isOnline: state.popup.isOnline
+    FirstName: state.profile.FirstName,
+    SecondName: state.profile.SecondName
   }),
   dispatch =>({
 

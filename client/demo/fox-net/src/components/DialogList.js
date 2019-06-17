@@ -1,12 +1,12 @@
 import React from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
-import Dialogs from '../container/dialogElList.js'
+import DialogElList from './DialogElList.js'
 
 class DialogList extends Component{
   render(){
     let dialogList = this.props.dialogs.map((item, index) =>{
-      return <Dialogs key={index} dialogs={item} lastMessage={this.props.lastMessage[index]} lastMessageTime={this.props.lastMessageTime[index]}/>
+      return <DialogElList key={index} dialog={item.NameDialog}/>
     })
     return(
       <div className="dialogList">
@@ -18,10 +18,7 @@ class DialogList extends Component{
 
 export default connect(
   state =>({
-    dialogState: state,
-    dialogs :  state.dialog.dialogs,
-    lastMessage: state.dialog.lastMessage,
-    lastMessageTime: state.dialog.lastMessageTime
+    dialogs: state.dialogs
   }),
   dispatch =>({
   })

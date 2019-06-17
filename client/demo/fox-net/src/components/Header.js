@@ -1,6 +1,7 @@
 import React from 'react';
 import {Component} from 'react';
 import { Link } from 'react-router-dom';
+import {connect} from 'react-redux'
 import logo from '../pics/foxnetWhite.png'
 import peoplePic from '../pics/people.png'
 import notificationPic from '../pics/nontification.png'
@@ -34,11 +35,19 @@ class Header extends Component{
         </div>
         <div className="profileLogo">
           <i>&equiv;</i>
-          <h3>{this.props.user}</h3>
+          <h3>{this.props.FirstName} {this.props.SecondName}</h3>
           <img src={profilePhoto} alt="profilePhoto"/>
         </div>
       </header>
     )
   }
 }
-export default Header
+export default connect(
+  state => ({
+    FirstName: state.profile.FirstName,
+    SecondName: state.profile.SecondName
+  }),
+  dispatch => ({
+
+  })
+)(Header)

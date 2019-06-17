@@ -377,13 +377,15 @@ header img{
   height: 20px;
 }*/
 .popupWrap{
-  display: flex;
+  position: absolute;
+  display: none;
   width: 100vw;
-  height: 100vh;
+  height: 85vh;
   justify-content: center;
   align-items: center;
 }
 .backgroundPopup{
+  z-index: 100;
   position: absolute;
   background: #000;
   opacity: 0.8;
@@ -392,32 +394,56 @@ header img{
 }
 .popup{
   position: relative;
+  z-index: 101;
   height: 400px;
   width: 500px;
   background: #232323;
   border: 1px solid #353535;
 }
-.popupProfileInfo{
+.popupUserName{
   display: flex;
   align-items: center;
   width: 500px;
   height: 70px;
   background: #4f3382;
 }
-.popupProfileInfo img{
+.popupUserName img{
   margin-left: 10px;
   width: 60px;
   height: 60px;
   border-radius: 10px;
 }
-.popupProfileInfo div{
+.popupUserName button{
+  margin-left: 180px;
+  margin-bottom: 25px;
+  border: 1px solid #232323;
+  background: #353535;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  transition: .2s;
+}
+.popupUserName button:hover{
+  color: #000;
+  background: #fff;
+}
+.popupUserName div{
   margin-left: 10px;
 }
-.popupProfileInfo h4{
+.popupUserName h4{
   font-size: 22px;
 }
-.popupProfileInfo span{
+.popupUserName span{
   font-size: 12px;
+}
+.popupProfileInfo{
+  margin: 10px;
+}
+.popupProfileInfo h3{
+  border-bottom: 1px solid #353535;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: normal;
 }
 .popupMessage{
   display: flex;
