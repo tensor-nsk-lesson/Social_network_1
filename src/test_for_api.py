@@ -9,7 +9,7 @@ class TestApi(unittest.TestCase):
             'login': 'Person1',
             'password': 'aaa'
         }
-        resp = requests.post('http://127.0.0.1:5000/auth', json=data)
+        resp = requests.post('http://127.0.0.1:80/auth', json=data)
         success = resp.json().get('success')
         session = resp.cookies.get('session')
         self.assertEqual(resp.status_code, 200)
@@ -18,13 +18,13 @@ class TestApi(unittest.TestCase):
 
     def test_get_dialogs(self):
         resp = self.test_auth()
-        resp = requests.get('http://127.0.0.1:5000/dialogs/', cookies=resp.cookies)
+        resp = requests.get('http://127.0.0.1:80/dialogs/', cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
     def test_create_dialog(self):
         resp = self.test_auth()
-        resp = requests.get('http://127.0.0.1:5000/dialog/', cookies=resp.cookies)
+        resp = requests.get('http://127.0.0.1:80/dialog/', cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
@@ -32,7 +32,7 @@ class TestApi(unittest.TestCase):
         data = {
             "new_name": "BOOM"
         }
-        resp = requests.put('http://127.0.0.1:5000/rename_dialog/90690', json=data)
+        resp = requests.put('http://127.0.0.1:80/rename_dialog/90690', json=data)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
@@ -41,23 +41,23 @@ class TestApi(unittest.TestCase):
         data = {
             "new_status": 1
         }
-        resp = requests.put('http://127.0.0.1:5000/dialog/90960/message/1', json=data, cookies=resp.cookies)
+        resp = requests.put('http://127.0.0.1:80/dialog/90960/message/1', json=data, cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
     def test_delete_message(self):
         resp = self.test_auth()
-        resp = requests.delete('http://127.0.0.1:5000/dialog/90960/message/2', cookies=resp.cookies)
+        resp = requests.delete('http://127.0.0.1:80/dialog/90960/message/2', cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
     def test_get_messages(self):
-        resp = requests.get('http://127.0.0.1:5000/dialog/90960/get_messages')
+        resp = requests.get('http://127.0.0.1:80/dialog/90960/get_messages')
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
     def test_get_content(self):
-        resp = requests.get('http://127.0.0.1:5000/global_content/1')
+        resp = requests.get('http://127.0.0.1:80/global_content/1')
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
@@ -66,13 +66,13 @@ class TestApi(unittest.TestCase):
         data = {
             "id_file": 5
         }
-        resp = requests.post('http://127.0.0.1:5000/add_local_content', json=data, cookies=resp.cookies)
+        resp = requests.post('http://127.0.0.1:80/add_local_content', json=data, cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
     def test_get_groups_for_user(self):
         resp = self.test_auth()
-        resp = requests.get('http://127.0.0.1:5000/get_groups/', cookies=resp.cookies)
+        resp = requests.get('http://127.0.0.1:80/get_groups/', cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
@@ -82,17 +82,17 @@ class TestApi(unittest.TestCase):
             "name":  "ВНЕЗАПНО АНАНАСЫ",
             "description": "СЛАВА КТУЛХУ"
         }
-        resp = requests.post('http://127.0.0.1:5000/create_group', json=data, cookies=resp.cookies)
+        resp = requests.post('http://127.0.0.1:80/create_group', json=data, cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
     def test_get_group(self):
-        resp = requests.get('http://127.0.0.1:5000/get_group/1')
+        resp = requests.get('http://127.0.0.1:80/get_group/1')
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
     def test_get_users_group(self):
-        resp = requests.get('http://127.0.0.1:5000/users_group/1')
+        resp = requests.get('http://127.0.0.1:80/users_group/1')
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
@@ -101,13 +101,13 @@ class TestApi(unittest.TestCase):
             'id_user': 8,
             'id_group': 3
         }
-        resp = requests.post('http://127.0.0.1:5000/add_user_in_group', json=data)
+        resp = requests.post('http://127.0.0.1:80/add_user_in_group', json=data)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
     def test_get_friends(self):
         resp = self.test_auth()
-        resp = requests.get('http://127.0.0.1:5000/friend', cookies=resp.cookies)
+        resp = requests.get('http://127.0.0.1:80/friend', cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
@@ -118,25 +118,25 @@ class TestApi(unittest.TestCase):
             'login':'Person49',
             'password': '2'
         }
-        resp = requests.post('http://127.0.0.1:5000/register', json=data)
+        resp = requests.post('http://127.0.0.1:80/register', json=data)
         error = resp.json().get('error')
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
     def test_get_wall(self):
-        resp = requests.get('http://127.0.0.1:5000/walls/1')
+        resp = requests.get('http://127.0.0.1:80/walls/1')
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
     def test_like_dislike(self):
         resp = self.test_auth()
-        resp = requests.put('http://127.0.0.1:5000/posts/1/status/false', cookies=resp.cookies)
+        resp = requests.put('http://127.0.0.1:80/posts/1/status/false', cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
     def test_privacy_invisibility(self):
         resp = self.test_auth()
-        resp = requests.put('http://127.0.0.1:5000/privacy/invisibility/true', cookies=resp.cookies)
+        resp = requests.put('http://127.0.0.1:80/privacy/invisibility/true', cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
@@ -145,7 +145,7 @@ class TestApi(unittest.TestCase):
         data = {
             'wide_status': 'Лол'
         }
-        resp = requests.put('http://127.0.0.1:5000/friends/12', json=data, cookies=resp.cookies)
+        resp = requests.put('http://127.0.0.1:80/friends/12', json=data, cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
@@ -157,7 +157,7 @@ class TestApi(unittest.TestCase):
                 13
             ]
         }
-        resp = requests.put('http://127.0.0.1:5000/privacy/view_friends/0', json=data, cookies=resp.cookies)
+        resp = requests.put('http://127.0.0.1:80/privacy/view_friends/0', json=data, cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
@@ -169,12 +169,12 @@ class TestApi(unittest.TestCase):
                 13
             ]
         }
-        resp = requests.put('http://127.0.0.1:5000/privacy/view_friends/0', json=data, cookies=resp.cookies)
+        resp = requests.put('http://127.0.0.1:80/privacy/view_friends/0', json=data, cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
     def test_get_profile_user(self):
         resp = self.test_auth()
-        resp = requests.get('http://127.0.0.1:5000/get_profile/', cookies=resp.cookies)
+        resp = requests.get('http://127.0.0.1:80/get_profile/', cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
