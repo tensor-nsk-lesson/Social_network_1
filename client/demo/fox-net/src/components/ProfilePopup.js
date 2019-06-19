@@ -7,7 +7,6 @@ import '../style.css'
 class ProfilePopup extends Component{
   render(){
     let display = {display: this.props.togglePopup}
-    console.log(display)
     return(
       <div className="popupWrap" style={display}>
         <div className="backgroundPopup"></div>
@@ -39,11 +38,11 @@ export default connect(
     age: state.profile.Age,
     city: state.profile.City,
     relationship: state.profile.Status,
-    togglePopup: state.popup
+    togglePopup: state.profilePopup
   }),
   dispatch =>({
     onTogglePopup: () =>{
-      dispatch({type: 'TOGGLE_POPUP', status: 'none'})
+      dispatch({type: 'TOGGLE_PROFILE_POPUP', status: 'none'})
     }
   })
 )(ProfilePopup)

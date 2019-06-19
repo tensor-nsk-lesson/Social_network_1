@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import '../style.css';
 import logo from '../pics/foxnetBlack.png';
 import {authorisation} from '../actions/authorisation.js';
-import {success} from '../actions/success.js'
 import { Redirect } from 'react-router'
 
 class Authorisation extends Component{
@@ -46,9 +45,6 @@ export default connect(
   dispatch =>({
     onAuth: (url, data) =>{
       dispatch(authorisation(url, data))
-    },
-    // getSuccess: () => {
-    //   dispatch(getSuccess());
-    // }
+    }
   })
 )(Authorisation)

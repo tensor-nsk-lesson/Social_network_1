@@ -1,13 +1,17 @@
 import React from 'react';
 import {Component} from 'react';
 import { Link } from 'react-router-dom';
-import {connect} from 'react-redux'
-import logo from '../pics/foxnetWhite.png'
-import peoplePic from '../pics/people.png'
-import notificationPic from '../pics/nontification.png'
-import profilePhoto from'../pics/profilePhoto.jpg'
+import {connect} from 'react-redux';
+import logo from '../pics/foxnetWhite.png';
+import peoplePic from '../pics/people.png';
+import notificationPic from '../pics/nontification.png';
+import profilePhoto from'../pics/profilePhoto.jpg';
+import {getProfile} from '../actions/profile.js'
 
 class Header extends Component{
+  componentDidMount(){
+    this.props.onGetProfile('/get_profile/')
+  }
   render(){
     return(
       <header>
@@ -24,7 +28,9 @@ class Header extends Component{
             <Link to='/profile'>
               <li>My profile</li>
             </Link>
-            <li>Friends</li>
+            <Link to='/friends'>
+              <li>Friends</li>
+            </Link>
             <Link to='/dialogs'>
               <li>Dialogs</li>
             </Link>
@@ -48,6 +54,8 @@ export default connect(
     SecondName: state.profile.SecondName
   }),
   dispatch => ({
-
+    onGetProfile: (url) =>{
+      dispatch(getProfile(url))
+    }
   })
 )(Header)

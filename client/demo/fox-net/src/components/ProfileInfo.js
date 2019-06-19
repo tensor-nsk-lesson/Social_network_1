@@ -1,14 +1,10 @@
 import React from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
-import userPhoto from '../pics/profilePhoto.jpg'
-import {getProfile} from '../actions/profile.js'
-import ProfilePopup from '../components/ProfilePopup.js'
+import userPhoto from '../pics/profilePhoto.jpg';
+import ProfilePopup from '../components/ProfilePopup.js';
 
 class ProfileInfo extends Component{
-  componentDidMount(){
-    this.props.onGetProfile('/get_profile/')
-  }
   render(){
     return(
       <React.Fragment>
@@ -35,11 +31,8 @@ export default connect(
     SecondName: state.profile.SecondName
   }),
   dispatch =>({
-    onGetProfile: (url) =>{
-      dispatch(getProfile(url))
-    },
     onTogglePopup: () =>{
-      dispatch({type: 'TOGGLE_POPUP', status: 'flex'})
+      dispatch({type: 'TOGGLE_PROFILE_POPUP', status: 'flex'})
     }
   })
 )(ProfileInfo)

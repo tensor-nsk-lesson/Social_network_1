@@ -3,20 +3,24 @@ import {routerReducer} from 'react-router-redux';
 import user from './user';
 import userLogin from './userLogin';
 import messagesList from './messages';
-import popup from './popup'
-import authorisation from './authorisation'
-import registration from './registration'
-import profile from './profile'
-import dialogs from './dialogs'
+import profilePopup from './profilePopup';
+import messagePopup from './messagePopup';
+import authorisation from './authorisation';
+import registration from './registration';
+import profile from './profile';
+import dialogs from './dialogs';
+import wall from './wall';
 
 export default combineReducers({
   routing: routerReducer,
   user,
   userLogin,
   messagesList,
-  popup,
+  profilePopup,
+  messagePopup,
   authorisation,
   registration,
   profile,
-  dialogs
+  dialogs,
+  wall
 })

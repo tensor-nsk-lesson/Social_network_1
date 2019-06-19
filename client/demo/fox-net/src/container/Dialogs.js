@@ -14,7 +14,7 @@ class Dialogs extends Component{
   render(){
     return(
       <React.Fragment>
-      <Header user='Венимин Аноним'/>
+      <Header/>
       <section className='dialogWrap'>
         <DialogList />
         <Chat/>
