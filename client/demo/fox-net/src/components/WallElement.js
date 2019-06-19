@@ -5,12 +5,10 @@ import comment from '../pics/comment.png';
 import like from '../pics/like.png';
 import dislike from '../pics/dislike.png'
 import {getWall} from '../actions/wall.js';
-import ScrollReveal from 'scrollreveal';
 
 class WallElement extends Component{
 
   componentDidMount(){
-    this.props.onGetWall('/walls/7123');
   }
 
   render(){

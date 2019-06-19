@@ -11,7 +11,7 @@ import profile from './profile';
 import dialogs from './dialogs';
 import wall from './wall';
 import fakemode from './fakemode';
-
+import logout from './logout'
 export default combineReducers({
   routing: routerReducer,
   user,
@@ -24,5 +24,6 @@ export default combineReducers({
   profile,
   dialogs,
   fakemode,
-  wall
+  wall,
+  logout
 })

@@ -6,7 +6,8 @@ import logo from '../pics/foxnetWhite.png';
 import peoplePic from '../pics/people.png';
 import notificationPic from '../pics/nontification.png';
 import profilePhoto from'../pics/profilePhoto.jpg';
-import {getProfile} from '../actions/profile.js'
+import {getProfile} from '../actions/profile.js';
+import {logout} from '../actions/logout.js';
 
 class Header extends Component{
   constructor(props){
@@ -42,6 +43,12 @@ class Header extends Component{
   render(){
     let style = {left: this.state.style}
     let display = {top: this.state.display}
+    let photo;
+    if(this.props.photo === null){
+      photo = logo;
+    }else{
+      photo = this.props.photo;
+    }
     return(
       <header>
         <div className="logo">
@@ -73,13 +80,13 @@ class Header extends Component{
             <i>&equiv;</i>
             <h3>{this.props.FirstName} {this.props.SecondName}</h3>
           </label>
-          <img src={profilePhoto} alt="profilePhoto"/>
+          <img src={photo} alt="profilePhoto"/>
         </div>
         <div className='settingsHeader'>
         <ul style={display}>
           <li>Settings</li>
-          <li>Logout</li>
-          <li onClick={this.fakeModeToggle.bind(this)}>FakeMode<div id='fakemode'><div  style={style}> </div></div></li>
+          <li onClick={this.props.onLogout}>Logout</li>
+          <li onClick={this.fakeModeToggle.bind(this)}>FakeMode<div id='fakemode'><div style={style}> </div></div></li>
         </ul>
         </div>
       </header>
@@ -90,10 +97,14 @@ export default connect(
   state => ({
     FirstName: state.profile.FirstName,
     SecondName: state.profile.SecondName,
+    photo: state.profile.Photo
   }),
   dispatch => ({
     onGetProfile: (url) =>{
       dispatch(getProfile(url))
+    },
+    onLogout: () =>{
+      dispatch(logout('/logout'))
     },
     onFakeMode: (status) => {
       dispatch({type: 'FAKEMOD_TOGGLE', status: status})

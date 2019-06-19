@@ -7,7 +7,6 @@ import logo from '../pics/foxnetWhite.png'
 class Popup extends Component{
   render(){
     let display = {display: this.props.togglePopup}
-    console.log(display);
     return(
       <div className="popupWrap" style={display}>
         <div className="backgroundPopup"></div>
