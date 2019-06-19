@@ -551,7 +551,6 @@ header img{
 .profileWall{
   background: #232323;
   width: 700px;
-  padding-bottom: 30px;
   min-height: 100px;
   margin-top: 15px;
   overflow: scroll;
@@ -568,6 +567,7 @@ header img{
   width: 600px;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 7px;
 }
 .profileWallText img{
   margin-top: 20px;
@@ -618,22 +618,120 @@ header img{
   color: #4f3382;
   background: #fff;
 }
+.assessmentButtons{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 50px;
+  height: 60px;
+}
+.assessmentButtons button{
+  height: 50px;
+  width: 60px;
+  border: none;
+  background: transparent
+}
+.assessmentButtons button:hover{
+  background: #121212;
+}
+.assessmentButtons span{
+  color: #fff;
+}
+.assessmentButtons button img{
+  width: 25px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+}
+.friends{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.friendsWrap{
+  height: 78vh;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.friendSearch{
+  border-radius: 10px;
+  background: #232323;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+}
+.friendSearch input{
+  border: none;
+  border-radius: 50px;
+  background: #353535;
+  height: 35px;
+  width: 450px;
+  margin: 5 auto;
+  padding: 0px 5px;
+  color: #fff;
+}
+.friendSearch input::placeholder{
+  color: #fff;
+}
+.friendWrap{
+  display: flex;
+  border-radius: 10px;
+  margin-top: 20px;
+  background: #232323;
+  width: 500px;
+}
+.friendInfo{
+  margin-left: 20px;
+  width: 250px;
+  display: flex;
+}
+.friendInfo div{
+  margin-left: 20px;
+}
+.friendInfo img{
+  width: 50px;
+  height: 60px;
+}
+.friendButtons{
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 250px;
+}
+.friendButtons img{
+  width: 20px;
+  height: 20px;
+}
+.friendButtons button{
+  width: 50px;
+  height: 60px;
+  background: transparent;
+  border: none;
+  color: #fff;
+}
+.friendButtons button:hover{
+  background: #121212;
+}
+
 ::-webkit-scrollbar-button {
-width:5px;
-height:0px;
+  width:5px;
+  height:0px;
 }
 
 ::-webkit-scrollbar-track {
-background-color:#444;
+  background-color:#444;
 }
 
 ::-webkit-scrollbar-thumb {
-background-color:#4f3382;
+  background-color:#4f3382;
 }
 
 ::-webkit-scrollbar{
-width: 5px;
-height: 5px;
+  width: 5px;
+  height: 5px;
 }
 @media screen and (min-height: 1000px){
   .autorisationWrap{
