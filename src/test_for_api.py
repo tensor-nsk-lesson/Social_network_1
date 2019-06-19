@@ -29,10 +29,11 @@ class TestApi(unittest.TestCase):
         self.assertIsNotNone(resp.text)
 
     def test_rename_dialog(self):
+        resp = self.test_auth()
         data = {
             "new_name": "BOOM"
         }
-        resp = requests.put('http://127.0.0.1:80/rename_dialog/90690', json=data)
+        resp = requests.put('http://127.0.0.1:80/rename_dialog/90690', json=data, cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
@@ -52,12 +53,14 @@ class TestApi(unittest.TestCase):
         self.assertIsNotNone(resp.text)
 
     def test_get_messages(self):
-        resp = requests.get('http://127.0.0.1:80/dialog/90960/get_messages')
+        resp = self.test_auth()
+        resp = requests.get('http://127.0.0.1:80/dialog/90960/get_messages', cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
     def test_get_content(self):
-        resp = requests.get('http://127.0.0.1:80/global_content/1')
+        resp = self.test_auth()
+        resp = requests.get('http://127.0.0.1:80/global_content/1', cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
@@ -87,21 +90,24 @@ class TestApi(unittest.TestCase):
         self.assertIsNotNone(resp.text)
 
     def test_get_group(self):
-        resp = requests.get('http://127.0.0.1:80/get_group/1')
+        resp = self.test_auth()
+        resp = requests.get('http://127.0.0.1:80/get_group/1', cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
     def test_get_users_group(self):
-        resp = requests.get('http://127.0.0.1:80/users_group/1')
+        resp = self.test_auth()
+        resp = requests.get('http://127.0.0.1:80/users_group/1', cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
     def test_add_user(self):
+        resp = self.test_auth()
         data = {
             'id_user': 8,
             'id_group': 3
         }
-        resp = requests.post('http://127.0.0.1:80/add_user_in_group', json=data)
+        resp = requests.post('http://127.0.0.1:80/add_user_in_group', json=data, cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
@@ -124,7 +130,11 @@ class TestApi(unittest.TestCase):
         self.assertIsNotNone(resp.text)
 
     def test_get_wall(self):
-        resp = requests.get('http://127.0.0.1:80/walls/1')
+        resp = self.test_auth()
+        data = {
+            'status': 'TRUE'
+        }
+        resp = requests.post('http://127.0.0.1:80/walls/', json=data,  cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
 
@@ -176,5 +186,11 @@ class TestApi(unittest.TestCase):
     def test_get_profile_user(self):
         resp = self.test_auth()
         resp = requests.get('http://127.0.0.1:80/get_profile/', cookies=resp.cookies)
+        self.assertEqual(resp.status_code, 200)
+        self.assertIsNotNone(resp.text)
+
+    def test_logout(self):
+        resp = self.test_auth()
+        resp = requests.get('http://127.0.0.1:80/logout', cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
