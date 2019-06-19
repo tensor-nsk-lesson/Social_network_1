@@ -10,6 +10,7 @@ import registration from './registration';
 import profile from './profile';
 import dialogs from './dialogs';
 import wall from './wall';
+import fakemode from './fakemode';
 
 export default combineReducers({
   routing: routerReducer,
@@ -22,5 +23,6 @@ export default combineReducers({
   registration,
   profile,
   dialogs,
+  fakemode,
   wall
 })

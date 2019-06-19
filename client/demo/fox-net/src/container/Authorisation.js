@@ -5,9 +5,18 @@ import { Link } from 'react-router-dom';
 import '../style.css';
 import logo from '../pics/foxnetBlack.png';
 import {authorisation} from '../actions/authorisation.js';
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router';
+import ScrollReveal from 'scrollreveal';
 
 class Authorisation extends Component{
+  componentDidMount(){
+    let slideUp = {
+    distance: '100%',
+    origin: 'top',
+    opacity: 0
+};
+    ScrollReveal().reveal('.singWrap', slideUp);
+  }
   loginUser(e){
     e.preventDefault();
     const data = {

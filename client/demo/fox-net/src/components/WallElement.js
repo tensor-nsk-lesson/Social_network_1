@@ -5,6 +5,7 @@ import comment from '../pics/comment.png';
 import like from '../pics/like.png';
 import dislike from '../pics/dislike.png'
 import {getWall} from '../actions/wall.js';
+import ScrollReveal from 'scrollreveal';
 
 class WallElement extends Component{
 
@@ -17,8 +18,8 @@ class WallElement extends Component{
       <div className='profileWall'>
           <img src={comment}/>
           <div className='profileWallText'>
-            <p>{this.props.text}</p>
-            <img src={this.props.image}/>
+            <p>Привет, я тест!</p>
+            <div><img src={like}/></div>
           </div>
           <div className='assessmentButtons'>
             <button> <span>5</span> <img src={like}/> </button>
