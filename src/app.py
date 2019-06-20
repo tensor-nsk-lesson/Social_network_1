@@ -248,7 +248,7 @@ def get_wall():
         }
         return jsonify(json)
     else:
-        status = request.json.get('status');
+        status = request.json.get('status')
         if status == 'TRUE':
             id_wall = r.get(request.cookies.get('session'))
         else:
@@ -355,6 +355,18 @@ def get_profile_another_user(id_user):
         return jsonify(json)
     else:
         return jsonify(get_profile_info(id_user))
+
+
+@app.route('/get_fake_profile/<int:id_fake>', methods = ['GET'])
+def get_fake_profile(id_user):
+    owner = r.get(request.cookies.get('session'))
+    if not owner:
+        json = {
+            'Error': 'пшел нах злоумышленник'
+        }
+        return jsonify(json)
+    else:
+        return jsonify(get_fake_info(id_user))
 
 
 @app.route('/logout', methods = ['GET'])

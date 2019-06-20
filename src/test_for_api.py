@@ -207,3 +207,9 @@ class TestApi(unittest.TestCase):
         resp = requests.get('http://127.0.0.1:80/get_profile/15', cookies=resp.cookies)
         self.assertEqual(resp.status_code, 500)
         self.assertIsNotNone(resp.text)
+
+    def test_get_fake(self):
+        resp = self.test_auth()
+        resp = requests.get('http://127.0.0.1:80/get_fake_profile/1', cookies=resp.cookies)
+        self.assertEqual(resp.status_code, 200)
+        self.assertIsNotNone(resp.text)
