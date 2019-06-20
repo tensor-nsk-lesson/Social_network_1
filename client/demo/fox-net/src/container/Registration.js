@@ -54,6 +54,9 @@ class Registration extends Component{
     if (this.props.success == 'success'){
       return <Redirect to='/'/>
     }
+    if (JSON.parse(localStorage.getItem('success')) == 'success'){
+      return <Redirect to='/profile'/>
+    }
     return (
       <div className="singWrap" onSubmit={this.submitRegData.bind(this)}>
         <form className='autorisationWrap registr' action="">

@@ -1,12 +1,21 @@
-export function logoutSuccsess(){
+export function logoutSuccsess(data){
+  localStorage.setItem('success', '"nosuccess"');
   return {
-    type: 'LOGOUT_SUCCESS'
+    type: 'LOGOUT_SUCCESS',
+    data
   }
 }
 
 export function logout(url){
   return (dispatch)=>{
     fetch(url,  {method: 'GET'})
-      .then(data => dispatch(logoutSuccsess()))
+      .then(response =>{
+        if(!response.ok){
+          throw new Error(response.statusText)
+        }
+        return response;
+      })
+      .then(response=> response.json())
+      .then(data => dispatch(logoutSuccsess(data)))
   }
 }
