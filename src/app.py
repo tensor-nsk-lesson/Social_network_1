@@ -378,7 +378,7 @@ def logout():
         }
         return jsonify(json)
     else:
-        r.delete(id_user)
+        r.delete(request.cookies.get('session'))
         return jsonify({'success':'success'})
 
 @app.route('/')
