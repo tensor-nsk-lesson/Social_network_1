@@ -7,6 +7,7 @@ import logo from '../pics/foxnetBlack.png';
 import {authorisation} from '../actions/authorisation.js';
 import { Redirect } from 'react-router';
 import ScrollReveal from 'scrollreveal';
+import { withRouter } from 'react-router-dom';
 
 class Authorisation extends Component{
   componentDidMount(){
@@ -26,7 +27,7 @@ class Authorisation extends Component{
     this.props.onAuth('/auth', data);
   }
   render(){
-      if (this.props.success == 'success'){
+      if (JSON.parse(localStorage.getItem('success')) == 'success'){
         return <Redirect to='/profile'/>
       }
     return(
@@ -38,8 +39,8 @@ class Authorisation extends Component{
             <input type="password" className='loginData' placeholder="Password" ref={(input) => {this.passwordInput = input}}/>
             <div className="serviceButtons"><label id='remember'><input type="checkbox" id='checkbox' ref={(input) => {this.rememberInput = input}}/>
             <p>Remember me</p></label> <a href="#" className='loginFuncs'>Forgot?</a></div>
-            <Link to='/dialogs' onClick={this.loginUser.bind(this)}>
-              <input className='logInput' type="submit" value='LOGIN'/>
+            <Link to='/profile'>
+              <input onClick={this.loginUser.bind(this)} className='logInput' type="submit" value='LOGIN'/>
             </Link>
             <Link to="/registration" className='loginFuncs'>I don't have an accaunt</Link>
         </form>
@@ -47,13 +48,12 @@ class Authorisation extends Component{
     )
   }
 }
-export default connect(
+export default withRouter(connect(
   state =>({
-    success: state.authorisation.success
   }),
   dispatch =>({
     onAuth: (url, data) =>{
       dispatch(authorisation(url, data))
     }
   })
-)(Authorisation)
+)(Authorisation))

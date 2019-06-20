@@ -1,6 +1,5 @@
 import {combineReducers} from 'redux';
 import {routerReducer} from 'react-router-redux';
-import user from './user';
 import userLogin from './userLogin';
 import messagesList from './messages';
 import profilePopup from './profilePopup';
@@ -14,7 +13,6 @@ import fakemode from './fakemode';
 import logout from './logout'
 export default combineReducers({
   routing: routerReducer,
-  user,
   userLogin,
   messagesList,
   profilePopup,

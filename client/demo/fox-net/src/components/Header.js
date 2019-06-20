@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import logo from '../pics/foxnetWhite.png';
 import peoplePic from '../pics/people.png';
+import { Redirect } from 'react-router';
 import notificationPic from '../pics/nontification.png';
 import profilePhoto from'../pics/profilePhoto.jpg';
 import {getProfile} from '../actions/profile.js';
@@ -48,6 +49,9 @@ class Header extends Component{
       photo = logo;
     }else{
       photo = this.props.photo;
+    }
+    if (localStorage.getItem('success') != '"success"'){
+      return <Redirect to='/'/>
     }
     return(
       <header>
@@ -97,7 +101,8 @@ export default connect(
   state => ({
     FirstName: state.profile.FirstName,
     SecondName: state.profile.SecondName,
-    photo: state.profile.Photo
+    photo: state.profile.Photo,
+    logout: state.logout.success
   }),
   dispatch => ({
     onGetProfile: (url) =>{
