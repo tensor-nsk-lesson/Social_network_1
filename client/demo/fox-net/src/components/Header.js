@@ -50,7 +50,7 @@ class Header extends Component{
     }else{
       photo = this.props.photo;
     }
-    if (localStorage.getItem('success') != '"success"'){
+    if (this.props.logout == 'success'){
       return <Redirect to='/'/>
     }
     return(

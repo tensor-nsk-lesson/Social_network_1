@@ -8,14 +8,16 @@ import {authorisation} from '../actions/authorisation.js';
 import { Redirect } from 'react-router';
 import ScrollReveal from 'scrollreveal';
 import { withRouter } from 'react-router-dom';
+import {getProfile} from '../actions/profile.js';
 
 class Authorisation extends Component{
   componentDidMount(){
+    //this.props.onCheck();
     let slideUp = {
     distance: '100%',
     origin: 'top',
     opacity: 0
-};
+    };
     ScrollReveal().reveal('.singWrap', slideUp);
   }
   loginUser(e){
@@ -27,7 +29,7 @@ class Authorisation extends Component{
     this.props.onAuth('/auth', data);
   }
   render(){
-      if (JSON.parse(localStorage.getItem('success')) == 'success'){
+      if (this.props.success == 'success'){
         return <Redirect to='/profile'/>
       }
     return(
@@ -50,10 +52,14 @@ class Authorisation extends Component{
 }
 export default withRouter(connect(
   state =>({
+    success: state.authorisation
   }),
   dispatch =>({
     onAuth: (url, data) =>{
       dispatch(authorisation(url, data))
+    },
+    onCheck: () =>{
+      dispatch(getProfile('/get_profile/'))
     }
   })
 )(Authorisation))
