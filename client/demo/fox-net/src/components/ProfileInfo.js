@@ -3,15 +3,22 @@ import {Component} from 'react';
 import {connect} from 'react-redux';
 import userPhoto from '../pics/profilePhoto.jpg';
 import ProfilePopup from '../components/ProfilePopup.js';
+import logo from '../pics/foxnetWhite.png'
 
 class ProfileInfo extends Component{
   render(){
+    let photo;
+    if(this.props.photo === null){
+      photo = logo;
+    }else{
+      photo = this.props.photo;
+    }
     return(
       <React.Fragment>
       <ProfilePopup/>
       <div className='profileInfoWrap'>
         <div className='profileInfo'>
-          <img src={userPhoto} />
+          <img src={photo} />
           <h3>{this.props.FirstName} {this.props.SecondName}</h3>
           <div className='profileInfoButtons'>
             <button onClick={this.props.onTogglePopup}>User information</button>
@@ -28,7 +35,8 @@ class ProfileInfo extends Component{
 export default connect(
   state => ({
     FirstName: state.profile.FirstName,
-    SecondName: state.profile.SecondName
+    SecondName: state.profile.SecondName,
+    photo: state.profile.Photo
   }),
   dispatch =>({
     onTogglePopup: () =>{

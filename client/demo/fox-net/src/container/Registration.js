@@ -2,12 +2,13 @@ import React from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
-import '../style.css'
-import months from '../constants/months.js'
-import days from '../constants/days.js'
-import years from '../constants/years.js'
-import {registration} from '../actions/registration.js'
-import { Redirect } from 'react-router'
+import '../style.css';
+import months from '../constants/months.js';
+import days from '../constants/days.js';
+import years from '../constants/years.js';
+import {registration} from '../actions/registration.js';
+import { Redirect } from 'react-router';
+import ScrollReveal from 'scrollreveal';
 
 class Registration extends Component{
   constructor(props){
@@ -17,6 +18,14 @@ class Registration extends Component{
       months: months,
       years: years
     };
+  }
+  componentDidMount(){
+    let slideUp = {
+    distance: '100%',
+    origin: 'top',
+    opacity: 0
+};
+    ScrollReveal().reveal('.singWrap', slideUp);
   }
   submitRegData(e){
     e.preventDefault();

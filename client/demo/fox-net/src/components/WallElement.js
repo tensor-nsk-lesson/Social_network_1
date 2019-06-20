@@ -9,7 +9,6 @@ import {getWall} from '../actions/wall.js';
 class WallElement extends Component{
 
   componentDidMount(){
-    this.props.onGetWall('/walls/7123');
   }
 
   render(){
@@ -17,8 +16,8 @@ class WallElement extends Component{
       <div className='profileWall'>
           <img src={comment}/>
           <div className='profileWallText'>
-            <p>{this.props.text}</p>
-            <img src={this.props.image}/>
+            <p>Привет, я тест!</p>
+            <div><img src={like}/></div>
           </div>
           <div className='assessmentButtons'>
             <button> <span>5</span> <img src={like}/> </button>

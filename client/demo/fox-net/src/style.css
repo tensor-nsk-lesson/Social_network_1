@@ -116,6 +116,7 @@ body{
   outline: none;
 }
 header{
+  z-index: 100;
   display: flex;
   justify-content: center;
   width: 100vw;
@@ -143,8 +144,16 @@ header img{
   width: 200px;
   height: 50px;
 }
-.notificButtons img{
+.notificButtons button{
   cursor: pointer;
+  background: transparent;
+  border: none;
+  height: 50px;
+}
+.notificButtons button:hover{
+  background: #462e72;
+}
+.notificButtons img{
   width: 40px;
   height: 30px;
 }
@@ -156,22 +165,25 @@ header img{
 .pagesList ul{
   width: 450px;
   justify-content: space-around;
-  margin-top: 15px;
   margin-left: 20px;
   display: flex;
   list-style: none;
 }
-.pagesList li{
+.pagesList button{
+  width: 70px;
+  color: #fff;
+  background: transparent;
+  border: none;
+  height: 50px;
   cursor: pointer;
   margin-left: 10px;
-  transition: 1s;
 }
 .pagesList a{
   color: #fff;
   text-decoration: none;
 }
-.pagesList li:hover{
-  text-decoration: underline;
+.pagesList button:hover{
+  background: #462e72;
 }
 .profileLogo{
   display: flex;
@@ -180,16 +192,84 @@ header img{
   justify-content: flex-end;
   align-items: center;
 }
+.profileLogo label{
+  z-index: 100;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:200px;
+  height: 50px;
+}
+.profileLogo label:hover{
+  background: #462e72;
+}
 .profileLogo i{
   margin-right: 15px;
   font-size: 20px;
   cursor: pointer;
 }
 .profileLogo img{
+  margin-right: 10px;
+  padding-left: 10px;
   cursor: pointer;
 }
 .profileLogo h3{
   font-size: 16px;
+}
+.settingsHeader{
+  position: absolute;
+  width: 1120px;
+}
+.settingsHeader ul{
+  z-index: 0;
+  border-bottom: 1px solid #fff;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  width: 195px;
+  background: #4f3382;
+  position: absolute;
+  right: 0px;
+  transition: .5s;
+  top:-200px;
+}
+.settingsHeader li{
+  cursor: pointer;
+  border-bottom: 1px solid #fff;
+  width: 195  px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  list-style: none;
+}
+.settingsHeader li:last-child{
+  flex-direction: column;
+  height: 70px;
+}
+.settingsHeader li:last-child{
+  border-bottom: none;
+}
+.settingsHeader li:hover{
+  background: #462272;
+}
+#fakemode{
+  align-items: center;
+  margin: 10px;
+  width: 150px;
+  height: 25px;
+  background: #fff;
+  border-radius: 20px;
+}
+#fakemode div{
+  position: relative;
+  left: 3px;
+  top: 2px;
+  border-radius: 20px;
+  background: #000;
+  width: 35px;
+  height: 22px;
+  transition: .3s;
 }
 .dialogWrap{
   width: 1250px;
@@ -569,9 +649,16 @@ header img{
   flex-direction: column;
   margin-bottom: 7px;
 }
+.profileWallText div{
+  display: flex;
+  justify-content: center;
+  height: auto;
+  align-items: flex-start;
+}
 .profileWallText img{
+  margin: 0 auto;
   margin-top: 20px;
-  max-width: 600px;
+  max-width: 430px;
 }
 .profileWallText p{
   word-break: break-all;
@@ -637,8 +724,8 @@ header img{
   color: #fff;
 }
 .assessmentButtons button img{
-  width: 25px;
-  height: 30px;
+  width: 20px;
+  height: 25px;
   margin: 0;
   padding: 0;
 }
@@ -654,6 +741,7 @@ header img{
   overflow-x: hidden;
 }
 .friendSearch{
+  margin-bottom: 10px;
   border-radius: 10px;
   background: #232323;
   height: 50px;
@@ -681,6 +769,9 @@ header img{
   margin-top: 20px;
   background: #232323;
   width: 500px;
+}
+.friendWrap:first-child{
+  margin-top: 0px;
 }
 .friendInfo{
   margin-left: 20px;
