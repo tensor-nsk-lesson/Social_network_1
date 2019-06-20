@@ -194,3 +194,16 @@ class TestApi(unittest.TestCase):
         resp = requests.get('http://127.0.0.1:80/logout', cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
+
+    def test_get_profile_user_2(self):
+        resp = self.test_auth()
+        resp = requests.get('http://127.0.0.1:80/get_profile/15', cookies=resp.cookies)
+        self.assertEqual(resp.status_code, 200)
+        self.assertIsNotNone(resp.text)
+
+    def test_logout_2(self):
+        resp = self.test_auth()
+        resp = requests.get('http://127.0.0.1:80/logout', cookies=resp.cookies)
+        resp = requests.get('http://127.0.0.1:80/get_profile/15', cookies=resp.cookies)
+        self.assertEqual(resp.status_code, 500)
+        self.assertIsNotNone(resp.text)
