@@ -89,25 +89,25 @@ def profile_changes(id_user, photo, secondName, firstName, fatherName, aboutMe, 
     return
 
 
-def profile_settings(id_user):
-    conn = connect()
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM "Profile" WHERE ("Id" = ' + id_user.__str__() + ')')
-    row = cur.fetchone()
-    result = {
-        "Id": row[0],
-        "Photo": row[2],
-        "SecondName": row[3],
-        "FirstName": row[4],
-        "FatherName": row[5],
-        "Age": row[6],
-        "AboutMe": row[7],
-        "Status": row[8],
-        "Date": row[9],
-        "StatusProfile": row[11],
-        "Gender": row[12],
-        "City": row[13]
-    }
-    conn.close()
-    return result
+#def profile_settings(id_user):
+#    conn = connect()
+#    cur = conn.cursor()
+#    cur.execute('SELECT * FROM "Profile" WHERE ("Id" = ' + id_user.__str__() + ')')
+#    row = cur.fetchone()
+#    result = {
+#        "Id": row[0],
+#        "Photo": row[2],
+#        "SecondName": row[3],
+#        "FirstName": row[4],
+#        "FatherName": row[5],
+#        "Age": row[6],
+#        "AboutMe": row[7],
+#        "Status": row[8],
+#        "Date": row[9],
+#        "StatusProfile": row[11],
+#        "Gender": row[12],
+#        "City": row[13]
+#    }
+#    conn.close()
+#    return result*/
 

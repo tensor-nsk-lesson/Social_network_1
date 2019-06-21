@@ -425,16 +425,16 @@ def profile_change():
         return jsonify(profile_changes(id_user, photo, secondName, firstName, fatherName, aboutMe, status, gender, city))
 
 
-@app.route('/profile_settings/<int:id_user>', methods = ['GET'])
-def profile_setting():
-    id_user = r.get(request.cookies.get('session'))
-    if not id_user:
-        json = {
-            'Error': 'true'
-        }
-        return jsonify(json)
-    else:
-        return jsonify(profile_settings(id_user))
+#@app.route('/profile_settings/', methods = ['GET'])
+#def profile_setting():
+#    id_user = r.get(request.cookies.get('session'))
+#    if not id_user:
+#        json = {
+#            'Error': 'true'
+#        }
+#        return jsonify(json)
+#    else:
+#        return jsonify(profile_settings(id_user))
 
 
 socketio.run(app, host='localhost', port=80)
