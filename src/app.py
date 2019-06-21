@@ -381,6 +381,7 @@ def logout():
         r.delete(request.cookies.get('session'))
         return jsonify({'success':'success'})
 
+
 @app.route('/')
 def index():
     # conn = connect()
@@ -389,6 +390,7 @@ def index():
     # conn.close()
     # messages = cur.fechall()
     return render_template('index.html', title='My Chat')
+
 
 @socketio.on('message')
 def handle_message(message):
@@ -403,8 +405,27 @@ def handle_message(message):
     send(message, broadcast=True)
 
 
-socketio.run(app, host='localhost', port=80)
+@app.route('/profile/<int:id_user>', methods = ['PUT'])
+def profile():
+    id_user = r.get(request.cookies.get('session'))
+    photo = request.json.get('photo')
+    secondName = request.json.get('secondName')
+    firstName = request.json.get('firstName')
+    fatherName = request.json.get('fatherName')
+    aboutMe = request.json.get('aboutMe')
+    status = request.json.get('status')
+    gender = request.json.get('gender')
+    city = request.json.get('city')
+    if not id_user:
+        json = {
+            'Error': 'true'
+        }
+        return jsonify(json)
+    else:
+        return jsonify(profile_changes(id_user, photo, secondName, firstName, fatherName, aboutMe, status, gender, city))
 
+
+socketio.run(app, host='localhost', port=80)
 
 
 app.run(port=80)
