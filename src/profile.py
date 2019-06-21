@@ -72,7 +72,7 @@ def get_fake_info(id):
     return result
 
 
-def profile_changes(id, photo, secondName, firstName, fatherName, aboutMe, status, gender, city):
+def profile_changes(id_user, photo, secondName, firstName, fatherName, aboutMe, status, gender, city):
     conn = connect()
     cur = conn.cursor()
     cur.execute('UPDATE "Profile" SET '
@@ -83,7 +83,31 @@ def profile_changes(id, photo, secondName, firstName, fatherName, aboutMe, statu
                 '"AboutMe" = ' + aboutMe.__str__() + ', '
                 '"Status" = ' + status.__str__() + ', '
                 '"Gender" = ' + gender.__str__() + ', '
-                '"City" = ' + city.__str__() + ' WHERE "Id" = ' + id.__str__())
+                '"City" = ' + city.__str__() + ' WHERE "Id" = ' + id_user.__str__())
     conn.commit()
     conn.close()
     return
+
+
+def profile_settings(id_user):
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM "Profile" WHERE ("Id" = ' + id_user.__str__() + ')')
+    row = cur.fetchone()
+    result = {
+        "Id": row[0],
+        "Photo": row[2],
+        "SecondName": row[3],
+        "FirstName": row[4],
+        "FatherName": row[5],
+        "Age": row[6],
+        "AboutMe": row[7],
+        "Status": row[8],
+        "Date": row[9],
+        "StatusProfile": row[11],
+        "Gender": row[12],
+        "City": row[13]
+    }
+    conn.close()
+    return result
+

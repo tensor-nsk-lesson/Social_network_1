@@ -405,8 +405,8 @@ def handle_message(message):
     send(message, broadcast=True)
 
 
-@app.route('/profile/<int:id_user>', methods = ['PUT'])
-def profile():
+@app.route('/profile_change/<int:id_user>', methods = ['PUT'])
+def profile_change():
     id_user = r.get(request.cookies.get('session'))
     photo = request.json.get('photo')
     secondName = request.json.get('secondName')
@@ -423,6 +423,18 @@ def profile():
         return jsonify(json)
     else:
         return jsonify(profile_changes(id_user, photo, secondName, firstName, fatherName, aboutMe, status, gender, city))
+
+
+@app.route('/profile_settings/<int:id_user>', methods = ['GET'])
+def profile_setting():
+    id_user = r.get(request.cookies.get('session'))
+    if not id_user:
+        json = {
+            'Error': 'true'
+        }
+        return jsonify(json)
+    else:
+        return jsonify(profile_settings(id_user))
 
 
 socketio.run(app, host='localhost', port=80)
