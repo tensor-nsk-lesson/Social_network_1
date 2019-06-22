@@ -4,16 +4,7 @@ from connect import connect
 def get_profile_info(id):
     conn = connect()
     cur = conn.cursor()
-    cur.execute('select "FakeId",'
-                '"Photo", '
-                '"SecondName", '
-                '"FirstName", "'
-                'FatherName", '
-                '"Age", '
-                '"AboutMe", '
-                '"Status", '
-                '"StatusProfile", '
-                '"City" from public.\"Profile\" where "Id"='+id.__str__())
+    cur.execute('select * from public.\"Profile\" where "Id"='+id.__str__())
     info = cur.fetchone()
     if not info:
         result = {
@@ -21,16 +12,20 @@ def get_profile_info(id):
         }
     else:
         result = {
-            "FakeId":info[0],
-            "Photo": info[1],
-            "SecondName":info[2],
-            "FirstName": info[3],
-            "FatherName": info[4],
-            "Age": info[5],
-            "AboutMe": info[6],
-            "Status": info[7],
-            "StatusProfile": info[8],
-            "City": info[9]
+            "Id" : info[0],
+            "FakeId":info[1],
+            "Photo": info[2],
+            "SecondName": info[3],
+            "FirstName": info[4],
+            "FatherName": info[5],
+            "Age": info[6],
+            "AboutMe": info[7],
+            "Status": info[8],
+            "Date" : info[9],
+            "LastActivity": info[10],
+            "StatusProfile": info[11],
+            "Gender" : info[12],
+            "City": info[13]
         }
     cur.close()
     conn.close()
@@ -40,16 +35,7 @@ def get_profile_info(id):
 def get_fake_info(id):
     conn = connect()
     cur = conn.cursor()
-    cur.execute('select '
-                '"Photo", '
-                '"SecondName", '
-                '"FirstName", "'
-                'FatherName", '
-                '"Age", '
-                '"AboutMe", '
-                '"Status", '
-                '"StatusProfile", '
-                '"City" from public.\"Profile\" where "FakeId"='+id.__str__())
+    cur.execute('select * from public.\"Profile\" where "FakeId"='+id.__str__())
     info = cur.fetchone()
     if not info:
         result = {
@@ -57,16 +43,39 @@ def get_fake_info(id):
         }
     else:
         result = {
-            "Photo": info[0],
-            "SecondName":info[1],
-            "FirstName": info[2],
-            "FatherName": info[3],
-            "Age": info[4],
-            "AboutMe": info[5],
-            "Status": info[6],
-            "StatusProfile": info[7],
-            "City": info[8]
+            "Id" : info[0],
+            "FakeId":info[1],
+            "Photo": info[2],
+            "SecondName": info[3],
+            "FirstName": info[4],
+            "FatherName": info[5],
+            "Age": info[6],
+            "AboutMe": info[7],
+            "Status": info[8],
+            "Date" : info[9],
+            "LastActivity": info[10],
+            "StatusProfile": info[11],
+            "Gender" : info[12],
+            "City": info[13]
         }
     cur.close()
     conn.close()
     return result
+
+
+def profile_changes(id_user, photo, secondName, firstName, fatherName, aboutMe, status, gender, city):
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute('UPDATE "Profile" SET '
+                '"Photo" = ' + photo.__str__() + ', '
+                '"SecondName" = ' + secondName.__str__() + ', '
+                '"FirstName" = ' + firstName.__str__() + ', '
+                '"FatherName" = ' + fatherName.__str__() + ', '
+                '"AboutMe" = ' + aboutMe.__str__() + ', '
+                '"Status" = ' + status.__str__() + ', '
+                '"Gender" = ' + gender.__str__() + ', '
+                '"City" = ' + city.__str__() + ' WHERE "Id" = ' + id_user.__str__())
+    conn.commit()
+    conn.close()
+    return
+
