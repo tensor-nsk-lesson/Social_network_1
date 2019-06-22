@@ -236,7 +236,8 @@ def register():
     date = request.json.get('date')
     login = request.json.get('login')
     password = request.json.get('password')
-    return jsonify(register_user(first_name, date, login, password))
+    time = request.json.get('time')
+    return jsonify(register_user(first_name, date, login, password, time))
 
 
 @app.route('/walls/', methods=['POST'])

@@ -1,6 +1,4 @@
 from connect import connect
-import secrets
-import datetime
 
 
 def authorization(login, password):
@@ -20,7 +18,7 @@ def authorization(login, password):
     return data
 
 
-def register_user(first_name, date, login, password):
+def register_user(first_name, date, login, password, time):
     conn = connect()
     cur = conn.cursor()
     cur.execute('select "Login" from "Authorization" where "Login" = \''+login.__str__()+'\'')
@@ -30,8 +28,10 @@ def register_user(first_name, date, login, password):
                     ' values(\''+login.__str__()+'\', \''+password.__str__()+'\') returning "Id"');
         id = cur.fetchone();
         conn.commit()
-        cur.execute('insert into "Profile" ("Id", "FirstName","Date", "StatusProfile")'
-                    ' values('+id[0].__str__()+',\''+first_name.__str__()+'\',to_timestamp(\''+date.__str__()+'\', \'dd-mm-yy\'), 1)')
+        cur.execute('insert into "Profile" ("Id", "FirstName","Date", "LastActivity", "StatusProfile")'
+                    ' values('+id[0].__str__()+',\''+first_name.__str__()+'\','
+                    'to_timestamp(\''+date.__str__()+'\', \'dd-mm-yy\'), '
+                    'to_timestamp(\''+time.__str__()+'\', \'dd-mm-yy hh24:mi:ss\'), 1)')
         conn.commit()
         conn.close()
         return {'success':'success'}
