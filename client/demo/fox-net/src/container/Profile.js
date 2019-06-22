@@ -11,7 +11,7 @@ class Profile extends Component{
       <React.Fragment>
       <Header/>
       <div className='profile'>
-        <ProfileInfo/>
+        <ProfileInfo  userId={this.props.match.params.id}/>
         <Wall/>
       </div>
       </React.Fragment>

@@ -21,7 +21,7 @@ const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
         <Route path="/registration" component={Registration}/>
         <Route path='/friends' component={Friends}/>
         <Route path='/dialogs' component={Dialogs}/>
-        <Route path='/profile' component={Profile}/>
+        <Route path='/profile/:id' component={Profile}/>
       </Router>
     </Provider>,
     document.getElementById('root')

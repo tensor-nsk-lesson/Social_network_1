@@ -137,6 +137,9 @@ header img{
   height: 50px;
   cursor: pointer;
 }
+.logo:hover{
+  background: #462e72;
+}
 .notificButtons{
   display: flex;
   align-items: center;
@@ -284,6 +287,11 @@ header img{
   height: 82vh;
   overflow: scroll;
   overflow-x: hidden;
+}
+.dialogList h3{
+  margin: 10px;
+  font-size: 18px;
+  color: darkgrey;
 }
 .dialogProfileInfo{
   height: 40px;

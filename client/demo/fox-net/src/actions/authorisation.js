@@ -1,8 +1,7 @@
-export function fetchSuccess(key){
-  localStorage.setItem('success',JSON.stringify(key.success));
+export function fetchSuccess(data){
   return {
     type: 'LOGIN_USER_SUCCESS',
-    key
+    data
   }
 }
 

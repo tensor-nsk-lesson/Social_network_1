@@ -34,7 +34,7 @@ def get_dialogs():
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error':'пшел нах злоумышленник'
+            'Error':'true'
         }
     else:
         json = get_dialogs_for_user(id_user)
@@ -46,7 +46,7 @@ def create():
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error':'пшел нах злоумышленник'
+            'Error':'true'
         }
         return jsonify(json)
     else:
@@ -59,7 +59,7 @@ def rename(id_dialog):
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -72,7 +72,7 @@ def change_status_for_message(id_dialog, id_message):
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -85,7 +85,7 @@ def delete_message(id_dialog, id_message):
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -108,7 +108,7 @@ def get_messages(id_dialog):
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -120,7 +120,7 @@ def get_contents(status):
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -132,7 +132,7 @@ def add_content():
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -145,7 +145,7 @@ def get_groups():
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -157,7 +157,7 @@ def create_group():
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -171,7 +171,7 @@ def get_group(id_group):
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -183,7 +183,7 @@ def get_users_group(id_group):
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -195,7 +195,7 @@ def add_user():
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -208,7 +208,7 @@ def get_friends():
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -244,11 +244,11 @@ def get_wall():
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
-        status = request.json.get('status');
+        status = request.json.get('status')
         if status == 'TRUE':
             id_wall = r.get(request.cookies.get('session'))
         else:
@@ -261,7 +261,7 @@ def like_dislike(id_post, id_status):
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -273,7 +273,7 @@ def privacy_invisibility(status):
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -285,7 +285,7 @@ def add_friend(id_friend):
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -298,7 +298,7 @@ def privacy_view_friends(status):
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -311,7 +311,7 @@ def privacy_view_groups(status):
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -324,7 +324,7 @@ def add_in_dialog():
     owner = r.get(request.cookies.get('session'))
     if not owner:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -338,7 +338,7 @@ def get_profile_user():
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
@@ -350,11 +350,23 @@ def get_profile_another_user(id_user):
     owner = r.get(request.cookies.get('session'))
     if not owner:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:
         return jsonify(get_profile_info(id_user))
+
+
+@app.route('/get_fake_profile/<int:id_fake>', methods = ['GET'])
+def get_fake_profile(id_user):
+    owner = r.get(request.cookies.get('session'))
+    if not owner:
+        json = {
+            'Error': 'true'
+        }
+        return jsonify(json)
+    else:
+        return jsonify(get_fake_info(id_user))
 
 
 @app.route('/logout', methods = ['GET'])
@@ -362,7 +374,7 @@ def logout():
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
         json = {
-            'Error': 'пшел нах злоумышленник'
+            'Error': 'true'
         }
         return jsonify(json)
     else:

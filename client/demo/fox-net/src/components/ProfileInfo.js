@@ -3,9 +3,13 @@ import {Component} from 'react';
 import {connect} from 'react-redux';
 import userPhoto from '../pics/profilePhoto.jpg';
 import ProfilePopup from '../components/ProfilePopup.js';
-import logo from '../pics/foxnetWhite.png'
+import logo from '../pics/foxnetWhite.png';
+import {getProfile} from '../actions/profile.js';
 
 class ProfileInfo extends Component{
+  componentDidMount(){
+    this.props.onGetProfile('/get_profile/'+this.props.userId)
+  }
   render(){
     let photo;
     if(this.props.photo === null){
@@ -39,6 +43,9 @@ export default connect(
     photo: state.profile.Photo
   }),
   dispatch =>({
+    onGetProfile: (url) =>{
+      dispatch(getProfile(url))
+    },
     onTogglePopup: () =>{
       dispatch({type: 'TOGGLE_PROFILE_POPUP', status: 'flex'})
     }

@@ -3,22 +3,14 @@ import {Component} from 'react';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../style.css';
-import months from '../constants/months.js';
-import days from '../constants/days.js';
-import years from '../constants/years.js';
+import {listMonths} from '../constants/date.js';
+import {listDays} from '../constants/date.js';
+import {listYears} from '../constants/date.js';
 import {registration} from '../actions/registration.js';
 import { Redirect } from 'react-router';
 import ScrollReveal from 'scrollreveal';
 
 class Registration extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      days: days,
-      months: months,
-      years: years
-    };
-  }
   componentDidMount(){
     let slideUp = {
     distance: '100%',
@@ -42,20 +34,8 @@ class Registration extends Component{
   }
   }
   render(){
-    let listDays = this.state.days.map((item, key) =>{
-      return <option value={item} key={key}>{item}</option>
-    })
-    let listMonth = this.state.months.map((item,key) =>{
-      return <option value={item} key={key}>{item}</option>
-    })
-    let listYears = this.state.years.map((item,key) =>{
-      return <option value={item} key={key}>{item}</option>
-    })
     if (this.props.success == 'success'){
       return <Redirect to='/'/>
-    }
-    if (JSON.parse(localStorage.getItem('success')) == 'success'){
-      return <Redirect to='/profile'/>
     }
     return (
       <div className="singWrap" onSubmit={this.submitRegData.bind(this)}>
@@ -68,7 +48,7 @@ class Registration extends Component{
                 {listDays}
               </select>
               <select className="selectDate" name="" ref={(input) => {this.monthInput = input}}>
-                {listMonth}
+                {listMonths}
               </select>
               <select className="selectDate" name="" ref={(input) => {this.yearInput = input}}>
                 {listYears}

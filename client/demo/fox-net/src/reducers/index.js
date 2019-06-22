@@ -7,7 +7,9 @@ import messagePopup from './messagePopup';
 import authorisation from './authorisation';
 import registration from './registration';
 import profile from './profile';
+import header from './header'
 import dialogs from './dialogs';
+import friends from './friends';
 import wall from './wall';
 import fakemode from './fakemode';
 import logout from './logout'
@@ -20,6 +22,7 @@ export default combineReducers({
   authorisation,
   registration,
   profile,
+  header,
   dialogs,
   fakemode,
   wall,
