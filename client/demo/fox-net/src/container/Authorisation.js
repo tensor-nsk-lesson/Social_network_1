@@ -11,8 +11,15 @@ import { withRouter } from 'react-router-dom';
 import {getProfile} from '../actions/profile.js';
 
 class Authorisation extends Component{
-  componentDidMount(){
+  componentWillMount(){
     this.props.onGetProfile('/get_profile/')
+  }
+  shouldComponentUpdate(nextProps, nextState){
+    if(nextProps != 'true'){
+      return true
+    }
+  }
+  componentDidMount(){
     let slideUp = {
     distance: '100%',
     origin: 'top',
@@ -29,10 +36,9 @@ class Authorisation extends Component{
     this.props.onAuth('/auth', data);
   }
   render(){
-    console.log(this.props.error);
-    console.log(this.props.error == "true");
-    console.log(this.props.error + '=' + "true");
-    console.log(this.props.success);
+    if (this.props.error != 'true' && this.props.error != undefined){
+      console.log(123123);
+    }
     return(
       <div className="singWrap">
         <form className="autorisationWrap">

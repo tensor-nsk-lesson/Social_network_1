@@ -1,4 +1,4 @@
-from flask_socketio import SocketIO, send, emit
+from flask_socketio import SocketIO, send, emit, join_room, leave_room
 import os
 from flask import Flask, render_template, jsonify, request, make_response
 from dialog import *
@@ -393,19 +393,6 @@ def index():
     return render_template('index.html', title='My Chat')
 
 
-@socketio.on('message')
-def handle_message(message):
-    # print('message ' + message)
-    # conn = connect()
-    # cur = conn.cursor()
-    # cur.execute('INSERT INTO "Messages" ("IdDialog", "IdUser", "IdMessage", "Message", "Time", "Status") VALUES (201, '
-    #             + '101, ' + id_Message.__str__() + ', ' + message.__str__() + ', CURRENT_TIMESTAMP, 0 )')
-    # cur.commit()
-    # conn.close()
-    # id_Message + 1
-    send(message, broadcast=True)
-
-
 @app.route('/profile_change/<int:id_user>', methods = ['PUT'])
 def profile_change():
     id_user = r.get(request.cookies.get('session'))
@@ -425,6 +412,28 @@ def profile_change():
     else:
         return jsonify(profile_changes(id_user, photo, secondName, firstName, fatherName, aboutMe, status, gender, city))
 
+
+@socketio.on('join')
+def join_dialog(data):
+    username = data['username']
+    room = data['room']
+    join_room(room)
+    send(username + ' вошел в комнату.', room=room)
+
+
+@socketio.on('leave')
+def on_leave(data):
+    username = data['username']
+    room = data['room']
+    leave_room(room)
+    send(username + ' покинул комнату.', room=room)
+
+
+@socketio.on('message')
+def on_message(data):
+    room = data['room']
+    message = data['message']
+    emit(message.__str__(), room=room)
 
 
 socketio.run(app, host='localhost', port=80)

@@ -13,6 +13,8 @@ import friends from './friends';
 import wall from './wall';
 import fakemode from './fakemode';
 import logout from './logout'
+import chat from './chat'
+
 export default combineReducers({
   routing: routerReducer,
   userLogin,
@@ -26,5 +28,6 @@ export default combineReducers({
   dialogs,
   fakemode,
   wall,
-  logout
+  logout,
+  chat
 })
