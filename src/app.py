@@ -430,7 +430,7 @@ def on_leave(data):
 
 
 @socketio.on('message')
-def on_leave(data):
+def on_message(data):
     room = data['room']
     message = data['message']
     leave_room(room)
