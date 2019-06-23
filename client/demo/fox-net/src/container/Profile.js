@@ -7,6 +7,7 @@ import Wall from '../components/ProfileWall.js'
 
 class Profile extends Component{
   render(){
+    console.log(this.props.match.params.id);
     return(
       <React.Fragment>
       <Header/>

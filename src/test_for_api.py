@@ -122,7 +122,8 @@ class TestApi(unittest.TestCase):
             'first_name': 'DIEMATH',
             'date': '20.05.2005',
             'login':'Person49',
-            'password': '2'
+            'password': '2',
+            'time': '20.05.2005 16:16:16'
         }
         resp = requests.post('http://127.0.0.1:80/register', json=data)
         error = resp.json().get('error')

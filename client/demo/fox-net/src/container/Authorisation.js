@@ -12,6 +12,7 @@ import {getProfile} from '../actions/profile.js';
 
 class Authorisation extends Component{
   componentDidMount(){
+    this.props.onGetProfile('/get_profile/')
     let slideUp = {
     distance: '100%',
     origin: 'top',
@@ -28,9 +29,10 @@ class Authorisation extends Component{
     this.props.onAuth('/auth', data);
   }
   render(){
-      // if (this.props.check != 'true'){
-      //   return <Redirect to='/profile'/>
-      // }
+    console.log(this.props.error);
+    console.log(this.props.error == "true");
+    console.log(this.props.error + '=' + "true");
+    console.log(this.props.success);
     return(
       <div className="singWrap">
         <form className="autorisationWrap">
@@ -40,9 +42,7 @@ class Authorisation extends Component{
             <input type="password" className='loginData' placeholder="Password" ref={(input) => {this.passwordInput = input}}/>
             <div className="serviceButtons"><label id='remember'><input type="checkbox" id='checkbox' ref={(input) => {this.rememberInput = input}}/>
             <p>Remember me</p></label> <a href="#" className='loginFuncs'>Forgot?</a></div>
-            <Link to='/profile/11'>
               <input onClick={this.loginUser.bind(this)} className='logInput' type="submit" value='LOGIN'/>
-            </Link>
             <Link to="/registration" className='loginFuncs'>I don't have an accaunt</Link>
         </form>
       </div>
@@ -51,10 +51,14 @@ class Authorisation extends Component{
 }
 export default withRouter(connect(
   state =>({
-    success: state.authorisation,
-    check: state.profile.Error
+    success: state.authorisation.success,
+    error: state.profile.Error,
+    id: state.profile.Id
   }),
   dispatch =>({
+    onGetProfile: (url) =>{
+      dispatch(getProfile(url))
+    },
     onAuth: (url, data) =>{
       dispatch(authorisation(url, data))
     }

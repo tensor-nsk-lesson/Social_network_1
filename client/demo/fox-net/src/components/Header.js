@@ -53,6 +53,7 @@ class Header extends Component{
     if (this.props.error == 'true' || this.props.logout == 'success' ){
       return <Redirect to='/'/>
     }
+    let myPage = '/profile/' + this.props.userId;
     return(
       <header>
         <div className="logo">
@@ -65,7 +66,7 @@ class Header extends Component{
         </div>
         <div className="pagesList">
           <ul>
-            <Link to='/profile/10'>
+            <Link to={myPage}>
               <button><li>My profile</li></button>
             </Link>
             <Link to='/friends'>
@@ -104,7 +105,7 @@ export default connect(
     photo: state.header.Photo,
     logout: state.logout.success,
     error: state.header.Error,
-    // id: match.params.id
+    userId: state.header.Id
   }),
   dispatch => ({
     onGetHeader: (url) =>{
