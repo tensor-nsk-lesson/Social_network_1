@@ -102,3 +102,22 @@ def add_user_in_dialog(id_user, id_dialog):
     conn.commit()
     conn.close()
     return
+
+
+def create_dialog_for_two(id_user, id_alien):
+    conn = connect()
+    cur = conn.cursor()
+    number = random.randint(1, 100000).__str__()
+    cur.execute('insert into "Dialogs" ("IdDialog", "IdUser", "Status", "NameDialog") '
+                'values(' + number + ',' + id_user.__str__()+
+                ', 0 , \'Dialog' + number + '\'), '
+                '(' + number + ',' + id_user.__str__()+
+                ', 0 , \'Dialog' + number + '\') '
+                                              'returning "IdDialog"')
+    id_dialog = cur.fetchone()
+    conn.commit()
+    conn.close()
+    result = {
+        "IdDialog": id_dialog[0]
+    }
+    return result

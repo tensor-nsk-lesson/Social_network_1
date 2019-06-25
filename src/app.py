@@ -411,6 +411,15 @@ def profile_change():
         return jsonify(profile_changes(id_user, fake_id, photo, second_name, first_name, father_name, about_me, date, status, gender, city))
 
 
+@app.route('/dialog_with_him/<int:id_alien>', methods=['GET'])
+def dialog_with_him(id_alien):
+    id_user = r.get(request.cookies.get('session'))
+    if not id_user:
+        return jsonify({'Error':'true'})
+    else:
+        return jsonify(create_dialog_for_two(id_user, id_alien))
+
+
 @socketio.on('join')
 def join_dialog(data):
     username = data['username']

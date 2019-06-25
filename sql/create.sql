@@ -21,12 +21,13 @@ drop table "Messages" cascade;
 
 create table if not exists "Authorization"(
 	"Login" VARCHAR(20),
-	"Password" INTEGER NOT NULL,
+	"Password" text NOT NULL,
 	"Id" serial UNIQUE,
 	CONSTRAINT "pk_login" PRIMARY KEY ("Login")
 );
 create table if not exists "Profile"(
 	"Id" INTEGER,
+	"FakeId" integer,
 	"Photo" Text,
 	"SecondName" Text,
 	"FirstName" Text NOT NULL,
@@ -128,3 +129,5 @@ CREATE TABLE if not exists "Comments"
 	"Time" timestamp without time zone,
 	FOREIGN KEY ("IdPost") REFERENCES "Posts"("IdPost") ON DELETE CASCADE
 );	
+
+delete from "Dialogs";
