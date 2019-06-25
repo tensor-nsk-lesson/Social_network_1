@@ -1,4 +1,4 @@
-export function getDialogsSuccsess(data){
+export function dialogsSuccsess(data){
   return {
     type: 'DIALOGS_FETCH_SUCCESS',
     data
@@ -15,6 +15,6 @@ export function getDialogs(url){
         return response;
       })
       .then(response=> response.json())
-      .then(data => dispatch(getDialogsSuccsess(data)))
+      .then(data => dispatch(dialogsSuccsess(data)))
   }
 }

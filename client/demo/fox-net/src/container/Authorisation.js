@@ -8,14 +8,23 @@ import {authorisation} from '../actions/authorisation.js';
 import { Redirect } from 'react-router';
 import ScrollReveal from 'scrollreveal';
 import { withRouter } from 'react-router-dom';
+import {getProfile} from '../actions/profile.js';
 
 class Authorisation extends Component{
+  componentWillMount(){
+    this.props.onGetProfile('/get_profile/')
+  }
+  shouldComponentUpdate(nextProps, nextState){
+    if(nextProps != 'true'){
+      return true
+    }
+  }
   componentDidMount(){
     let slideUp = {
     distance: '100%',
     origin: 'top',
     opacity: 0
-};
+    };
     ScrollReveal().reveal('.singWrap', slideUp);
   }
   loginUser(e){
@@ -27,9 +36,9 @@ class Authorisation extends Component{
     this.props.onAuth('/auth', data);
   }
   render(){
-      if (JSON.parse(localStorage.getItem('success')) == 'success'){
-        return <Redirect to='/profile'/>
-      }
+    if (this.props.error != 'true' && this.props.error != undefined){
+      console.log(123123);
+    }
     return(
       <div className="singWrap">
         <form className="autorisationWrap">
@@ -39,9 +48,7 @@ class Authorisation extends Component{
             <input type="password" className='loginData' placeholder="Password" ref={(input) => {this.passwordInput = input}}/>
             <div className="serviceButtons"><label id='remember'><input type="checkbox" id='checkbox' ref={(input) => {this.rememberInput = input}}/>
             <p>Remember me</p></label> <a href="#" className='loginFuncs'>Forgot?</a></div>
-            <Link to='/profile'>
               <input onClick={this.loginUser.bind(this)} className='logInput' type="submit" value='LOGIN'/>
-            </Link>
             <Link to="/registration" className='loginFuncs'>I don't have an accaunt</Link>
         </form>
       </div>
@@ -50,8 +57,14 @@ class Authorisation extends Component{
 }
 export default withRouter(connect(
   state =>({
+    success: state.authorisation.success,
+    error: state.profile.Error,
+    id: state.profile.Id
   }),
   dispatch =>({
+    onGetProfile: (url) =>{
+      dispatch(getProfile(url))
+    },
     onAuth: (url, data) =>{
       dispatch(authorisation(url, data))
     }

@@ -3,38 +3,38 @@ import {Component} from 'react';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../style.css';
-import months from '../constants/months.js';
-import days from '../constants/days.js';
-import years from '../constants/years.js';
+import {listMonths} from '../constants/date.js';
+import {listDays} from '../constants/date.js';
+import {listYears} from '../constants/date.js';
 import {registration} from '../actions/registration.js';
 import { Redirect } from 'react-router';
 import ScrollReveal from 'scrollreveal';
 
 class Registration extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      days: days,
-      months: months,
-      years: years
-    };
-  }
   componentDidMount(){
     let slideUp = {
     distance: '100%',
     origin: 'top',
     opacity: 0
-};
+  };
     ScrollReveal().reveal('.singWrap', slideUp);
   }
   submitRegData(e){
+    let now = new Date()
+    let date = now.getDate() + '.' +
+      now.getMonth() + '.' +
+      now.getFullYear() + ' ' +
+      now.getHours() + ':' +
+      now.getMinutes() + ':' +
+      now.getSeconds();
     e.preventDefault();
     if (this.passwordInput.value === this.checkPasswordInput.value){
       const userData ={
         first_name: this.nameInput.value,
         login: this.secondnameInput.value,
         date: this.dayInput.value + '.' + this.monthInput.value + '.' + this.yearInput.value,
-        password: this.passwordInput.value
+        password: this.passwordInput.value,
+        time: date
       }
       this.props.onReg('/register', userData);
   }else{
@@ -42,33 +42,21 @@ class Registration extends Component{
   }
   }
   render(){
-    let listDays = this.state.days.map((item, key) =>{
-      return <option value={item} key={key}>{item}</option>
-    })
-    let listMonth = this.state.months.map((item,key) =>{
-      return <option value={item} key={key}>{item}</option>
-    })
-    let listYears = this.state.years.map((item,key) =>{
-      return <option value={item} key={key}>{item}</option>
-    })
     if (this.props.success == 'success'){
       return <Redirect to='/'/>
-    }
-    if (JSON.parse(localStorage.getItem('success')) == 'success'){
-      return <Redirect to='/profile'/>
     }
     return (
       <div className="singWrap" onSubmit={this.submitRegData.bind(this)}>
         <form className='autorisationWrap registr' action="">
             <h1>Registration</h1>
-            <input type="text" className="loginData" placeholder="Firstname" ref={(input) => {this.nameInput = input}} />
+            <input type="text" className="loginData" placeholder="Firstname" maxlength='15' ref={(input) => {this.nameInput = input}} />
             <input type="email" className="loginData" placeholder="Email" ref={(input) => {this.secondnameInput = input}} />
             <div className="loginData selectDateWrap">
               <select className="selectDate" name="" ref={(input) => {this.dayInput = input}}>
                 {listDays}
               </select>
               <select className="selectDate" name="" ref={(input) => {this.monthInput = input}}>
-                {listMonth}
+                {listMonths}
               </select>
               <select className="selectDate" name="" ref={(input) => {this.yearInput = input}}>
                 {listYears}

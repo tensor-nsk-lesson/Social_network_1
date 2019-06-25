@@ -1,5 +1,4 @@
 export function logoutSuccsess(data){
-  localStorage.setItem('success', '"nosuccess"');
   return {
     type: 'LOGOUT_SUCCESS',
     data

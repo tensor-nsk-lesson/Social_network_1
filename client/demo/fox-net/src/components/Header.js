@@ -7,7 +7,7 @@ import peoplePic from '../pics/people.png';
 import { Redirect } from 'react-router';
 import notificationPic from '../pics/nontification.png';
 import profilePhoto from'../pics/profilePhoto.jpg';
-import {getProfile} from '../actions/profile.js';
+import {getHeader} from '../actions/header.js';
 import {logout} from '../actions/logout.js';
 
 class Header extends Component{
@@ -16,7 +16,7 @@ class Header extends Component{
     this.state ={toggle: false, style: '', display: ''};
   }
   componentDidMount(){
-    this.props.onGetProfile('/get_profile/')
+    this.props.onGetHeader('/get_profile/')
   }
   toggleMenu(){
     if (this.state.display == ''){
@@ -50,9 +50,10 @@ class Header extends Component{
     }else{
       photo = this.props.photo;
     }
-    if (localStorage.getItem('success') != '"success"'){
+    if (this.props.error == 'true' || this.props.logout == 'success' ){
       return <Redirect to='/'/>
     }
+    let myPage = '/profile/' + this.props.userId;
     return(
       <header>
         <div className="logo">
@@ -65,7 +66,7 @@ class Header extends Component{
         </div>
         <div className="pagesList">
           <ul>
-            <Link to='/profile'>
+            <Link to={myPage}>
               <button><li>My profile</li></button>
             </Link>
             <Link to='/friends'>
@@ -99,14 +100,16 @@ class Header extends Component{
 }
 export default connect(
   state => ({
-    FirstName: state.profile.FirstName,
-    SecondName: state.profile.SecondName,
-    photo: state.profile.Photo,
-    logout: state.logout.success
+    FirstName: state.header.FirstName,
+    SecondName: state.header.SecondName,
+    photo: state.header.Photo,
+    logout: state.logout.success,
+    error: state.header.Error,
+    userId: state.header.Id
   }),
   dispatch => ({
-    onGetProfile: (url) =>{
-      dispatch(getProfile(url))
+    onGetHeader: (url) =>{
+      dispatch(getHeader(url))
     },
     onLogout: () =>{
       dispatch(logout('/logout'))

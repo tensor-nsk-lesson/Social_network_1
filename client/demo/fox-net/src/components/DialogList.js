@@ -5,9 +5,14 @@ import DialogElList from './DialogElList.js'
 
 class DialogList extends Component{
   render(){
-    let dialogList = this.props.dialogs.map((item, index) =>{
-      return <DialogElList key={index} dialog={item.NameDialog}/>
-    })
+      let dialogList = <p>Loading</p>;
+      if(this.props.dialogs[0] != undefined){
+        dialogList = this.props.dialogs.map((item, index) =>{
+          return <DialogElList key={index} dialog={item.NameDialog}/>
+        });
+      }else{
+        dialogList = <h3>You have not got dialogs yet</h3>
+      }
     return(
       <div className="dialogList">
         {dialogList}

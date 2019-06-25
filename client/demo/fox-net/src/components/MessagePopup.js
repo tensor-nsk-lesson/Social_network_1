@@ -28,9 +28,9 @@ class Popup extends Component{
 
 export default connect(
   state => ({
-    FirstName: state.profile.FirstName,
-    SecondName: state.profile.SecondName,
-    togglePopup: state.messagePopup
+    FirstName: state.header.FirstName,
+    SecondName: state.header.SecondName,
+    togglePopup: state.messagePopup.status
   }),
   dispatch =>({
     onTogglePopup: () =>{
