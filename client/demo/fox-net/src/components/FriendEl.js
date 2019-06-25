@@ -13,7 +13,7 @@ class FriendEl extends Component{
         <div className='friendInfo'>
           <img src={logo} alt='FriendPhoto'/>
           <div>
-            <h3><a href="#">Тест Игорь</a></h3>
+            <h3><a href="#">{this.props.name}</a></h3>
             <span>online</span>
           </div>
         </div>

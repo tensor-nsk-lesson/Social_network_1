@@ -7,7 +7,13 @@ export function messageSuccsess(data){
 
 export function getMessages(url){
   return (dispatch)=>{
-    fetch(url,  {method: 'GET'})
+    return fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+    })
       .then(response =>{
         if(!response.ok){
           throw new Error(response.statusText)

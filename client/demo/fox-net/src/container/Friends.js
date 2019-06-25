@@ -12,13 +12,10 @@ class Friends extends Component{
   componentDidMount(){
     this.props.onGetFriends('/friend')
   }
-  constructor(props){
-    super(props);
-    this.state = {test: [1,2,3,4,5,6,7,8,9,10]}
-  }
   render(){
-    let friends = this.state.test.map((item, key) => {
-      return <FriendEl key={key}/>
+    let friendsMas= [this.props.friends]
+    let friends = friendsMas.map((item, key) => {
+      return <FriendEl key={key} name={this.props.friends}/>
     })
     return(
       <React.Fragment>
@@ -37,11 +34,12 @@ class Friends extends Component{
 
 export default connect(
   state =>({
-
+    friends: state.friends,
+    id: state.friends
   }),
   dispatch =>({
     onGetFriends: (url) =>{
       dispatch(getFriends(url))
-    },
+    }
   })
 )(Friends)
