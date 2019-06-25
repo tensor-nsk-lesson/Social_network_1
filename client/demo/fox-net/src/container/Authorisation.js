@@ -11,14 +11,6 @@ import { withRouter } from 'react-router-dom';
 import {getProfile} from '../actions/profile.js';
 
 class Authorisation extends Component{
-  componentWillMount(){
-    this.props.onGetProfile('/get_profile/')
-  }
-  shouldComponentUpdate(nextProps, nextState){
-    if(nextProps != 'true'){
-      return true
-    }
-  }
   componentDidMount(){
     let slideUp = {
     distance: '100%',
@@ -36,8 +28,9 @@ class Authorisation extends Component{
     this.props.onAuth('/auth', data);
   }
   render(){
-    if (this.props.error != 'true' && this.props.error != undefined){
-      console.log(123123);
+    if(this.props.success == 'success' || localStorage.getItem('login') == 'on'){
+      localStorage.setItem('login','on')
+      window.location.assign('http://localhost:3000/dialogs')
     }
     return(
       <div className="singWrap">
@@ -57,14 +50,9 @@ class Authorisation extends Component{
 }
 export default withRouter(connect(
   state =>({
-    success: state.authorisation.success,
-    error: state.profile.Error,
-    id: state.profile.Id
+    success: state.authorisation.success
   }),
   dispatch =>({
-    onGetProfile: (url) =>{
-      dispatch(getProfile(url))
-    },
     onAuth: (url, data) =>{
       dispatch(authorisation(url, data))
     }

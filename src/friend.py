@@ -9,7 +9,7 @@ def get_friends_for_user(id_user):
     result = []
     for row in rows:
         friend = 0
-        if (row[0] == id_user):
+        if (row[0].__str__() == id_user.__str__()):
             friend = row[1]
         else:
             friend = row[0]
@@ -36,4 +36,3 @@ def add_friends(id_friend, id_user, wide_status):
     conn.commit()
     conn.close()
     return
-

@@ -91,7 +91,7 @@ def get_messages_for_user(id_dialog):
     return result
 
 
-def add_in_dialog(id_user, id_dialog):
+def add_user_in_dialog(id_user, id_dialog):
     conn = connect()
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM "Dialogs" WHERE "IdDialog" = '+id_dialog.__str__())

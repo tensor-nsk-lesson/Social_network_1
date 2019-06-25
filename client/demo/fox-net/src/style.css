@@ -3,6 +3,10 @@
   padding: 0;
   outline: none;
 }
+a{
+  text-decoration: none;
+  color: #fff;
+}
 body{
   margin: 0;
   color: #fff;
@@ -236,10 +240,23 @@ header img{
   transition: .5s;
   top:-200px;
 }
+.settingsHeader a{
+  text-decoration: none;
+  color: #fff;
+  width: 195px;
+  margin-top: 10px;
+  height: 30px;
+  text-align: center;
+}
+.settingsHeader li:first-child{
+  margin: 0;
+  padding: 0;
+  border-top: none;
+}
 .settingsHeader li{
   cursor: pointer;
-  border-bottom: 1px solid #fff;
-  width: 195  px;
+  border-top: 1px solid #fff;
+  width: 195px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -249,9 +266,6 @@ header img{
 .settingsHeader li:last-child{
   flex-direction: column;
   height: 70px;
-}
-.settingsHeader li:last-child{
-  border-bottom: none;
 }
 .settingsHeader li:hover{
   background: #462272;
@@ -814,7 +828,103 @@ header img{
 .friendButtons button:hover{
   background: #121212;
 }
-
+.settingsWrap{
+  background: #232323;
+  width: 1100px;
+  height: 90vh;
+  margin: 0 auto;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items:flex-start;
+  border-radius: 10px;
+}
+.settingsBlock{
+  display: flex;
+  justify-content: center;
+  margin-top: 5vh;
+  background: #353535;
+  width: 600px;
+  height: 540px;
+  border-radius: 10px;
+}
+.settingsNav{
+  margin-top: 5vh;
+  border-radius: 10px;
+  background: #353535;
+  width: 250px;
+}
+.settingsNav ul{
+  list-style: none;
+}
+.settingsNav li{
+  padding-top: 10px;
+  padding-left: 10px;
+  font-size: 18px;
+  height: 30px;
+  width: 240px;
+  border-bottom: 1px solid #fff;
+}
+.settingsNav li:last-child{
+  border-bottom: none;
+}
+#activeSetting{
+  color: #353535;
+  background: #fff;
+  border-radius: 10px 10px 0 0;
+}
+.settings{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #232323;
+  width: 450px;
+}
+.settings *{
+  margin-top: 30px;
+}
+.settings input:first-child{
+  margin-top: 40px;
+}
+.settings > input{
+  padding-left: 10px;
+  height: 30px;
+  width: 250px;
+  border-radius: 20px;
+  border: none;
+}
+.settings .gender{
+  margin-top: 0px;
+}
+.settings label{
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid #fff;
+}
+.settings label:first-child{
+  margin-right: 40px;
+}
+.settings label input{
+  margin: 0;
+  width: 15px;
+}
+.settings input[type="submit"]{
+  background: #353535;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 0;
+  transition: .2s;
+}
+.settings input[type="submit"]:hover{
+  color: #000;
+  background: #fff;
+}
+.settings .selectDate{
+  margin: 15px;
+  background: #fff;
+  color: #000;
+  border: none;
+}
 ::-webkit-scrollbar-button {
   width:5px;
   height:0px;

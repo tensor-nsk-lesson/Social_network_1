@@ -331,7 +331,7 @@ def add_in_dialog():
     else:
         id_user = request.json.get('id_user')
         id_dialog = request.json.get('id_dialog')
-        return jsonify(add_in_dialog(id_user, id_dialog))
+        return jsonify(add_user_in_dialog(id_user, id_dialog))
 
 
 @app.route('/get_profile/', methods = ['GET'])
@@ -397,10 +397,10 @@ def index():
 def profile_change():
     id_user = r.get(request.cookies.get('session'))
     photo = request.json.get('photo')
-    secondName = request.json.get('secondName')
-    firstName = request.json.get('firstName')
-    fatherName = request.json.get('fatherName')
-    aboutMe = request.json.get('aboutMe')
+    secondName = request.json.get('second_name')
+    firstName = request.json.get('first_name')
+    fatherName = request.json.get('father_name')
+    aboutMe = request.json.get('about_me')
     status = request.json.get('status')
     gender = request.json.get('gender')
     city = request.json.get('city')

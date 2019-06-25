@@ -1,6 +1,6 @@
 import React from 'react';
 
-const months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
 const days = [];
 for(let i=1; i<=31; i++){
@@ -21,7 +21,11 @@ export let listDays = days.map((item, key) =>{
   return <option value={item} key={key}>{item}</option>
 })
 export let listMonths = months.map((item,key) =>{
-  return <option value={item} key={key}>{item}</option>
+  key++;
+  if (key < 10){
+    key= '0'+key;
+  }
+  return <option value={key} key={key}>{item}</option>
 })
 export let listYears = years.map((item,key) =>{
   return <option value={item} key={key}>{item}</option>

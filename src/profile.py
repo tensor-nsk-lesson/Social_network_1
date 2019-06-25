@@ -63,19 +63,19 @@ def get_fake_info(id):
     return result
 
 
-def profile_changes(id_user, photo, secondName, firstName, fatherName, aboutMe, status, gender, city):
+def profile_changes(id_user, fake_id,  photo, second_name, first_name, father_name, about_me, status, gender, city):
     conn = connect()
     cur = conn.cursor()
     cur.execute('UPDATE "Profile" SET '
-                '"Photo" = ' + photo.__str__() + ', '
-                '"SecondName" = ' + secondName.__str__() + ', '
-                '"FirstName" = ' + firstName.__str__() + ', '
-                '"FatherName" = ' + fatherName.__str__() + ', '
-                '"AboutMe" = ' + aboutMe.__str__() + ', '
-                '"Status" = ' + status.__str__() + ', '
-                '"Gender" = ' + gender.__str__() + ', '
-                '"City" = ' + city.__str__() + ' WHERE "Id" = ' + id_user.__str__())
+                '"FakeId" = ' + fake_id.str() + ', '
+                '"Photo" = \'' + photo.str() + '\', '
+                '"SecondName" = \'' + second_name.str() + '\', '
+                '"FirstName" = \'' + first_name.str() + '\', '
+                '"FatherName" = \'' + father_name.str() + '\', '
+                '"AboutMe" = \'' + about_me.str() + '\', '
+                '"Status" = \'' + status.str() + '\', '
+                '"Gender" = \'' + gender.str() + '\', '
+                '"City" = \'' + city.str() + '\' WHERE "Id" = ' + id_user.str())
     conn.commit()
     conn.close()
     return
-

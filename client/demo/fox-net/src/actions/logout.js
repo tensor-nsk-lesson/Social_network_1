@@ -1,4 +1,5 @@
 export function logoutSuccsess(data){
+  localStorage.removeItem('login')
   return {
     type: 'LOGOUT_SUCCESS',
     data

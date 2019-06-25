@@ -89,7 +89,9 @@ class Header extends Component{
         </div>
         <div className='settingsHeader'>
         <ul style={display}>
-          <li>Settings</li>
+
+            <li><Link to='/settings'>Settings</Link></li>
+
           <li onClick={this.props.onLogout}>Logout</li>
           <li onClick={this.fakeModeToggle.bind(this)}>FakeMode<div id='fakemode'><div style={style}> </div></div></li>
         </ul>

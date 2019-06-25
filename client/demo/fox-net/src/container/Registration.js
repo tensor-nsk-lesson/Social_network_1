@@ -38,7 +38,7 @@ class Registration extends Component{
       }
       this.props.onReg('/register', userData);
   }else{
-    console.log("Passwords aren't the same")
+    this.props.onError();
   }
   }
   render(){
@@ -49,8 +49,8 @@ class Registration extends Component{
       <div className="singWrap" onSubmit={this.submitRegData.bind(this)}>
         <form className='autorisationWrap registr' action="">
             <h1>Registration</h1>
-            <input type="text" className="loginData" placeholder="Firstname" maxlength='15' ref={(input) => {this.nameInput = input}} />
-            <input type="email" className="loginData" placeholder="Email" ref={(input) => {this.secondnameInput = input}} />
+            <input type="text" className="loginData" placeholder="Firstname" maxLength='15' ref={(input) => {this.nameInput = input}} required/>
+            <input type="email" className="loginData" placeholder="Email" maxLength='20' ref={(input) => {this.secondnameInput = input}} required/>
             <div className="loginData selectDateWrap">
               <select className="selectDate" name="" ref={(input) => {this.dayInput = input}}>
                 {listDays}
@@ -62,8 +62,10 @@ class Registration extends Component{
                 {listYears}
               </select>
             </div>
-            <input type="password" className="loginData" placeholder="Password" ref={(input) => {this.passwordInput = input}}/>
-            <input type="password" className="loginData" placeholder="Password again" ref={(input) => {this.checkPasswordInput = input}}/>
+            <input type="password" className="loginData" placeholder="Password" maxLength='20' ref={(input) => {this.passwordInput = input}}required/>
+            <input type="password" className="loginData" placeholder="Password again" maxLength='20' ref={(input) => {this.checkPasswordInput = input}}required/>
+            <p id="error">{this.props.passError}</p>
+            <p id="error">{this.props.logError}</p>
               <input type="submit" className='logInput regInput' value='REGISTRATE'/>
 
         </form>
@@ -74,11 +76,16 @@ class Registration extends Component{
 
 export default connect(
   state => ({
-    success: state.registration.success
+    success: state.registration.success,
+    logError: state.registration.error,
+    passError: state.registration.passError
   }),
   dispatch => ({
     onReg: (url, data) =>{
       dispatch(registration(url, data))
+    },
+    onError: () =>{
+      dispatch({type: 'WRONG_DATA_REGISTRATION', text: "Passwords aren't the same"})
     }
   })
 )(Registration);

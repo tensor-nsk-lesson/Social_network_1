@@ -38,7 +38,7 @@ export default connect(
     age: state.profile.Age,
     city: state.profile.City,
     relationship: state.profile.Status,
-    togglePopup: state.profilePopup
+    togglePopup: state.profilePopup.status
   }),
   dispatch =>({
     onTogglePopup: () =>{
