@@ -13,8 +13,8 @@ from profile import *
 import redis
 import secrets
 
-
 r = redis.StrictRedis(host='localhost', port=6379, db=0, decode_responses=True)
+
 
 project_root = os.path.dirname(__file__)
 template_path = os.path.join(project_root, '../client/demo/fox-net/public')
@@ -418,6 +418,18 @@ def dialog_with_him(id_alien):
         return jsonify({'Error':'true'})
     else:
         return jsonify(create_dialog_for_two(id_user, id_alien))
+
+
+@app.route('/push_message', methods=['POST'])
+def push_message():
+    id_user = r.get(request.cookies.get('session'))
+    if not id_user:
+        return jsonify({'Error': 'true'})
+    else:
+        id_dialog = request.json.get('id_dialog')
+        message = request.json.get('message')
+        time = request.json.get('time')
+        return jsonify(push_message_in_dialog(id_dialog, id_user, message, time))
 
 
 @socketio.on('join')

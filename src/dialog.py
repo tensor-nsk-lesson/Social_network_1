@@ -121,3 +121,14 @@ def create_dialog_for_two(id_user, id_alien):
         "IdDialog": id_dialog[0]
     }
     return result
+
+
+def push_message_in_dialog(id_dialog, id_user, message, time):
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute('insert into "Messages" ("IdDialog", "IdUser", "Message", "Time", "Status") '
+                'values('+id_dialog.__str__()+', '+id_user.__str__()+', \''+message.__str__()+'\', '
+                +'to_timestamp(\''+time.__str__()+'\', \'dd-mm-yy hh24:mi:ss\'), 0)')
+    conn.commit()
+    conn.close()
+    return
