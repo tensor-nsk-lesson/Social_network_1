@@ -45,13 +45,9 @@ def get_dialogs():
 def create():
     id_user = r.get(request.cookies.get('session'))
     if not id_user:
-        json = {
-            'Error':'true'
-        }
-        return jsonify(json)
+        return jsonify({'Error':'true'})
     else:
-        id_dialog = create_dialog(id_user)
-        return jsonify(id_dialog)
+        return jsonify(create_dialog(id_user))
 
 
 @app.route('/rename_dialog/<int:id_dialog>', methods=["PUT"])
@@ -331,7 +327,7 @@ def add_in_dialog():
     else:
         id_user = request.json.get('id_user')
         id_dialog = request.json.get('id_dialog')
-        return jsonify(add_in_dialog(id_user, id_dialog))
+        return jsonify(add_user_in_dialog(id_user, id_dialog))
 
 
 @app.route('/get_profile/', methods = ['GET'])
@@ -393,14 +389,15 @@ def index():
     return render_template('index.html', title='My Chat')
 
 
-@app.route('/profile_change/<int:id_user>', methods = ['PUT'])
+@app.route('/profile_change', methods = ['PUT'])
 def profile_change():
     id_user = r.get(request.cookies.get('session'))
+    fake_id = request.json.get('fake_id')
     photo = request.json.get('photo')
-    secondName = request.json.get('secondName')
-    firstName = request.json.get('firstName')
-    fatherName = request.json.get('fatherName')
-    aboutMe = request.json.get('aboutMe')
+    second_name = request.json.get('second_name')
+    first_name = request.json.get('first_name')
+    father_name = request.json.get('father_name')
+    about_me = request.json.get('about_me')
     status = request.json.get('status')
     gender = request.json.get('gender')
     city = request.json.get('city')
@@ -410,7 +407,7 @@ def profile_change():
         }
         return jsonify(json)
     else:
-        return jsonify(profile_changes(id_user, photo, secondName, firstName, fatherName, aboutMe, status, gender, city))
+        return jsonify(profile_changes(id_user, fake_id, photo, second_name, first_name, father_name, about_me, status, gender, city))
 
 
 @socketio.on('join')
@@ -433,7 +430,6 @@ def on_leave(data):
 def on_message(data):
     room = data['room']
     message = data['message']
-    leave_room(room)
     emit(message.__str__(), room=room)
 
 
