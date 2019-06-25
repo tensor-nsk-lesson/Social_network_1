@@ -925,6 +925,45 @@ header img{
   color: #000;
   border: none;
 }
+.mafiaForm{
+  background: #232323;
+  width: 300px;
+  height: 200px;
+}
+.mafiaButtos{
+  padding-top: 10px;
+  justify-content: space-around;
+  display: flex;
+  margin-bottom: 40px;
+}
+.mafiaGuessButton, .mafiaUserButton{
+  width: 100px;
+}
+.mafiaGuessButton input, .mafiaUserButton input{
+  width: 100px;
+  border: none;
+  border-radius: 20px;
+  height: 20px;
+  margin-top: 5px;
+  padding-left: 5px;
+}
+#mafiaSubmit{
+  width: 300px;
+  display: flex;
+  justify-content: center;
+}
+#mafiaSubmit input{
+  width: 150px;
+  border: none;
+  background: #353535;
+  height: 40px;
+  color: #fff;
+  transition: .3s;
+}
+#mafiaSubmit input:hover{
+  color: #000;
+  background: #fff;
+}
 ::-webkit-scrollbar-button {
   width:5px;
   height:0px;

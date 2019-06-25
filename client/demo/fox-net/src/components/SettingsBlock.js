@@ -14,14 +14,15 @@ class SettingsBlock extends Component{
   changeSettings(e){
     e.preventDefault();
     let postData = {
-      firstName: this.nameInput.value,
-      secondName: this.secondNameInput.value,
-      fatherName: this.fatherNameInput.value,
+      first_name: this.nameInput.value,
+      second_name: this.secondNameInput.value,
+      father_name: this.fatherNameInput.value,
       date: this.dayInput.value + '.' + this.monthInput.value + '.' + this.yearInput.value,
       city: this.cityInput.value,
       gender: this.state.gender,
+      fake_id: 0
     }
-    this.props.onChangeSettings('/profile_change/', postData)
+    this.props.onChangeSettings('/profile_change', postData)
   }
   changeGender(e){
     this.state.gender = e.target.value;

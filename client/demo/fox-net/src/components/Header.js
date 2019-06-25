@@ -56,10 +56,12 @@ class Header extends Component{
     let myPage = '/profile/' + this.props.userId;
     return(
       <header>
-        <div className="logo">
-          <img src={logo} alt="LOGO"/>
-          <h1>Foxnet</h1>
-        </div>
+        <Link to='/mafia'>
+          <div className="logo">
+            <img src={logo} alt="LOGO"/>
+            <h1>Foxnet</h1>
+          </div>
+        </Link>
         <div className="notificButtons">
           <button><img src={peoplePic} alt="PEOPLE"/></button>
           <button><img src={notificationPic}alt="NONTIFICATION"/></button>

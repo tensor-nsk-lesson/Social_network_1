@@ -6,7 +6,7 @@ class TestApi(unittest.TestCase):
 
     def test_auth(self):
         data = {
-            'login': 'Person1',
+            'login': 'Person',
             'password': 'aaa'
         }
         resp = requests.post('http://127.0.0.1:80/auth', json=data)
@@ -212,5 +212,28 @@ class TestApi(unittest.TestCase):
     def test_get_fake(self):
         resp = self.test_auth()
         resp = requests.get('http://127.0.0.1:80/get_fake_profile/1', cookies=resp.cookies)
+        self.assertEqual(resp.status_code, 200)
+        self.assertIsNotNone(resp.text)
+
+    def test_add_user_in_dialog(self):
+        resp = self.test_auth()
+        data = {
+            'id_user': 1,
+            'id_dialog': 12
+        }
+        resp = requests.post('http://127.0.0.1:80/add_in_dialog', json=data, cookies=resp.cookies)
+        self.assertEqual(resp.status_code, 200)
+        self.assertIsNotNone(resp.text)
+
+    def test_profile_change(self):
+        resp = self.test_auth()
+        data = {
+            'id_user': 1,
+            'fake_id': 0,
+            'second_name' : 'Grant',
+            'about_me' : 'Its Me Mario',
+            'gender' : 'true'
+        }
+        resp = requests.put('http://127.0.0.1:80/profile_change', json=data, cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)

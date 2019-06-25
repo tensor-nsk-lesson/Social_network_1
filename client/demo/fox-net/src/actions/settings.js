@@ -8,7 +8,7 @@ export function changeSettingsSuccess(data){
 export function changeSettings(url, data){
   return (dispatch) => {
     return fetch(url, {
-      method: 'POST',
+      method: 'PUT',
       body: JSON.stringify(data),
       headers: new Headers({
         'Content-Type': 'application/json'

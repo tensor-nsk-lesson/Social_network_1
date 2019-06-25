@@ -63,19 +63,20 @@ def get_fake_info(id):
     return result
 
 
-def profile_changes(id_user, fake_id,  photo, second_name, first_name, father_name, about_me, status, gender, city):
+def profile_changes(id_user, fake_id,  photo, second_name, first_name, father_name, about_me, date, status, gender, city):
     conn = connect()
     cur = conn.cursor()
     cur.execute('UPDATE "Profile" SET '
-                '"FakeId" = ' + fake_id.str() + ', '
-                '"Photo" = \'' + photo.str() + '\', '
-                '"SecondName" = \'' + second_name.str() + '\', '
-                '"FirstName" = \'' + first_name.str() + '\', '
-                '"FatherName" = \'' + father_name.str() + '\', '
-                '"AboutMe" = \'' + about_me.str() + '\', '
-                '"Status" = \'' + status.str() + '\', '
-                '"Gender" = \'' + gender.str() + '\', '
-                '"City" = \'' + city.str() + '\' WHERE "Id" = ' + id_user.str())
+                '"FakeId" = ' + fake_id.__str__() + ', '
+                '"Photo" = \'' + photo.__str__() + '\', '
+                '"SecondName" = \'' + second_name.__str__() + '\', '
+                '"FirstName" = \'' + first_name.__str__() + '\', '
+                '"FatherName" = \'' + father_name.__str__() + '\', '
+                '"AboutMe" = \'' + about_me.__str__() + '\', '
+                '"Date" = to_timestamp(\'' + date.__str__() + '\', \'dd-mm-yy\'),'
+                '"Status" = \'' + status.__str__() + '\', '
+                '"Gender" = \'' + gender.__str__() + '\', '
+                '"City" = \'' + city.__str__() + '\' WHERE "Id" = ' + id_user.__str__())
     conn.commit()
     conn.close()
     return

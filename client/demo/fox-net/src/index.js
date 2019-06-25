@@ -8,8 +8,8 @@ import Authorisation from './container/Authorisation.js';
 import Dialogs from './container/Dialogs.js';
 import Profile from './container/Profile.js';
 import Friends from './container/Friends.js';
-import Settings from './components/Settings.js'
-import ChatTEST from './components/ChatTEST.js';
+import Settings from './components/Settings.js';
+import Mafia from './components/Mafia.js';
 import reducer from './reducers';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
@@ -25,7 +25,7 @@ const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
         <Route path='/dialogs' component={Dialogs}/>
         <Route path='/profile/:id' component={Profile}/>
         <Route path='/settings' component={Settings}/>
-        <Route path='/chat' component={ChatTEST}/>
+        <Route path='/mafia' component={Mafia}/>
       </Router>
     </Provider>,
     document.getElementById('root')
