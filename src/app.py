@@ -397,6 +397,7 @@ def profile_change():
     second_name = request.json.get('second_name')
     first_name = request.json.get('first_name')
     father_name = request.json.get('father_name')
+    date = request.json.get('date')
     about_me = request.json.get('about_me')
     status = request.json.get('status')
     gender = request.json.get('gender')
@@ -407,7 +408,16 @@ def profile_change():
         }
         return jsonify(json)
     else:
-        return jsonify(profile_changes(id_user, fake_id, photo, second_name, first_name, father_name, about_me, status, gender, city))
+        return jsonify(profile_changes(id_user, fake_id, photo, second_name, first_name, father_name,  about_me, date, status, gender, city))
+
+
+@app.route('/dialog_with_him/<int:id_alien>', methods=['GET'])
+def dialog_with_him(id_alien):
+    id_user = r.get(request.cookies.get('session'))
+    if not id_user:
+        return jsonify({'Error':'true'})
+    else:
+        return jsonify(create_dialog_for_two(id_user, id_alien))
 
 
 @socketio.on('join')

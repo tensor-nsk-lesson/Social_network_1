@@ -231,9 +231,16 @@ class TestApi(unittest.TestCase):
             'id_user': 1,
             'fake_id': 0,
             'second_name' : 'Grant',
+            'date' : '20.05.2005',
             'about_me' : 'Its Me Mario',
             'gender' : 'true'
         }
         resp = requests.put('http://127.0.0.1:80/profile_change', json=data, cookies=resp.cookies)
+        self.assertEqual(resp.status_code, 200)
+        self.assertIsNotNone(resp.text)
+
+    def test_dialog_for_two(self):
+        resp = self.test_auth()
+        resp = requests.get('http://127.0.0.1:80/dialog_with_him/2', cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
