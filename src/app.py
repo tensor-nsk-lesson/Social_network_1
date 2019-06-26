@@ -50,6 +50,16 @@ def create():
         return jsonify(create_dialog(id_user))
 
 
+@app.route('/dialog_test/', methods=["GET"])
+def crate_t():
+    id_user = r.get(request.cookies.get('session'))
+    if not id_user:
+        return jsonify({'Error': 'true'})
+    else:
+        id_friends = request.json.get('id_friends')
+        return jsonify(create_dialog_test(id_user, id_friends))
+
+
 @app.route('/rename_dialog/<int:id_dialog>', methods=["PUT"])
 def rename(id_dialog):
     id_user = r.get(request.cookies.get('session'))
