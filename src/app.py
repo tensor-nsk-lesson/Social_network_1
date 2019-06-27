@@ -12,6 +12,7 @@ from user import *
 from profile import *
 import redis
 import secrets
+import base64
 
 r = redis.StrictRedis(host='localhost', port=6379, db=0, decode_responses=True)
 
@@ -404,6 +405,7 @@ def profile_change():
     id_user = r.get(request.cookies.get('session'))
     fake_id = request.json.get('fake_id')
     photo = request.json.get('photo')
+    photo_str = base64.b64encode(photo.read())
     second_name = request.json.get('second_name')
     first_name = request.json.get('first_name')
     father_name = request.json.get('father_name')
@@ -418,7 +420,7 @@ def profile_change():
         }
         return jsonify(json)
     else:
-        return jsonify(profile_changes(id_user, fake_id, photo, second_name, first_name, father_name, about_me, date, status, gender, city))
+        return jsonify(profile_changes(id_user, fake_id, photo_str, second_name, first_name, father_name, about_me, date, status, gender, city))
 
 
 @app.route('/dialog_with_him/<int:id_alien>', methods=['GET'])

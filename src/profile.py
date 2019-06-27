@@ -63,12 +63,12 @@ def get_fake_info(id):
     return result
 
 
-def profile_changes(id_user, fake_id,  photo, second_name, first_name, father_name, about_me, date, status, gender, city):
+def profile_changes(id_user, fake_id,  photo_str, second_name, first_name, father_name, about_me, date, status, gender, city):
     conn = connect()
     cur = conn.cursor()
     cur.execute('UPDATE "Profile" SET '
                 '"FakeId" = ' + fake_id.__str__() + ', '
-                '"Photo" = \'' + photo.__str__() + '\', '
+                '"Photo" = \'' + photo_str.__str__() + '\', '
                 '"SecondName" = \'' + second_name.__str__() + '\', '
                 '"FirstName" = \'' + first_name.__str__() + '\', '
                 '"FatherName" = \'' + father_name.__str__() + '\', '

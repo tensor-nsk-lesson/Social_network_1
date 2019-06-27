@@ -55,7 +55,6 @@ def create_dialog_test(id_user, id_friends):
     return result
 
 
-
 def rename_dialog(id_dialog, new_name):
     conn = connect()
     cur = conn.cursor()
