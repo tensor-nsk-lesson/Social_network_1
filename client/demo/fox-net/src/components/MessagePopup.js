@@ -2,7 +2,7 @@ import React from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
 import '../style.css';
-import logo from '../pics/foxnetWhite.png'
+import logo from '../pics/foxnetWhite.png';
 
 class Popup extends Component{
   render(){
@@ -18,7 +18,7 @@ class Popup extends Component{
             </div>
             <div className="popupMessage">
               <textarea type="text" placeholder="Enter your message"></textarea>
-              <button>Sumit</button>
+                <button>Submit</button>
             </div>
           </div>
       </div>

@@ -964,6 +964,9 @@ header img{
   color: #000;
   background: #fff;
 }
+#mafiaPic{
+  margin-right: 100px;
+}
 ::-webkit-scrollbar-button {
   width:5px;
   height:0px;

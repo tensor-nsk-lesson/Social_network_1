@@ -220,7 +220,7 @@ def auth():
         return jsonify(result)
     else:
         key = secrets.token_hex(10)
-        r.set(key.__str__(), result.get('Id').__str__(), 3600)
+        r.set(key.__str__(), result.get('Id').__str__(), 13600)
         cookie = make_response(jsonify({'success':'success'}))
         cookie.set_cookie('session', key.__str__(), max_age=None);
     return cookie
@@ -452,7 +452,7 @@ def on_leave(data):
 def on_message(data):
     room = data['room']
     message = data['message']
-    emit(message.__str__(), room=room)
+    emit('response', {'message': message},  room=room)
 
 
 socketio.run(app, host='localhost', port=80)

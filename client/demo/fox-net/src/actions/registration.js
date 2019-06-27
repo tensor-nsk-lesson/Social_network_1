@@ -20,6 +20,7 @@ export function registration(url, data){
       }
       return response;
     })
+    .catch()
     .then(response => response.json())
     .then(data => dispatch(registrationSuccess(data)))
   }

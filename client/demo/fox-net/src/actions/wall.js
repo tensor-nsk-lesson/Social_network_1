@@ -14,6 +14,7 @@ export function getWall(url){
         }
         return response;
       })
+      .catch()
       .then(response=> response.json())
       .then(data => dispatch(wallSuccess(data)))
   }

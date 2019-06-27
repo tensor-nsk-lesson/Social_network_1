@@ -1,14 +1,15 @@
 import React from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
-import DialogChat from './DialogChat.js'
+import DialogChat from './DialogChat.js';
+import mafia from '../pics/mafia.jpg';
 
 class MafiaChat extends Component{
   render(){
     return(
       <div className="dialogMessages">
         <div className="messageProfileInfo">
-          <img src='' alt="MAFIA"/>
+          <img id='mafiaPic'src={mafia} alt="MAFIA"/>
         </div>
         <div className="dialogBlock">
 

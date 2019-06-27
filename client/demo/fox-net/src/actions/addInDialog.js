@@ -20,6 +20,7 @@ export function addInDialog(url, data){
       }
       return response;
     })
+    .catch()
     .then(response => response.json())
     .then(data => dispatch(addInDialogSuccess(data)))
   }

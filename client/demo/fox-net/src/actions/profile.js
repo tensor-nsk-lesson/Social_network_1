@@ -14,6 +14,7 @@ export function getProfile(url){
         }
         return response;
       })
+      .catch()
       .then(response=> response.json())
       .then(data => dispatch(personSuccess(data)))
   }

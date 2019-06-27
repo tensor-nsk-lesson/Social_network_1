@@ -20,6 +20,7 @@ export function changeSettings(url, data){
       }
       return response;
     })
+    .catch()
     .then(response => response.json())
     .then(data => dispatch(changeSettingsSuccess(data)))
   }

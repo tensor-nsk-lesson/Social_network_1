@@ -15,6 +15,7 @@ export function logout(url){
         }
         return response;
       })
+      .catch()
       .then(response=> response.json())
       .then(data => dispatch(logoutSuccsess(data)))
   }

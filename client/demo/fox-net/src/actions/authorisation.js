@@ -20,6 +20,7 @@ export function authorisation(url, data){
       }
       return response;
     })
+    .catch()
     .then(response => response.json())
     .then(data => dispatch(fetchSuccess(data)))
   }

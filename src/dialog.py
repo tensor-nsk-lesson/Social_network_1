@@ -111,7 +111,7 @@ def create_dialog_for_two(id_user, id_alien):
     cur.execute('insert into "Dialogs" ("IdDialog", "IdUser", "Status", "NameDialog") '
                 'values(' + number + ',' + id_user.__str__()+
                 ', 0 , \'Dialog' + number + '\'), '
-                '(' + number + ',' + id_user.__str__()+
+                '(' + number + ',' + id_alien.__str__()+
                 ', 0 , \'Dialog' + number + '\') '
                                               'returning "IdDialog"')
     id_dialog = cur.fetchone()

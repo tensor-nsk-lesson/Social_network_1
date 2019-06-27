@@ -14,6 +14,7 @@ export function getFriends(url){
         }
         return response;
       })
+      .catch()
       .then(response=> response.json())
       .then(data => dispatch(friendsSuccess(data)))
   }

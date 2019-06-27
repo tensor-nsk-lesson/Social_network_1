@@ -20,11 +20,4 @@ class Profile extends Component{
   }
 }
 
-export default connect(
-  state => ({
-
-  }),
-  dispatch => ({
-
-  })
-)(Profile)
+export default Profile

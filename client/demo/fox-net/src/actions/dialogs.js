@@ -14,6 +14,7 @@ export function getDialogs(url){
         }
         return response;
       })
+      .catch()
       .then(response=> response.json())
       .then(data => dispatch(dialogsSuccsess(data)))
   }

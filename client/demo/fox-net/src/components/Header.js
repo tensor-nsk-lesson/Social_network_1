@@ -118,8 +118,8 @@ export default connect(
     onLogout: () =>{
       dispatch(logout('/logout'))
     },
-    onFakeMode: (status) => {
-      dispatch({type: 'FAKEMOD_TOGGLE', status: status})
+    onFakeMode: (status, on) => {
+      dispatch({type: 'FAKEMOD_TOGGLE', status: status, on: on})
     }
   })
 )(Header)

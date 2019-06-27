@@ -5,7 +5,7 @@ export function messageSuccsess(data){
   }
 }
 
-export function getMessages(url){
+export function postMessage(url, data){
   return (dispatch)=>{
     return fetch(url, {
       method: 'POST',
@@ -20,6 +20,7 @@ export function getMessages(url){
         }
         return response;
       })
+      .catch()
       .then(response=> response.json())
       .then(data => dispatch(messageSuccsess(data)))
   }

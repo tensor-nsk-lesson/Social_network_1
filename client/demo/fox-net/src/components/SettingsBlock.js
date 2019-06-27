@@ -20,7 +20,8 @@ class SettingsBlock extends Component{
       date: this.dayInput.value + '.' + this.monthInput.value + '.' + this.yearInput.value,
       city: this.cityInput.value,
       gender: this.state.gender,
-      fake_id: 0
+      fake_id: 0,
+      photo: null
     }
     this.props.onChangeSettings('/profile_change', postData)
   }

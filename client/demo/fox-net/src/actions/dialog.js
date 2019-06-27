@@ -14,6 +14,7 @@ export function createDialog(url){
         }
         return response;
       })
+      .catch()
       .then(response=> response.json())
       .then(data => dispatch(dialogSuccsess(data)))
   }
