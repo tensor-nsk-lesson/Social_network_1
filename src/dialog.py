@@ -35,6 +35,26 @@ def create_dialog(id_user):
     return result
 
 
+def create_dialog_test(id_user, id_friends):
+    conn = connect()
+    cur = conn.cursor()
+    number = random.randint(1, 100000).__str__()
+    cur.execute('INSERT INTO "Dialogs" ("IdDialog", "IdUser", "Status", "NameDialog") '
+                'VALUES (' + number + ', ' + id_user.__str__() + ', 0, \'Dialog' +
+                number + '\') returning "IdDialog"')
+    id_dialog = cur.fetchone()
+    for i in range(len(id_friends)):
+        cur.execute('INSERT INTO "Dialogs" ("IdDialog", "IdUser", "Status", "NameDialog") '
+                    'VALUES (' + number + ', ' + id_friends[i].__str__() + ', 0, \'Dialog' +
+                    number + '\') returning "IdDialog"')
+    conn.commit()
+    conn.close()
+    result = {
+        "IdDialog": id_dialog[0]
+    }
+    return result
+
+
 def rename_dialog(id_dialog, new_name):
     conn = connect()
     cur = conn.cursor()
