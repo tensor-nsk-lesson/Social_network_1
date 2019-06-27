@@ -17,7 +17,7 @@ def get_friends_for_user(id_user):
             "Status": row[2],
             "WideStatus": row[3]
         }
-        result.append(data)
+        result.append({'friend':data})
     conn.close()
     return result
 

@@ -244,3 +244,14 @@ class TestApi(unittest.TestCase):
         resp = requests.get('http://127.0.0.1:80/dialog_with_him/2', cookies=resp.cookies)
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.text)
+
+    def test_push_message(self):
+        resp = self.test_auth()
+        data = {
+            'id_dialog': 1,
+            'message': 'Its my life',
+            'time': '20.05.2005 19:15:24'
+        }
+        resp = requests.post('http://127.0.0.1:80/push_message', json=data, cookies=resp.cookies)
+        self.assertEqual(resp.status_code, 200)
+        self.assertIsNotNone(resp.text)
